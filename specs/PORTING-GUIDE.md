@@ -18,7 +18,7 @@
 | `gaps.md` | Partially — file paths in citations |
 | `glossary.md` | NO — domain terms |
 
-**Rule of thumb:** If a paragraph names a framework (Symfony / Spring / Django / Express / Rails), it belongs in `where.md` § 5. If it names a concept (transaction / queue / cache / event), it belongs in the conceptual layer.
+**Rule of thumb:** If a paragraph names a framework (Spring / Django / Express / Rails / NestJS / FastAPI / axum / Symfony), it belongs in `where.md` § 5. If it names a concept (transaction / queue / cache / event), it belongs in the conceptual layer.
 
 ## Step-by-step port
 
@@ -76,90 +76,125 @@ Follow `workflow/01-authoring-checklist.md`. Read existing docs + production cod
 
 Follow `workflow/02-b1-verification.md` through `workflow/04-r1-r2-parallel-review.md`.
 
-## Stack-specific examples
+## Stack-specific examples — `where.md` § 5
 
-### PHP / Symfony (original pilot stack)
+> The examples below are **rotational templates**, not normative. Pick the one matching your stack OR use as a model for an unlisted stack. ZeeSpec itself is stack-neutral; only `where.md` § 5 is stack-specific.
 
-```markdown
-# where.md § 5
-## 5.1 Backend runtime
-- PHP 8.2 + Symfony 6.4 + API Platform 4.2 + Doctrine ORM 3.5
-- Symfony Validator + Symfony Messenger 6.4
-
-## 5.2 Relational database
-- PostgreSQL 15
-- Tables: notifications (18 fields), device_tokens (15 fields)
-
-## 5.3 Async transports
-- Symfony Messenger 6.4 with Redis transport
-- Routing: App\Message\SendSMSMessage → sms_high_priority
-```
-
-### Go / gRPC / DynamoDB
+### Go (e.g., grpc-go + DynamoDB + AWS SQS)
 
 ```markdown
 # where.md § 5
 ## 5.1 Backend runtime
-- Go 1.22 + grpc-go v1.62 + protobuf v1.33
-- Validator v10
+- Go <version> + <RPC framework> + <protobuf/codec>
+- <validation library>
 
-## 5.2 Document database
-- DynamoDB single-table design
-- Partition key: PK = "NOTIF#${userId}"; sort key: SK = "${timestamp}#${channel}"
+## 5.2 Persistence layer
+- <document or relational DB> + schema design
+- Tables/collections: <entity> (N fields), <entity> (M fields)
 
 ## 5.3 Async transports
-- AWS SQS with FIFO queues
-- Routing: SendSMSCommand → notification-sms-high.fifo
+- <queue technology>
+- Routing: <message type> → <destination>
 ```
 
-### Python / FastAPI / SQLAlchemy
+### Java (e.g., Spring Boot + JPA + Kafka)
 
 ```markdown
 # where.md § 5
 ## 5.1 Backend runtime
-- Python 3.12+ + FastAPI 0.109 + SQLAlchemy 2.0 + Alembic
-- Pydantic V2 + python-jose
+- Java <version> + Spring Boot <version> + Hibernate/JPA <version>
+- <validation library>
 
-## 5.2 Relational database
-- PostgreSQL 15
-- Models: notifications (18 fields), device_tokens (15 fields)
+## 5.2 Persistence layer
+- <DB engine + version>
+- Entities: <entity> (N fields), <entity> (M fields)
 
 ## 5.3 Async transports
-- Celery 5 with Redis broker
-- Routing: send_sms_task → sms_high_priority queue
+- <Kafka / RabbitMQ / SQS> with <client library>
+- Routing: <message class> → <topic/queue>
 ```
 
-### TypeScript / NestJS / Prisma
+### Python (e.g., FastAPI + SQLAlchemy + Celery)
 
 ```markdown
 # where.md § 5
 ## 5.1 Backend runtime
-- Node.js 20 + NestJS 10 + Prisma 5 + TypeScript 5.3
+- Python <version> + <web framework> + <ORM> + <migrations tool>
+- <validation library>
 
-## 5.2 Relational database
-- PostgreSQL 15
-- Models: Notification (18 fields), DeviceToken (15 fields)
+## 5.2 Persistence layer
+- <DB engine + version>
+- Models: <entity> (N fields), <entity> (M fields)
 
 ## 5.3 Async transports
-- BullMQ on Redis
-- Routing: SendSMSJob → sms-high-priority queue
+- <task queue + broker>
+- Routing: <task function> → <queue name>
 ```
 
-### Rust / Axum / Diesel
+### Rust (e.g., axum + Diesel + RabbitMQ)
 
 ```markdown
 # where.md § 5
 ## 5.1 Backend runtime
-- Rust 1.75 + axum 0.7 + diesel 2.1 + tokio 1.36
+- Rust <version> + <web framework> + <ORM> + <async runtime>
 
-## 5.2 Relational database
-- PostgreSQL 15
-- Tables: notifications (18 fields), device_tokens (15 fields)
+## 5.2 Persistence layer
+- <DB engine + version>
+- Tables: <entity> (N fields), <entity> (M fields)
 
 ## 5.3 Async transports
-- lapin (RabbitMQ client)
-- Routing: SendSmsCommand → notification.sms.high_priority exchange
+- <queue client library>
+- Routing: <command type> → <exchange/queue>
 ```
+
+### TypeScript (e.g., NestJS + Prisma + BullMQ)
+
+```markdown
+# where.md § 5
+## 5.1 Backend runtime
+- Node.js <version> + <web framework> + <ORM> + TypeScript <version>
+
+## 5.2 Persistence layer
+- <DB engine + version>
+- Models: <Entity> (N fields), <Entity> (M fields)
+
+## 5.3 Async transports
+- <queue technology>
+- Routing: <job type> → <queue name>
+```
+
+### PHP (e.g., Symfony + Doctrine + Symfony Messenger) — the original pilot stack
+
+```markdown
+# where.md § 5
+## 5.1 Backend runtime
+- PHP <version> + <framework + version> + <ORM + version>
+- <validation library>
+
+## 5.2 Persistence layer
+- <DB engine + version>
+- Tables: <entity> (N fields), <entity> (M fields)
+
+## 5.3 Async transports
+- <message bus library + transport>
+- Routing: <message class> → <transport name>
+```
+
+### Other stacks
+
+Use any of the above as a template. The shape is the same regardless of stack:
+- 5.1 Backend runtime
+- 5.2 Persistence layer
+- 5.3 Async transports
+- 5.4 Service classes (whatever your project calls them)
+- 5.5 Message + handler classes (if applicable)
+- 5.6 Enums / typed constants
+- 5.7 External provider integrations
+- 5.8 Auth + RBAC
+- 5.9 CLI commands
+- 5.10 Configuration sources
+
+If your stack doesn't have one of these (e.g., no async transports because the module is synchronous), omit the subsection.
 
 ## Adapting numbering to your domain
 
@@ -175,31 +210,26 @@ Pick 3-7 character ALL CAPS module prefixes. Be consistent across all 10 files.
 
 ## Adapting severity matrix to your domain
 
-The default severity matrix (P0/P1/P2/P3) maps to:
+The severity matrix (P0/P1/P2/P3) is jurisdiction- and domain-neutral. Per-domain calibration examples (illustrative, not normative):
 
-| Default | Financial domain | E-commerce | Healthcare |
-|---------|------------------|------------|------------|
-| P0 | Compliance violation, money loss | Cart abandonment ≥5% impact | Patient safety, HIPAA breach |
-| P1 | AML/FRC gap, audit failure | Conversion drop, payment bug | PHI exposure, GDPR breach |
-| P2 | Operational friction | UX paper cut, A/B test loss | Workflow inefficiency |
-| P3 | Documentation drift | Style issue | Code quality |
+| Generic baseline | Regulated finance (example) | E-commerce | Healthcare |
+|------------------|------------------------------|------------|------------|
+| P0 Compliance violation, money loss | Money loss, regulator-reportable misfile | Cart abandonment ≥5% impact | Patient safety, HIPAA / GDPR Art. 9 breach |
+| P1 Audit gap, missing guard | AML / regulatory audit failure | Conversion drop, payment bug | PHI exposure, privacy-law breach |
+| P2 Drift, stale refs | Operational friction | UX paper cut, A/B test loss | Workflow inefficiency |
+| P3 Style, cleanup | Documentation drift | Style issue | Code quality |
 
 Customize `checklists/severity-matrix.md` for your domain.
 
 ## Adapting compliance reviewers (R2)
 
-The R2 reviewer prompt in `workflow/04-r1-r2-parallel-review.md` mentions:
-- Mongolia FRC (Financial Regulatory Commission)
-- 7-year retention per Mongolia AML law
-- CTR threshold (20M MNT)
+The R2 reviewer prompt in `workflow/04-r1-r2-parallel-review.md` contains a `[your jurisdiction + applicable regulations]` placeholder followed by examples. Replace with **your** jurisdiction. Reference table for common ones:
 
-**Adapt these to your jurisdiction:**
-
-| Original | EU | US | India |
-|----------|-----|-----|-------|
-| FRC | ESMA / national regulator | SEC / FINRA | SEBI |
-| 7-year retention | GDPR Article 17 + sector-specific | Sarbanes-Oxley 7 years | DPDPA 2023 + IT Act |
-| CTR 20M MNT | Currency Transaction Report €10K | CTR $10K | Cash Transaction Report ₹10L |
+| Theme | EU | US | India | Mongolia (pilot) |
+|-------|-----|-----|-------|------------------|
+| Securities regulator | ESMA / national regulator | SEC / FINRA | SEBI | FRC |
+| Long-term retention | GDPR Article 17 + sector rules | Sarbanes-Oxley 7 years | DPDPA 2023 + IT Act | 7-year AML retention |
+| Cash-transaction report threshold | Currency Transaction Report €10K | CTR $10K | Cash Transaction Report ₹10L | CTR 20M MNT |
 
 For non-financial domains:
 - **E-commerce:** GDPR / CCPA / state privacy laws + PCI-DSS for payments
@@ -208,14 +238,14 @@ For non-financial domains:
 
 ## Reviewer agent prompts (stack-aware adaptation)
 
-The R1/R2 reviewer prompts in `workflow/04-r1-r2-parallel-review.md` include hardcoded file extensions and conventions. Adapt:
+When customizing R1/R2 reviewer prompts in `workflow/04-r1-r2-parallel-review.md` for your stack, substitute these conventions:
 
-| Original (PHP) | Adapt for your stack |
-|----------------|---------------------|
-| `grep -c "#\[ORM\\\\Column"` | `rg "@Column"` (Java/Spring) OR `rg "Field("` (Pydantic) |
-| `composer require X` | `go get`, `pip install`, `npm install`, `cargo add` |
-| `php bin/console` | your CLI runner |
-| `Doctrine ORM` | Hibernate / SQLAlchemy / Prisma / Diesel |
+| Concept | Java/Spring | Python | TypeScript/Node | Go | Rust | C# | Ruby | PHP/Doctrine (pilot) |
+|---------|-------------|--------|------------------|-----|------|-----|------|----------------------|
+| ORM column annotation grep | `@Column` | `= Column(` / `Field(` | `@Column` (TypeORM) / Prisma model body | `gorm:` tag | `table!` macro | `[Column]` | `db/schema.rb` | `#[ORM\Column]` |
+| Package manager install | `mvn install` / `gradle build` | `pip install` / `poetry add` | `npm install` / `yarn add` | `go get` | `cargo add` | `dotnet add package` | `bundle add` | `composer require` |
+| CLI runner | `mvn`, `gradle` | `python manage.py` / `python -m` | `npm run` | go binary | cargo binary | `dotnet run` | `rails`, `rake` | `php bin/console` |
+| ORM name | Hibernate / JPA | SQLAlchemy / Django ORM | Prisma / TypeORM / Sequelize | GORM / sqlc | Diesel / SeaORM | EF Core | ActiveRecord | Doctrine |
 
 ## Optional: ZeeSpec linter
 

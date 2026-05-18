@@ -144,9 +144,9 @@ Goal: Capture every algorithm + state machine + validation rule.
 ## Phase 11: Author `glossary.md` (30 min)
 
 - [ ] Domain terms (e.g., "Channel" in our context)
-- [ ] Technical terms (e.g., "Async dispatch" = sync if no MessageBus)
-- [ ] Stack-specific terms (Postmark, Skytel, etc.)
-- [ ] Cross-spec terms (FRC, AML, etc.)
+- [ ] Technical terms (e.g., "Async dispatch" = sync if no message bus injected)
+- [ ] Stack-specific terms (third-party SDKs, vendor product names — e.g., the email/SMS providers your module integrates with)
+- [ ] Cross-spec terms (acronyms shared across modules — e.g., your regulator's name, your AML/KYC acronyms)
 
 ## Phase 12: Author `CLAUDE.md` (30 min)
 

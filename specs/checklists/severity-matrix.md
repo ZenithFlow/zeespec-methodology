@@ -24,19 +24,21 @@
 
 ## Severity by domain (calibration)
 
-| Default (general) | Financial (Mongolia FRC) | E-commerce | Healthcare (HIPAA) |
-|-------------------|--------------------------|------------|---------------------|
-| **P0** | Compliance violation, money loss | Cart abandonment ≥5% impact | Patient safety, PHI breach |
-| **P1** | AML/FRC gap, audit failure | Conversion drop, payment bug | PHI exposure, GDPR breach |
-| **P2** | Operational friction | UX paper cut, A/B test loss | Workflow inefficiency |
-| **P3** | Documentation drift | Style issue | Code quality |
+> The columns below are **illustrative**, not normative. Pick the column that matches your domain, or add a new one. The pilot project's domain (regulated financial services) is shown as one example among many.
+
+| Generic baseline | Financial / regulated (example: AML / national securities regulator) | E-commerce | Healthcare (HIPAA / GDPR Article 9) |
+|------------------|---------------------------------------------------------------------|------------|--------------------------------------|
+| **P0** Compliance violation, money loss | Compliance violation, money loss, reportable transaction misfile | Cart abandonment ≥5% impact | Patient safety, PHI breach |
+| **P1** Audit gap, dead code, missing guard | AML/regulatory gap, audit failure | Conversion drop, payment bug | PHI exposure, GDPR breach |
+| **P2** Drift, stale refs | Operational friction | UX paper cut, A/B test loss | Workflow inefficiency |
+| **P3** Style, cleanup | Documentation drift | Style issue | Code quality |
 
 ## What qualifies as P0
 
 A finding is P0 if ANY of these apply:
 
 - Money loss or potential for money loss
-- Regulatory enforcement action risk (FRC, SEC, EU, IRS, etc.)
+- Regulatory enforcement action risk (your local regulator — e.g., national securities, central bank, tax authority, GDPR/CCPA enforcement)
 - Runtime crash in core flow (e.g., every approval throws 500)
 - Audit trail completely broken (e.g., createdBy: 0 sentinel)
 - Data corruption (e.g., balance sheet shows wrong signs)
@@ -95,17 +97,19 @@ If a gap affects multiple severities:
 
 ## Real examples from pilot
 
+> Examples below come from the pilot project (a regulated financial services system). Substitute equivalents from your own domain.
+
 | Finding | Severity | Why |
 |---------|:--------:|-----|
-| FRC retention violation (hard DELETE on audit tables) | 🚨 P0 | Compliance + already executed in dev |
-| createdBy:0 anti-pattern across 20+ sites | 🚨 P0 | Audit trail BROKEN; FRC inspector test fails |
-| Approval workflow boundary mismatch (every approved journal throws) | 🚨 P0 | Runtime crash in core flow |
-| Bond maturity reads stale holdings → over-distribution | 🚨 P0 | Real money risk |
-| Tax remittance ignores USD bucket | 🚨 P0 | Government under-remittance + tax penalties |
-| Per-type toggles DEAD CODE (UI shows but production ignores) | 🟠 P1 | GDPR false-promise + UX confusion |
+| Regulatory retention violation (hard DELETE on audit tables) | 🚨 P0 | Compliance + already executed in dev |
+| `createdBy:0` sentinel anti-pattern across 20+ sites | 🚨 P0 | Audit trail BROKEN; regulator inspector test fails |
+| Approval workflow boundary mismatch (every approved record throws) | 🚨 P0 | Runtime crash in core flow |
+| Stale-read at maturity-event time → over-distribution | 🚨 P0 | Real money risk |
+| Tax remittance ignores foreign-currency bucket | 🚨 P0 | Government under-remittance + tax penalties |
+| Per-type toggles DEAD CODE (UI shows but production ignores) | 🟠 P1 | Privacy/consent false-promise + UX confusion |
 | Stale line refs (200+ drift) | 🟡 P2 | Confusing to readers but not broken |
 | Enum count drift (39 → 45) | 🟡 P2 | Docs only |
-| ReferenceType admin Sonata filter missing 35 cases | 🟢 P3 | UI polish |
+| Admin filter missing 35 enum cases | 🟢 P3 | UI polish |
 
 ## Severity escalation triggers
 

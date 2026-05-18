@@ -42,7 +42,7 @@
 | `R-<MOD>-NN` | Risk | `why.md` | `R-NOTIF-09` |
 | `G-<MOD>-NN` | Strategic goal | `why.md` | `G-NOTIF-01` |
 | `BR-<MOD>-NN` | Business rule | `why.md` | `BR-NOTIF-02` |
-| `FU-<MOD>-DESC` | Follow-up gap | `gaps.md` | `FU-NOTIF-FCM-STALE-CLEANUP` |
+| `FU-<MOD>-DESC` | Follow-up gap | `gaps.md` | `FU-<MOD>-STALE-TOKEN-CLEANUP` (descriptive suffix, ALL CAPS, hyphenated) |
 | `Gap-<MOD>-NN` | Numbered gap | `gaps.md` | `Gap-NOTIF-14` |
 | `RES-<MOD>-QN` | Research question | `gaps.md` | `RES-NOTIF-Q3` |
 | `NHW-<MOD>-NN` | Non-hardwiring (explicit non-rule) | `gravity.md` | `NHW-NOTIF-2` |
@@ -65,7 +65,7 @@ For ADR (because ADRs accumulate over module lifetime):
 
 For ALG, FU:
 - ALL CAPS with hyphens
-- Examples: `ALG-NOTIF-SEND-01`, `FU-NOTIF-FCM-STALE-CLEANUP`
+- Examples: `ALG-<MOD>-SEND-01`, `FU-<MOD>-STALE-TOKEN-CLEANUP`
 
 ### Question number (QN)
 
@@ -103,7 +103,9 @@ If you renumber an ID (e.g., HW-X-04 → HW-X-09):
 
 ## Examples from pilot
 
-### Notification module IDs
+> The IDs below are taken from the pilot project (modules: `notification`, `accounting`). Use them as a shape reference; replace `NOTIF` / `ACC` with your own module prefixes.
+
+### Notification module IDs (pilot)
 
 ```
 INV-NOTIF-01..20  (20 invariants)
@@ -121,11 +123,11 @@ FU-NOTIF-FCM-STALE-CLEANUP, FU-NOTIF-TYPE-TOGGLE-UNUSED, ...
 RES-NOTIF-Q1..Q4  (4 research questions)
 ```
 
-### Accounting module IDs
+### Accounting module IDs (pilot)
 
 ```
 INV-ACC-01..23   (23 invariants)
-HW-ACC-01..28    (28 hardwiring constraints — high due to compliance)
+HW-ACC-01..28    (28 hardwiring constraints — high count due to regulated-finance domain)
 ADR-ACC-001..018 (18 ADRs)
 Gap-ACC-R3-XXX   (R3 round prefix used for traceability)
 ```

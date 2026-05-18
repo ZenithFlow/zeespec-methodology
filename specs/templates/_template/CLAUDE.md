@@ -88,35 +88,34 @@ ADRs are summarized here (one-line per row). If you maintain a separate ADR log 
 
 ## Tech stack
 
-> ✅ **Language-agnostic v2.0:** This spec describes MODULE_NAME **regardless of programming language**. Storage / queue / cache / framework specifics live in `where.md` § 5 "Tech Stack Binding".
+> ✅ **Language-agnostic:** This spec describes MODULE_NAME **regardless of programming language**. Concrete stack bindings (framework, ORM, queue, cache, classes) live ONLY in `where.md` § 5 "Tech Stack Binding".
 >
 > If porting to a different stack: replace `where.md` § 5 ONLY.
 
-**Production binding ([Platform name], YYYY-MM-DD):**
-- Backend runtime: [e.g., PHP 8.2 + Symfony 6.4 + Doctrine ORM 3.5]
-- Relational DB: [e.g., PostgreSQL 15]
-- Async transports: [e.g., Symfony Messenger + Redis]
-- Cache: [e.g., Redis (Symfony Cache adapter)]
+**Production binding (your platform, YYYY-MM-DD):**
+- Backend runtime: [your language + framework + version]
+- Persistence layer: [your DB engine + version + ORM/query layer]
+- Async transports: [your message bus / queue / scheduler]
+- Cache layer: [your cache engine + adapter]
+- See `where.md` § 5 for full details.
 
 ## Source documents
 
 ### Production code (highest authority)
-- `backend/src/<MODULE>/EntityName.php`
-- `backend/src/Service/<MODULE>/ServiceName.php`
-- `backend/src/Enum/<MODULE>/EnumName.php`
+- [path/to/your/module/entity-files] — use your project's source root
+- [path/to/your/module/service-files]
+- [path/to/your/module/enum-or-type-files]
 
-### Canonical 4-file legacy specs (if your project has them — NOT part of ZeeSpec)
-- `docs/specs/MODULE_NAME/CLAUDE.md` (legacy entry point)
-- `docs/specs/MODULE_NAME/decisions.md` (legacy ADR log — supplemented by ZeeSpec's CLAUDE.md ADR table)
-- `docs/specs/MODULE_NAME/implementation.md` (legacy implementation tracker)
+### Existing canonical specs (if your project has them — supplemented, not replaced, by ZeeSpec)
+- `docs/specs/MODULE_NAME/*` — older spec format (if any)
+- ZeeSpec's `CLAUDE.md` ADR table supplements any legacy ADR log
 
 ### Feature documentation (if exists)
-- `docs/features/MODULE_NAME/system.md`
-- `docs/features/MODULE_NAME/testing.md`
+- `docs/features/MODULE_NAME/*` — product / business documentation
 
 ### Cross-module ZeeSpec references
 - `docs/specs/zeespec/<upstream-module>/`
 - `docs/specs/zeespec/<downstream-module>/`
 
 ### Business rules
-- `docs/business/business_rules.md` — BR-MOD_PREFIX-XX
+- `docs/business/business_rules.md` — BR-MOD_PREFIX-XX (or your project's BR catalog)

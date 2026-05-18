@@ -65,19 +65,19 @@ When you encounter an OPEN gap:
 
 Every change to a module with a ZeeSpec MUST cite the rule it enforces or relates to.
 
-**Good:**
-```php
-// HW-NOTIF-01 + INV-NOTIF-13: write Notification row PER channel
-$notification = $this->createNotification($customer, $type, $channel, ...);
+**Good** (example shown in pseudocode — use your language's comment syntax: `//`, `#`, `--`, `;`):
+```
+// HW-<MOD>-01 + INV-<MOD>-13: write one row per channel
+notification = create_notification(customer, type, channel, ...)
 
-// FU-NOTIF-FCM-STALE-CLEANUP: clear dead token immediately
-$deviceToken->setFcmToken(null);
+// FU-<MOD>-STALE-TOKEN-CLEANUP: clear dead token immediately
+device_token.push_token = null
 ```
 
 **Bad:**
-```php
+```
 // Send notification
-$notification = $this->createNotification(...);
+notification = create_notification(...)
 ```
 
 The cited IDs let reviewers (and future you) trace WHY this code exists. Specs evolve; comments lose context. Citations are the bridge.

@@ -45,7 +45,7 @@ Append a new section:
 [list with reasons — usually doc-fix-only or one-time-audit]
 
 ### Top 3 inspector questions that fail TODAY
-[real questions an FRC/auditor/compliance officer would ask]
+[real questions an auditor / compliance officer / regulator would ask — your local equivalent of FRC/SEC/ESMA/HIPAA/etc.]
 ```
 
 ### Step 3: Update gravity.md (20 min)
@@ -181,7 +181,7 @@ If the reviewer says "this enforcement claim seems to hold", don't blanket-upgra
 
 ### Anti-pattern 3: Skipping the "Top 3 inspector questions" section
 
-This is the most actionable artifact of R2. Skipping it means the next FRC inspection finds the same gaps you already know about. Always document.
+This is the most actionable artifact of R2. Skipping it means the next regulatory inspection (FRC / SEC / ESMA / HIPAA audit / etc.) finds the same gaps you already know about. Always document.
 
 ### Anti-pattern 4: Bumping version without status change
 

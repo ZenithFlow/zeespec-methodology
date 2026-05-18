@@ -23,64 +23,86 @@ This is **fast, mechanical, AI-friendly** — perfect for a 30-min B1 phase.
 
 For each entity in `what.md` § 1:
 
-```bash
-# Example (PHP/Doctrine)
-ENTITY=Notification
-COLS=$(grep -c "#\[ORM\\\\Column" backend/src/Entity/$ENTITY.php)
-MTO=$(grep -c "#\[ORM\\\\ManyToOne" backend/src/Entity/$ENTITY.php)
-OTO=$(grep -c "#\[ORM\\\\OneToOne" backend/src/Entity/$ENTITY.php)
-echo "$ENTITY: Column=$COLS, ManyToOne=$MTO, OneToOne=$OTO, Total=$((COLS + MTO + OTO))"
+**Generic recipe:**
+1. Identify the source-of-truth file for the entity (the model/entity definition)
+2. Count its declared fields/columns/properties
+3. Count its declared relationships (ManyToOne, OneToOne, OneToMany, ManyToMany, FK, ref)
+4. Sum: total fields = columns + relationships
+
+Compare the production count to spec's claimed count. Document drift:
+
+```
+| Entity   | Spec claim | Production | Drift            |
+|----------|------------|------------|------------------|
+| ModelA   | 18         | 18         | ✅                |
+| ModelB   | 17         | 15         | ⚠️ -2 (spec stale) |
 ```
 
-Adapt for your stack:
-- **Java/Spring:** `rg "@Column" Entity.java | wc -l`
-- **Python/SQLAlchemy:** `rg "Column\(" model.py | wc -l`
-- **TypeScript/Prisma:** count fields in `schema.prisma` model block
-- **Go/GORM:** `rg "gorm:" model.go | wc -l`
+**Stack-specific grep patterns (pick the one matching your stack):**
 
-Compare to spec's claimed count. Document drift:
+| Stack | Count columns | Count relationships |
+|-------|---------------|---------------------|
+| Java + JPA/Spring | `rg "@Column" model.java \| wc -l` | `rg "@(One\|Many)To(One\|Many)" model.java \| wc -l` |
+| Python + SQLAlchemy | `rg "= Column\(" model.py \| wc -l` | `rg "= relationship\(" model.py \| wc -l` |
+| Python + Pydantic/SQLModel | `rg ": .* = Field" model.py \| wc -l` | `rg "Relationship\(" model.py \| wc -l` |
+| TypeScript + Prisma | count fields between `model X {` and `}` in `schema.prisma` | `@relation` blocks within the same model |
+| TypeScript + TypeORM | `rg "@Column" entity.ts \| wc -l` | `rg "@(One\|Many)To(One\|Many)" entity.ts \| wc -l` |
+| Go + GORM | `rg "gorm:" model.go \| wc -l` | `rg "foreignKey:\|references:" model.go \| wc -l` |
+| Go + sqlc/raw | count fields in struct declaration | FKs declared in SQL schema |
+| Rust + Diesel | `rg "-> " schema.rs \| wc -l` (within `table!`) | `joinable!` macros |
+| C# + EF Core | `rg "public .* { get;" entity.cs \| wc -l` | navigation properties (`virtual ICollection<X>`) |
+| Ruby + ActiveRecord | columns from migrations / `db/schema.rb` | `belongs_to / has_many / has_one` declarations |
+| PHP + Doctrine | `rg "#\[ORM\\\\Column" entity.php \| wc -l` | `rg "#\[ORM\\\\(Many\|One)To(One\|Many)" entity.php \| wc -l` |
 
-```markdown
-| Entity | Spec claim | Production | Drift |
-|--------|------------|------------|-------|
-| Notification | 18 | 18 | ✅ |
-| DeviceToken | 17 | 15 | ⚠️ -2 (spec stale) |
-```
+### 2. Enum / type case counts (5 min)
 
-### 2. Enum case counts (5 min)
+**Generic recipe:** count the declared values/variants in your enum/type.
 
-```bash
-# PHP
-ENUM=NotificationType
-grep -c "case " backend/src/Enum/Notification/$ENUM.php
+**Stack-specific:**
 
-# Adapt:
-# Java:  grep -c "^\s*[A-Z_]*," Enum.java
-# Python: rg "^\s+[A-Z_]+\s*=" enum.py
-# Go: count const block lines
-```
+| Stack | Count enum cases |
+|-------|------------------|
+| Java | `rg "^\s*[A-Z_]+(,\|\()" Enum.java \| wc -l` |
+| Python (`Enum`) | `rg "^\s+[A-Z_]+\s*=" enum.py \| wc -l` |
+| TypeScript | members of `enum X { ... }` block OR string-union literal count |
+| Go | const block entries under typed `type X int` |
+| Rust | variants of `enum X { ... }` |
+| C# | members of `public enum X { ... }` |
+| Ruby | constants in module / `enum :x, [:a, :b]` declarations |
+| PHP 8.1+ | `rg "^\s*case " Enum.php \| wc -l` |
 
 Document drift in your B1 findings.
 
-### 3. Service LOC + public method count (5 min)
+### 3. Service LOC + public-method count (5 min)
 
-```bash
-SERVICE=NotificationService
-wc -l backend/src/Service/Notification/$SERVICE.php
-grep -c "public function" backend/src/Service/Notification/$SERVICE.php
-```
+**Generic recipe:**
+- LOC: `wc -l <service-file>` (or equivalent)
+- Public methods: count the public/exported function declarations
 
 Spec usually claims something like "X service, ~Y LOC, Z public methods". Verify.
 
+**Stack-specific public-function patterns:**
+
+| Stack | Public-function count |
+|-------|----------------------|
+| Java/C# | `rg "^\s*public " ServiceFile \| wc -l` |
+| Python | `rg "^\s{0,4}def [a-z]" service.py \| wc -l` (top-level, no underscore prefix) |
+| TypeScript | `rg "^\s*(public \|export )(async )?[a-zA-Z]" service.ts \| wc -l` |
+| Go | `rg "^func \(.*\) [A-Z]" service.go \| wc -l` (capitalized = exported) |
+| Rust | `rg "^\s*pub fn " service.rs \| wc -l` |
+| Ruby | `rg "^\s*def [a-z]" service.rb \| wc -l` |
+| PHP | `rg "public function" service.php \| wc -l` |
+
 ### 4. Cited line refs (10 min)
 
-For each `file:line` citation in the spec, verify the method still lives there:
+For each `file:line` citation in the spec, verify the method still lives there.
+
+**Generic recipe:** grep for the method/function declaration, compare line number to the spec citation.
 
 ```bash
-# Spec says: AccountingService::createJournal at line 253
-grep -n "public function createJournal\|private function createJournal" \
-  backend/src/Service/Accounting/AccountingService.php
-# Production output: 263 — drift of +10 lines
+# Generic example (adjust regex per language):
+grep -n "<your-language-method-pattern>" <file-path>
+# Compare to spec's cited line. If drift > 50 lines, file as B1 finding.
 ```
 
 Run this for ~5-10 most-cited methods (focus on `CLAUDE.md` references). If drift > 50 lines, file as B1 finding.
@@ -90,10 +112,11 @@ Run this for ~5-10 most-cited methods (focus on `CLAUDE.md` references). If drif
 For each cited method/enum case in spec:
 
 ```bash
-# Spec says: ReferenceType::DIVIDEND_ACCRUAL
-grep "case DIVIDEND_ACCRUAL" backend/src/Enum/Accounting/ReferenceType.php
-# Empty result = phantom enum case → R1 finding
+# Generic: grep for the symbol; empty result = phantom (file as R1 finding)
+grep "<symbol-pattern>" <file>
 ```
+
+A phantom (spec cites it but production doesn't have it) is an R1 finding — file it.
 
 ## Output: B1 Findings Section
 

@@ -39,7 +39,7 @@ Unilateral declaration creates **silent breakage:**
 ```markdown
 ## From module-B (HW-B inheritance, ratified 2026-05-16)
 
-> Module A inherits dispatch + storage contracts from `module-B` ZeeSpec. См. `docs/specs/zeespec/module-B/gravity.md` § 1.
+> Module A inherits dispatch + storage contracts from `module-B` ZeeSpec. See `docs/specs/zeespec/module-B/gravity.md` § 1.
 
 | Inherited HW | Why this module inherits | How it manifests |
 |--------------|--------------------------|------------------|

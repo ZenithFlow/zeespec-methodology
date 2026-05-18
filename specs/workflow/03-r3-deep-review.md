@@ -84,7 +84,7 @@ Production: No such method
 
 ### Pattern 4: Dead enum case
 Spec: "NotificationStatus has 5 cases incl. DELIVERED"
-Production: Enum has 5 cases but DELIVERED is never set (no Postmark webhook ingestion)
+Production: Enum has 5 cases but DELIVERED is never set (no delivery-receipt webhook ingestion from the email/SMS provider)
 → File as FU-X-DEAD-STATUS; mark enum case as DEAD; clarify state machine.
 
 ### Pattern 5: Phantom DTO field

@@ -110,11 +110,11 @@ Production: FundJournalService.php has 20+ instances of:
             $this->accountingService->createJournal(..., createdBy: 0);
 ```
 
-**Impact:** FRC audit trail BROKEN — "Who posted journal #X?" → "user #0" (doesn't exist).
+**Impact:** Audit trail BROKEN — "Who posted record #X?" → "user #0" (doesn't exist). Regulator-inspector test fails on any system with a "who did this?" audit requirement.
 
 **Caught by:** R2 compliance review.
 
-**Fix:** Inject SecurityContext + use real user OR seed `system.eod` user. File spawn task chip.
+**Fix:** Inject the security/identity context + use real user OR seed a dedicated system-actor account (e.g., `system.eod`). File spawn task chip.
 
 ---
 
@@ -140,11 +140,11 @@ wallet/gravity.md has NO § "From notification" section
 
 **Example:**
 ```
-Spec: "NotificationService dispatches async via Symfony Messenger"
-Production: NotificationService has NO MessageBusInterface; all 4 channels execute inline
+Spec: "NotificationService dispatches async via <your message bus>"
+Production: NotificationService has NO message-bus dependency; all 4 channels execute inline
 ```
 
-**Caught by:** R1 reading service constructor.
+**Caught by:** R1 reading service constructor / dependency-injection wiring.
 
 **Fix:** Rewrite how.md §1-2 + gravity.md HW-X-03; document opt-in async wrapper.
 
@@ -169,7 +169,7 @@ Production: createNotification called PER channel — N rows for N-channel dispa
 ```
 Spec: NotificationStatus has 5 cases (PENDING, SENT, DELIVERED, READ, FAILED)
 Production: markAsRead() only sets isRead boolean — never mutates notification_status
-            No Postmark webhook ingestion — DELIVERED never set
+            No delivery-receipt webhook ingestion (e.g., from your email/SMS provider) — DELIVERED never set
 Effective state machine: PENDING → SENT | FAILED only
 ```
 
@@ -197,7 +197,7 @@ AccountingService::postJournal only allows JournalStatus::DRAFT
 
 ---
 
-## 13. Hard DELETE on audit tables (FRC retention)
+## 13. Hard DELETE on audit tables (retention-required tables)
 
 **Symptom:** CLI command issues raw DELETE on audit-trail tables that regulation requires to retain.
 

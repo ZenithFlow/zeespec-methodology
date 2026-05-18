@@ -38,14 +38,14 @@ docs/specs/zeespec/<module-name>/
 
 Each dimension answers ONE orthogonal question:
 
-| Dimension | Question | Mongolian |
-|-----------|----------|-----------|
-| WHAT | What entities/data exist? What constraints hold? | Юу? |
-| HOW | How does the algorithm work? What's the state machine? | Хэрхэн? |
-| WHO | Who can do what? Permission boundaries? | Хэн? |
-| WHEN | When does it run? What's the SLA? | Хэзээ? |
-| WHERE | Where does it live? Storage + tech stack? | Хаана? |
-| WHY | Why this design? What problem does it solve? | Яагаад? |
+| Dimension | Question |
+|-----------|----------|
+| WHAT | What entities/data exist? What constraints hold? |
+| HOW | How does the algorithm work? What's the state machine? |
+| WHO | Who can do what? Permission boundaries? |
+| WHEN | When does it run? What's the SLA? |
+| WHERE | Where does it live? Storage + tech stack? |
+| WHY | Why this design? What problem does it solve? |
 
 The 4 helpers:
 
@@ -122,8 +122,8 @@ OPEN gaps carry severity. AI behaviour depends on severity:
 
 Most-used prefixes (see `checklists/invariant-numbering.md` for the **full 19-prefix catalog** including `SLA`, `G`, `BR`, `F`, `Gap`, `RES`, `NHW`):
 
-| Prefix | Meaning | Lives in | Example |
-|--------|---------|----------|---------|
+| Prefix | Meaning | Lives in | Example (pilot module: NOTIF) |
+|--------|---------|----------|-------------------------------|
 | `INV-<MOD>-NN` | Invariant (data integrity) | `what.md` | `INV-NOTIF-13` |
 | `HW-<MOD>-NN` | Hardwiring (cross-dimension) | `gravity.md` | `HW-NOTIF-08` |
 | `ADR-<MOD>-NNN` | Architecture Decision Record | `CLAUDE.md` (+ optional separate ADR log) | `ADR-NOTIF-009` |
@@ -136,6 +136,8 @@ Most-used prefixes (see `checklists/invariant-numbering.md` for the **full 19-pr
 | `V-<MOD>-NN` | Validation table | `how.md` | `V-NOTIF-01` |
 | `A-<MOD>-NN` | Actor | `who.md` | `A-NOTIF-02` |
 | `SOD-<MOD>-NN` | Segregation of Duties | `who.md` | `SOD-NOTIF-03` |
+
+> The `NOTIF` examples come from the pilot project's notification module. Substitute your own module prefix when authoring (e.g., `INV-INVENTORY-04`, `HW-CHECKOUT-07`, `ADR-ORDERS-012`).
 
 Use ALL CAPS module prefix; zero-padded numbers (NN = 2 digit, NNN = 3 digit for ADRs). Descriptive-suffix prefixes (`ALG`, `FU`, `Gap`) use ALL CAPS with hyphens, no zero-padding.
 
@@ -170,11 +172,13 @@ Layer 2 (stack-specific) — content lives in `where.md` § 5.3:
 
 ```
 Async transports
-  Component: Symfony Messenger 6.4 with Redis transport
-    - notifications: max_retries=3, delay=1000ms (PHP class App\Message\SendNotificationMessage)
+  Component: <your message bus library> with <your transport>
+    - notifications: max_retries=3, delay=1000ms (class/handler name)
     - sms_high_priority: max_retries=5, delay=500ms
     - ...
 ```
+
+(Layer 2 names actual frameworks, libraries, classes. Layer 1 above does not.)
 
 ## 8. The 5 R6 Reflexes (R6-aware authoring)
 
@@ -323,7 +327,7 @@ Most modules sit at 🟡 Design-intent for an extended period — that's healthy
 
 **Anti-patterns:**
 - **AccountStatus pattern** — false-positive enforcement claim (spec says enforced; production has bypass)
-- **createdBy:0 anti-pattern** — sentinel value instead of real operator capture; breaks FRC audit trail
+- **createdBy:0 anti-pattern** — sentinel value instead of real operator capture; breaks audit trail (regulatory inspection blocker)
 
 ---
 

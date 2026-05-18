@@ -1,6 +1,6 @@
 # ZeeSpec Methodology — Standalone Package
 
-> **A portable, AI-friendly specification methodology** based on the 6-dimension Zachman framework (1987), adapted for modern AI-assisted development. Validated across 5 production modules in a Mongolian Mutual Fund Management System (PHP 8.2 + Symfony 6.4 + PostgreSQL 15) — surfaced **177 findings, 4 real production bugs fixed + 6 queued, 22 compliance gaps filed** (see § Validation Track Record below).
+> **A portable, AI-friendly specification methodology** based on the 6-dimension Zachman framework (1987), adapted for modern AI-assisted development. **Language-agnostic by design** — only one file (`where.md` § 5) is stack-specific. Validated across 5 production modules of a regulated financial-services system; pilot stack was PHP / Symfony / PostgreSQL but the methodology applies equally to Go, Java, Python, Rust, TypeScript, C#, Ruby, and other backend stacks. The pilot surfaced **177 findings, 4 real production bugs fixed + 6 queued, 22 compliance gaps filed** (see § Validation Track Record below).
 
 ---
 
@@ -110,8 +110,8 @@ find . -name '*.bak' -delete
 | notification | 45 | 2 fixed | 3 GDPR/AML filed |
 | asset_catalog | 13 | 1 fixed | 1 phantom-method removed |
 | wallet | 25 | 1 fixed | 5 AML filed |
-| accounting | 54 | (3 spawn chips OPEN) | 7 FRC retention/audit |
-| settlement | 40 | (3 spawn chips OPEN) | 6 FRC audit/tax |
+| accounting | 54 | (3 spawn chips OPEN) | 7 regulator retention/audit |
+| settlement | 40 | (3 spawn chips OPEN) | 6 regulator audit/tax |
 | **TOTAL** | **177** | **4 + 6 queued** | **22 filed** |
 
 ## Cost & ROI

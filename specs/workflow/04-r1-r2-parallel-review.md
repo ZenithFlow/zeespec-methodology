@@ -51,8 +51,8 @@ call patterns, race conditions, and cross-module orchestration.
 6. [Cross-module ordering] — If module X depends on module Y running first,
    is the order enforced or assumed?
 
-7. [Decimal precision / money math] — bcmath / decimal / BigDecimal scale
-   consistency across boundaries
+7. [Numeric precision / money math] — Decimal / BigDecimal / fixed-point scale
+   consistency across boundaries (whatever your stack uses; never use float for money)
 
 8. [Pseudocode validation] — Pick 3 ALG-X-NN entries in `how.md`. Compare
    to actual production. Any drift?
@@ -71,15 +71,20 @@ might miss, focusing on regulation, audit trail, cross-module breakage,
 and operator workflows.
 
 **Domain context:** [your jurisdiction + applicable regulations]
-[e.g., Mongolia FRC (Financial Regulatory Commission); 7-year retention per
-Mongolia AML law; CTR threshold 20M MNT]
+[Examples:
+ - EU finance: ESMA / national securities regulator; GDPR; PSD2; MiFID II
+ - US finance: SEC / FINRA; BSA/AML; SOX 7-year retention; CTR $10K threshold
+ - Healthcare US: HIPAA + state privacy laws
+ - E-commerce: PCI-DSS + GDPR / CCPA
+ - Pilot example: Mongolia FRC (Financial Regulatory Commission); 7-year retention
+   per Mongolia AML law; CTR threshold 20M MNT]
 
 **Already-known issues — don't re-report:**
 [List R3's findings + R1 likely findings to dedupe]
 
 **R2 focus areas:**
 
-1. [Regulatory compliance] — Domain-specific (FRC / GDPR / HIPAA / PCI-DSS).
+1. [Regulatory compliance] — Domain-specific (your local regulator, GDPR / HIPAA / PCI-DSS / SOX, etc.).
    What would an inspector ask first?
 
 2. [Audit trail completeness] — Every state transition logged with
@@ -164,7 +169,7 @@ Production indeed has the method, just not in the file R1 grep'd. R2 wins. Updat
 
 ### R1 says "missing transaction wrapper"; R2 says "savepoint config covers it"
 
-Both might be right. Check production `doctrine.yaml` for `use_savepoints: true`. If yes, R2 wins (nested transactions safely become savepoints). If no, R1 wins (partial-rollback risk).
+Both might be right. Check whether your ORM/transaction layer is configured to use savepoints for nested transactions (e.g., `use_savepoints: true` in Doctrine; `nested transactions` in SQLAlchemy; `SAVEPOINT` usage in raw SQL/sqlx). If yes, R2 wins (nested transactions safely become savepoints). If no, R1 wins (partial-rollback risk).
 
 ### R1 says "P0 production bug"; R2 says "P1 spec drift"
 

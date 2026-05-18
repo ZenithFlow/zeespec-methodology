@@ -27,7 +27,7 @@ last_updated: YYYY-MM-DD
 
 | Regulation | Requirement | Affects | Coverage |
 |-----------|-------------|---------|----------|
-| [GDPR / FRC / HIPAA] | [requirement] | [field/process] | [✅/🟡/🚧] |
+| [your applicable regulation — e.g., GDPR / HIPAA / PCI-DSS / SOX / your local regulator] | [requirement] | [field/process] | [✅/🟡/🚧] |
 
 ## 4. Cross-module dependencies
 
