@@ -476,8 +476,13 @@ Is this regulated / compliance-relevant?
 - `workflow/07-r4-regulatory-research/` — R4 agent (compliance research)
 - `workflow/08-code-drift-management/05-R5-drift-scanner-agent.md` — R5 agent
 - `workflow/09-adr-lifecycle/05-R6-adr-curator-agent.md` — R6 agent
+- `workflow/12-agentic-role-replacement/` — 🆕 deep-dive on agentic replacement
+  of 6 human team roles (Reviewer / Compliance / Architect / Tech Lead /
+  Domain Expert / QA). This file (`08-one-man-army.md`) gives the playbook;
+  `workflow/12-*` gives the per-role mechanics.
 
 ## Next
 
 → Try the workflow on YOUR project
 → `07-zeespec-lite-tier-0-fasttrack.md` for 2-hour starter
+→ `workflow/12-agentic-role-replacement/00-START-HERE.md` for per-role agent dispatch patterns

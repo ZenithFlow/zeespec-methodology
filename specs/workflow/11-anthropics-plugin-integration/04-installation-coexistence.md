@@ -334,4 +334,5 @@ For methodology updates: read changelog; update internal training; re-run any br
 ## Next
 
 → Back to `workflow/10-adoption-guide/00-START-HERE.md` for adoption decisions
+→ `workflow/12-agentic-role-replacement/00-START-HERE.md` — agentic role replacement (Reviewer / Compliance / Architect / Tech Lead / Domain Expert / QA)
 → Or: `workflow/00-START-HERE.md` for per-module workflow

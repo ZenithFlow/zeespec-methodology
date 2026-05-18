@@ -1,7 +1,7 @@
 ---
 doc: README
 type: package-overview
-version: 2.3.0
+version: 2.4.0
 status: stable
 last_updated: 2026-05-18
 ---
@@ -106,6 +106,16 @@ zeespec-methodology/specs/
 │   ├── 02-dispatching-from-zeespec.md — Pattern 2: plugin-as-subroutine
 │   ├── 03-spec-driven-plugin-config.md — Pattern 3: spec governs plugin runtime
 │   └── 04-installation-coexistence.md — install + coexist
+├── workflow/12-agentic-role-replacement/  — 🆕 v1.0.0 systematic agentic replacement of 6 human team roles
+│   ├── 00-START-HERE.md            — entry; 6-role coverage table; gold rules
+│   ├── 01-reviewer-agents.md       — Reviewer (R1/R2/R3) — 75-85% coverage
+│   ├── 02-compliance-officer-agent.md — Compliance Officer — 60-70% coverage
+│   ├── 03-architect-agent.md       — Architect — 65-75% coverage
+│   ├── 04-tech-lead-agent.md       — Tech Lead — 50-60% coverage
+│   ├── 05-domain-expert-agent.md   — Domain Expert / PM — 40-55% coverage
+│   ├── 06-qa-tester-agent.md       — QA Engineer / Tester — 70-80% coverage
+│   ├── 07-orchestration-matrix.md  — Multi-role handoff + panel + parallel dispatch
+│   └── 08-limitations-and-escalation.md — Honest limits + when to escalate to humans
 └── overlays/
     └── finance-accounting/         — domain-specialized reference example (v0.4.0)
         ├── README.md               — how to apply the overlay

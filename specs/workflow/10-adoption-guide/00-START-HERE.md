@@ -39,6 +39,7 @@ applies_to: teams considering OR adopting ZeeSpec for the first time
 6. `06-common-pitfalls.md` (what kills adoption; how to avoid)
 7. `07-zeespec-lite-tier-0-fasttrack.md` (3-file Lite path; ~2-hour trial)
 8. `08-one-man-army.md` (solo developer playbook — 1 хүн full methodology)
+9. `../12-agentic-role-replacement/` (🆕 per-role agentic replacement — 6 human roles; orchestration matrix; limitations)
 
 ## Adoption decision matrix
 
