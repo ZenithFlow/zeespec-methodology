@@ -1,0 +1,178 @@
+# Severity Matrix — Gap Priorities + AI Behaviour
+
+> Use in `gaps.md` to triage OPEN gaps. Drives whether AI proceeds or STOPs.
+
+## The 4 severities
+
+| Severity | Symbol | Definition |
+|----------|:------:|------------|
+| **P0 Critical** | 🚨 / 🔴 | Real money loss, compliance violation, runtime crash blocking core flow |
+| **P1 Important** | 🟠 | Audit gap, dead code, missing guard, false invariant claim |
+| **P2 Medium** | 🟡 | Stale line ref (<200 lines), drift, missing test |
+| **P3 Low** | 🟢 | Style, naming, low-priority cleanup |
+
+## AI behaviour by severity + ticket presence
+
+| Severity | Has ticket? | AI behaviour |
+|----------|:-----------:|--------------|
+| 🚨 P0 | No | **STOP** — ask user; do not implement |
+| 🚨 P0 | Yes (MOD-IMPL-XXX) | Refer to ticket; do NOT implement (production fix is separate workstream) |
+| 🟠 P1 | No | **STOP** — ask user |
+| 🟠 P1 | Yes | Cite gap; proceed only if explicitly invoked by user |
+| 🟡 P2 | Either | Implement if obvious + cite gap |
+| 🟢 P3 | Either | Implement + cite gap |
+
+## Severity by domain (calibration)
+
+| Default (general) | Financial (Mongolia FRC) | E-commerce | Healthcare (HIPAA) |
+|-------------------|--------------------------|------------|---------------------|
+| **P0** | Compliance violation, money loss | Cart abandonment ≥5% impact | Patient safety, PHI breach |
+| **P1** | AML/FRC gap, audit failure | Conversion drop, payment bug | PHI exposure, GDPR breach |
+| **P2** | Operational friction | UX paper cut, A/B test loss | Workflow inefficiency |
+| **P3** | Documentation drift | Style issue | Code quality |
+
+## What qualifies as P0
+
+A finding is P0 if ANY of these apply:
+
+- Money loss or potential for money loss
+- Regulatory enforcement action risk (FRC, SEC, EU, IRS, etc.)
+- Runtime crash in core flow (e.g., every approval throws 500)
+- Audit trail completely broken (e.g., createdBy: 0 sentinel)
+- Data corruption (e.g., balance sheet shows wrong signs)
+- Single-actor money exfiltration vector
+- Production bug already happened (incident log evidence)
+
+## What qualifies as P1
+
+A finding is P1 if ANY of these apply:
+
+- Audit gap (operator identity missing but not always)
+- Dead code (feature documented but never invoked)
+- Missing guard (input validation absent at one layer of 3)
+- False invariant claim (spec says enforced, actually partial)
+- Race condition with low frequency
+- Compliance gap for less-critical regulations
+
+## What qualifies as P2
+
+- Stale line ref < 200 lines
+- Drift in count (e.g., enum says 39 cases, actual 40)
+- Documentation copy-paste error
+- Pseudocode typo
+
+## What qualifies as P3
+
+- Style inconsistencies
+- Code comment improvements
+- Module reorganization
+
+## Severity-driven gap status
+
+| Severity | Maximum allowed status |
+|----------|----------------------|
+| 🚨 P0 | 🔴 OPEN (block all related work) |
+| 🟠 P1 | 🔴 OPEN OR 🟡 PROPOSED |
+| 🟡 P2 | Any status |
+| 🟢 P3 | Any status |
+
+## Severity-driven response time
+
+| Severity | Expected response |
+|----------|-------------------|
+| 🚨 P0 | < 1 week (spawn task chip immediately) |
+| 🟠 P1 | < 1 month |
+| 🟡 P2 | < 1 quarter |
+| 🟢 P3 | When convenient |
+
+## Composite gap severity (multi-impact)
+
+If a gap affects multiple severities:
+
+| Money loss + audit gap | Take MAX severity → P0 |
+| Compliance + UX | Compliance wins → severity matches the regulatory impact |
+| Race condition only at high concurrency | Frequency-adjusted → if <1% incidence, downgrade to P2 |
+
+## Real examples from pilot
+
+| Finding | Severity | Why |
+|---------|:--------:|-----|
+| FRC retention violation (hard DELETE on audit tables) | 🚨 P0 | Compliance + already executed in dev |
+| createdBy:0 anti-pattern across 20+ sites | 🚨 P0 | Audit trail BROKEN; FRC inspector test fails |
+| Approval workflow boundary mismatch (every approved journal throws) | 🚨 P0 | Runtime crash in core flow |
+| Bond maturity reads stale holdings → over-distribution | 🚨 P0 | Real money risk |
+| Tax remittance ignores USD bucket | 🚨 P0 | Government under-remittance + tax penalties |
+| Per-type toggles DEAD CODE (UI shows but production ignores) | 🟠 P1 | GDPR false-promise + UX confusion |
+| Stale line refs (200+ drift) | 🟡 P2 | Confusing to readers but not broken |
+| Enum count drift (39 → 45) | 🟡 P2 | Docs only |
+| ReferenceType admin Sonata filter missing 35 cases | 🟢 P3 | UI polish |
+
+## Severity escalation triggers
+
+A P1 escalates to P0 if:
+- Production incident occurs (caught in log)
+- Compliance audit raises it
+- Multiple users report affected
+- Cross-impact with another P0
+
+A P2 escalates to P1 if:
+- Drift accumulates (line refs > 500 off)
+- Multiple modules cross-impacted
+- Audit cycle approaches and gap remains
+
+## Severity de-escalation triggers
+
+A P0 de-escalates to P1 if:
+- Workaround documented + operator-tested
+- Risk window narrowed (e.g., only affects pre-launch funds)
+- Compensating control added (e.g., daily reconciliation)
+
+## How to use this matrix
+
+### When authoring a gap
+
+1. Describe the gap (what / where / impact)
+2. Pick severity using the calibration tables
+3. Decide ticket assignment (P0/P1 usually get spawn chips)
+4. Set the AI behaviour expectation explicitly
+
+### When reading a gap as AI
+
+1. Check severity
+2. Check ticket presence
+3. Look up the row in the severity × ticket matrix
+4. Apply the behaviour ("STOP" / "cite" / "proceed")
+
+### When prioritizing remediation
+
+```
+Priority order:
+1. 🚨 P0 with production evidence (dev.log, incident log)
+2. 🚨 P0 with compliance impact
+3. 🚨 P0 with money risk
+4. 🟠 P1 with audit cycle approaching
+5. 🟠 P1 with cross-module impact
+6. 🟡 P2 batched per spec re-author cycle
+7. 🟢 P3 when convenient
+```
+
+## Common mistakes
+
+### Mistake 1: Inflating severity
+
+Everything marked P0 → severity loses meaning. Reserve P0 for real production impact.
+
+### Mistake 2: Not specifying ticket presence
+
+"Gap-X-XXX 🚨 P0 OPEN" without a ticket reference → AI doesn't know if it should STOP or refer.
+
+### Mistake 3: Severity drift over time
+
+A gap filed 6 months ago as P1 may now be P0 (incident happened) or P2 (workaround landed). Re-triage during spec re-author cycles.
+
+### Mistake 4: Severity vs Status confusion
+
+- **Status** (🔴 OPEN / 🟡 PROPOSED / 🟢 RESOLVED) = where the gap is in its lifecycle
+- **Severity** (🚨 P0 / 🟠 P1 / 🟡 P2 / 🟢 P3) = how urgent
+
+A gap can be P0 OPEN (urgent + unresolved) OR P0 RESOLVED (urgent + fixed). Both are valid.
