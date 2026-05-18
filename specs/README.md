@@ -90,16 +90,33 @@ zeespec-methodology/specs/
 │   ├── 03-adr-relationships.md     — supersedes / extends / conflicts-with / inherits links
 │   ├── 04-drift-driven-adr-pattern.md — drift detection → retroactive ADR pipeline
 │   └── 05-R6-adr-curator-agent.md  — agent (4 modes: draft / annual review / conflict check / cross-module)
+├── workflow/10-adoption-guide/         — 🆕 v1.0.0 organizational adoption (greenfield / brownfield / team rollout)
+│   ├── 00-START-HERE.md            — entry; adoption decision matrix; tier selection
+│   ├── 01-adopting-zeespec-from-scratch.md — greenfield path
+│   ├── 02-onboarding-existing-project.md — brownfield path
+│   ├── 03-team-rollout-strategy.md — multi-developer rollout
+│   ├── 04-tooling-integration.md   — CI / IDE / Slack / dashboards
+│   ├── 05-cross-domain-adaptation.md — healthcare / government / privacy / etc.
+│   ├── 06-common-pitfalls.md       — 15 adoption failure modes + fixes
+│   └── 07-zeespec-lite-tier-0-fasttrack.md — 3-file Lite path (2-hour trial)
+├── workflow/11-anthropics-plugin-integration/  — 🆕 v1.0.0 integration with anthropics/financial-services plugins
+│   ├── 00-START-HERE.md            — entry; ZeeSpec vs plugins (complementary)
+│   ├── 01-plugin-output-as-adr.md  — Pattern 1: capture plugin outputs as ADRs
+│   ├── 02-dispatching-from-zeespec.md — Pattern 2: plugin-as-subroutine
+│   ├── 03-spec-driven-plugin-config.md — Pattern 3: spec governs plugin runtime
+│   └── 04-installation-coexistence.md — install + coexist
 └── overlays/
-    └── finance-accounting/         — 🆕 v0.1.0 domain-specialized overlay
+    └── finance-accounting/         — domain-specialized reference example (v0.4.0)
         ├── README.md               — how to apply the overlay
-        ├── principles/             — accounting + FRC + invariants + anti-patterns + severity
-        ├── modules/                — 3 pre-filled module templates
+        ├── principles/             — accounting + regulatory + invariants + anti-patterns + severity (5 files)
+        ├── modules/                — 4 pre-filled module templates
         │   ├── general-ledger/     — full 10-file ZeeSpec for GL / journal / CoA
         │   ├── wallet-settlement/  — module overview (condensed) for payment / wallet
-        │   └── kyc-aml/            — module overview (condensed) for KYC / AML
+        │   ├── kyc-aml/            — module overview (condensed) for KYC / AML
+        │   └── lending/            — module overview (condensed) for NBFI lending
+        ├── research-examples/      — 4 worked R4 research examples (finance-specific)
         ├── prompts/                — specialized R2 financial reviewer agent prompt
-        └── glossary/               — ~100 finance + accounting + FRC terms
+        └── glossary/               — ~120 finance + accounting + regulator vocabulary
 ```
 
 ## Available overlays

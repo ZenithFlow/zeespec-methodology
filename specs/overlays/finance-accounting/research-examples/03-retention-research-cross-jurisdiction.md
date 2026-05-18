@@ -1,5 +1,5 @@
 ---
-doc: overlays/finance-accounting/research/examples/03-retention-research-cross-jurisdiction
+doc: overlays/finance-accounting/research-examples/03-retention-research-cross-jurisdiction
 type: research-worked-example
 overlay: finance-accounting
 example_topic: Retention research across 5 jurisdictions (Mongolia, EU, US, UK, Singapore)
@@ -343,9 +343,9 @@ These 3 examples (FRC investment-fund regulation; Mongolia AML law; cross-jurisd
 
 ## Cross-references
 
-- `../00-START-HERE.md` — research methodology overview
-- `../regulator-research-workflow.md` — 6-phase method
+- `/specs/workflow/07-r4-regulatory-research/00-START-HERE.md` — research methodology overview
+- `/specs/workflow/07-r4-regulatory-research/01-regulatory-research-workflow.md` — 6-phase method
 - `../source-evaluation.md` — Tier 1-4 hierarchy
 - `../citation-conventions.md` — citation format
-- `../R4-regulatory-research-agent.md` — agent prompt
+- `/specs/workflow/07-r4-regulatory-research/04-R4-agent-prompt.md` — agent prompt
 - `../other-jurisdictions-cheatsheet.md` — source URL map

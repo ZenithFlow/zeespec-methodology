@@ -258,15 +258,17 @@ If R4 says "threshold = 20M MNT per Art. 11.1.1" and production code has `THRESH
 
 ## Example output (abbreviated)
 
-See `examples/01-frc-investment-fund-regulation.md` for a full worked example.
+See `/specs/overlays/finance-accounting/research-examples/01-frc-investment-fund-regulation.md` for a full worked example (finance domain).
 
 ## Cross-references
 
 - `00-START-HERE.md` — research methodology overview
-- `regulator-research-workflow.md` — 6-phase method
-- `source-evaluation.md` — Tier 1-4 source hierarchy
-- `citation-conventions.md` — citation format
-- `other-jurisdictions-cheatsheet.md` — source URLs per jurisdiction
-- `../prompts/R2-financial-reviewer.md` — R2 verifies R4's output against code
-- Core ZeeSpec `workflow/04-r1-r2-parallel-review.md` — R1+R2 framework
-- Core ZeeSpec `workflow/06-spawn-task-chips.md` — chip dispatch
+- `01-regulatory-research-workflow.md` — 6-phase method
+- `02-source-evaluation.md` — Tier 1-4 source hierarchy
+- `03-citation-conventions.md` — citation format
+- `05-source-cheatsheet.md` — source URLs per jurisdiction + domain
+- `06-re-validation-strategy.md` — annual re-check workflow
+- `09-amendment-tracking.md` — proactive monitoring
+- `/specs/overlays/finance-accounting/prompts/R2-financial-reviewer.md` — R2 verifies R4's output against code (finance overlay; analogous prompts for other domains)
+- Core ZeeSpec `/specs/workflow/04-r1-r2-parallel-review.md` — R1+R2 framework
+- Core ZeeSpec `/specs/workflow/06-spawn-task-chips.md` — chip dispatch

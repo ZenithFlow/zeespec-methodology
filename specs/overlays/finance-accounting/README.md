@@ -46,7 +46,7 @@ last_updated: 2026-05-18
 7. **Specialized R2 reviewer prompt** (`prompts/R2-financial-reviewer.md`) — replaces the generic R2 prompt with finance-tuned questions ("Show me the audit trail for journal #X", "Reconcile yesterday's wallet movements against subledger", "List CTR transactions > threshold over last 30 days").
 8. **Finance + accounting glossary** (`glossary/finance-glossary.md`) — ~120 terms covering double-entry, IFRS line types, AML/KYC acronyms, multi-jurisdiction regulator vocabulary.
 
-9. **Regulatory research methodology** (`research/`) — step-by-step workflow for navigating your jurisdiction's regulator website + statute database; how to evaluate sources; how to cite regulator + law in your spec; R4-Regulatory-Research agent prompt; 3 worked examples (FRC investment-fund regulation; Mongolia AML law; cross-jurisdiction retention research); cheatsheet of regulator websites + statute databases for 9 jurisdictions.
+9. **Worked R4 research examples** (`research-examples/`) — 4 worked R4 sessions demonstrating the regulator + statute research methodology applied to Mongolia FRC, Mongolia AML law, cross-jurisdiction retention, and Mongolia NBFI lending. The R4 METHODOLOGY itself (workflow, source evaluation, citation conventions, agent prompt, cheatsheet) lives in core ZeeSpec at `workflow/07-r4-regulatory-research/` (promoted to core in v2.7).
 
 ## Read order
 
@@ -56,7 +56,7 @@ last_updated: 2026-05-18
 4. `principles/regulatory-compliance.md` — regulatory framework (multi-jurisdiction)
 5. `principles/financial-invariants-catalog.md` — reusable invariants
 6. `principles/severity-matrix-finance.md` — calibration
-7. `research/00-START-HERE.md` — how to research YOUR jurisdiction's specifics (regulator + statute + retention thresholds)
+7. `/specs/workflow/07-r4-regulatory-research/00-START-HERE.md` — how to research YOUR jurisdiction's specifics (regulator + statute + retention thresholds); see `research-examples/` for finance applications
 8. Pick the relevant module template under `modules/` and start authoring
 
 ## Relationship to core ZeeSpec
@@ -127,23 +127,18 @@ overlays/finance-accounting/
 │   ├── wallet-settlement/                   — module overview (condensed)
 │   ├── kyc-aml/                             — module overview (condensed)
 │   └── lending/                             — module overview (NBFI lending; NPL; dual ECL)
-├── research/                                — 🆕 v0.2.0 regulator + statute research workflow
-│   ├── 00-START-HERE.md                     — research entry point
-│   ├── regulator-research-workflow.md       — 6-phase research method
-│   ├── source-evaluation.md                 — how to assess regulator sources
-│   ├── citation-conventions.md              — how to cite regulator + law in spec
-│   ├── R4-regulatory-research-agent.md      — specialized R4 agent prompt
-│   ├── other-jurisdictions-cheatsheet.md    — source URLs for 9 jurisdictions
-│   └── examples/
-│       ├── 01-frc-investment-fund-regulation.md
-│       ├── 02-mongolia-aml-law-research.md
-│       ├── 03-retention-research-cross-jurisdiction.md
-│       └── 04-mongolia-lending-research.md           — NBFI lending (R4 produced lending module)
+├── research-examples/                       — 4 worked R4 research examples (finance-specific)
+│   ├── 01-frc-investment-fund-regulation.md
+│   ├── 02-mongolia-aml-law-research.md
+│   ├── 03-retention-research-cross-jurisdiction.md
+│   └── 04-mongolia-lending-research.md      — NBFI lending (R4 produced lending module)
 ├── prompts/
 │   └── R2-financial-reviewer.md             — specialized R2 agent prompt
 └── glossary/
     └── finance-glossary.md                  — ~120 finance + accounting terms
 ```
+
+> **Note:** R4 regulatory research METHODOLOGY (the 6-phase workflow, source evaluation, citation conventions, agent prompt, source cheatsheet) lives in **core ZeeSpec** at `workflow/07-r4-regulatory-research/` (promoted to core in v2.7 because it's domain-agnostic). The 4 finance-specific worked examples in `research-examples/` above demonstrate that methodology applied to Mongolia FRC + AML domain.
 
 ## License + credits
 

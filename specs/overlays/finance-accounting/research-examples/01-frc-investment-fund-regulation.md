@@ -1,5 +1,5 @@
 ---
-doc: overlays/finance-accounting/research/examples/01-frc-investment-fund-regulation
+doc: overlays/finance-accounting/research-examples/01-frc-investment-fund-regulation
 type: research-worked-example
 overlay: finance-accounting
 example_topic: FRC investment-fund regulation (Mongolia)

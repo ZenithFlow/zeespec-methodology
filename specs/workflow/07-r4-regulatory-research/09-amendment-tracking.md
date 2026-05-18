@@ -326,12 +326,63 @@ following authorities + topics:
    - What changed
    - When effective
    - Which spec INV/HW would be affected
+   - **Which existing ADR may be superseded by the amendment** (per § "Amendment → ADR cascade" below)
    - Recommended action
 
 **Output:** Markdown report to be appended to
 `_meta/amendment-watch-list.md`.
 
 Time budget: ~30-60 min total across all authorities.
+
+## Amendment → ADR cascade (R4 → R6 handoff)
+
+When R4 detects an amendment that materially changes an existing INV/HW backed by an ADR, the cascade is:
+
+```
+R4 detects amendment
+  (e.g., Mongolia AML threshold raised 20M → 30M MNT)
+        ↓
+R4 identifies affected ADR(s)
+  (e.g., ADR-KYC-007 captured the 20M threshold decision)
+        ↓
+R4 recommends ADR action:
+  - If amendment merely tightens a parameter → "amendment-driven ADR update":
+    - Mark ADR-KYC-007 as Superseded
+    - Dispatch R6 Mode A (per `09/05-R6-adr-curator-agent.md`) to draft new ADR-KYC-NNN+1
+    - Cite the amendment as source
+  - If amendment changes the structural decision → "authority-driven ADR superseder":
+    - Full ADR re-author via R6
+    - Cross-module impact check via R6 Mode D
+        ↓
+Human reviewer accepts ADR draft
+  (validates that engineering team agrees with the codification)
+        ↓
+Spec update applied
+  (INV/HW updated; engineering ticket if code change needed)
+        ↓
+Drift item marked RESOLVED with link to new ADR
+```
+
+This is the **authority-driven retroactive ADR pattern** — symmetric to the code-drift-driven retroactive ADR pattern in `workflow/09-adr-lifecycle/04-drift-driven-adr-pattern.md`.
+
+Without this cascade documentation, R4 would detect amendments but the ADRs they invalidate would silently remain marked Accepted.
+
+## Conflict resolution: R4 detects amendment + R5 detects code already follows new value
+
+Common scenario after amendment:
+- R4 detects: law amended on 2028-03-15 (threshold raised 20M → 30M MNT)
+- R5 separately detects: code uses 30M MNT (matches new law); spec still says 20M MNT
+- R5 categorization confusion: is this Type 3-bug (code wrong) or Type 3-design (spec stale)?
+
+Resolution: R4 finding wins. Code is correct (matches amended law); spec is stale (still references pre-amendment value). Drift is authority-driven, not code-bug. Recipe:
+
+1. R4 writes amendment ADR (per cascade above)
+2. R5 drift finding linked to the amendment ADR
+3. Spec INV/HW updated to new value
+4. No spawn chip (code is right)
+5. Drift item resolved by spec edit
+
+See `07-conflict-resolution.md` § "Type 5 — International standard vs national transposition" for related conflict resolution patterns.
 ```
 
 ## Anti-patterns

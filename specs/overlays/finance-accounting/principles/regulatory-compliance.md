@@ -11,7 +11,7 @@ last_updated: 2026-05-18
 
 > **Jurisdiction-neutral**. Common compliance pillars that apply to regulated financial-services entities worldwide. Concrete examples are shown across **multiple jurisdictions equally** (EU / US / UK / Singapore / India / Japan / Mongolia / Hong Kong / Australia) so any team can pick their own and adapt.
 >
-> For **how to research your jurisdiction's specifics** (regulator website navigation, law citation conventions, periodic re-check workflow), see the `../research/` folder.
+> For **how to research your jurisdiction's specifics** (regulator website navigation, law citation conventions, periodic re-check workflow), see core ZeeSpec `workflow/07-r4-regulatory-research/` (promoted to core in v2.7). Finance-specific worked examples in `../research-examples/`.
 
 ## 1. The regulatory landscape
 
@@ -362,11 +362,11 @@ Before claiming production-ready in any jurisdiction:
 
 This pilot is one reference. Your jurisdiction will differ; the framework above is the same.
 
-For step-by-step research methodology to discover YOUR jurisdiction's specifics, see `../research/00-START-HERE.md`.
+For step-by-step research methodology to discover YOUR jurisdiction's specifics, see `/specs/workflow/07-r4-regulatory-research/00-START-HERE.md`.
 
 ## 8. References
 
-(See `../research/other-jurisdictions-cheatsheet.md` for full source URL list per regulator.)
+(See `/specs/workflow/07-r4-regulatory-research/05-source-cheatsheet.md` for full source URL list per regulator + domain.)
 
 ### International standards
 - FATF Recommendations: https://www.fatf-gafi.org
@@ -381,4 +381,4 @@ For step-by-step research methodology to discover YOUR jurisdiction's specifics,
 ## Next
 
 → `financial-invariants-catalog.md` — reusable INV/HW entries
-→ `../research/00-START-HERE.md` — research methodology
+→ `/specs/workflow/07-r4-regulatory-research/00-START-HERE.md` — research methodology (in core ZeeSpec)

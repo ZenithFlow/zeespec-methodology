@@ -1,5 +1,5 @@
 ---
-doc: overlays/finance-accounting/research/examples/04-mongolia-lending-research
+doc: overlays/finance-accounting/research-examples/04-mongolia-lending-research
 type: research-worked-example
 overlay: finance-accounting
 example_topic: Mongolia lending regulation (NBFI + interest cap + NPL classification + IFRS 9 ECL)
@@ -555,8 +555,8 @@ ZEM removes negative history (affects future DTI calc by other lenders).
 
 ## Cross-references
 
-- `../00-START-HERE.md` — research methodology overview
-- `../regulator-research-workflow.md` — 6-phase method
-- `../R4-regulatory-research-agent.md` — agent prompt
-- `../examples/02-mongolia-aml-law-research.md` — related (AML/KYC dependency)
+- `/specs/workflow/07-r4-regulatory-research/00-START-HERE.md` — research methodology overview
+- `/specs/workflow/07-r4-regulatory-research/01-regulatory-research-workflow.md` — 6-phase method
+- `/specs/workflow/07-r4-regulatory-research/04-R4-agent-prompt.md` — agent prompt
+- `02-mongolia-aml-law-research.md` — related (AML/KYC dependency)
 - `../../modules/lending/MODULE-OVERVIEW.md` — module spec produced from this research session

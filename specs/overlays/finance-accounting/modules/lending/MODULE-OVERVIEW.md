@@ -810,10 +810,10 @@ SoD:
 
 ## Cross-references
 
-- `../general-ledger/MODULE-OVERVIEW.md` — GL postings backing every loan transaction
+- `../general-ledger/CLAUDE.md` — GL postings backing every loan transaction (full 10-file spec)
 - `../wallet-settlement/MODULE-OVERVIEW.md` — disbursement + repayment via wallet
 - `../kyc-aml/MODULE-OVERVIEW.md` — KYC TIER_FULL + sanctions screening prerequisite
 - `../../principles/accounting-principles.md` — double-entry framework
 - `../../principles/regulatory-compliance.md` — 7 universal compliance pillars
 - `../../principles/financial-invariants-catalog.md` — INV-FIN-* base patterns
-- `../../research/examples/04-mongolia-lending-research.md` — full R4 research session that produced this module
+- `../../research-examples/04-mongolia-lending-research.md` — full R4 research session that produced this module

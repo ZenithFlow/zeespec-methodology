@@ -104,37 +104,41 @@ PHASE 5: APPLY (1-2h)      → Fold findings back; spawn task chips for producti
 | **R1** | Architecture-level | "spec describes async, production is sync" |
 | **R2** | Cross-cutting + compliance | "no operator identity captured in audit trail" |
 
-## 3a. Continuous post-Tier-1 phases (drift + ADR)
+## 3a. Continuous post-Tier-1 workflows (drift + ADR)
 
-After Tier 1 promotion, two ONGOING phases keep the spec aligned with reality:
+> **Phase numbering note:** The pre-Tier-1 workflow has 5 phases (Author + B1 + R3 + R1+R2 + Apply). `workflow/06-spawn-task-chips.md` is a UTILITY used across phases (not a numbered phase). After Tier 1, two CONTINUOUS workflows take over — referenced by folder number (`workflow/08`, `workflow/09`) rather than as numbered phases, since they run perpetually rather than as discrete sequential steps.
+
+After Tier 1 promotion, two ONGOING workflows keep the spec aligned with reality:
 
 ```
 [Tier 1 status]
         ↓
 [CONTINUOUS]
-  Phase 7 — Code Drift Management (workflow/08)
+  workflow/08 — Code Drift Management
     - CI drift scan on every PR (Layer 1)
     - Scheduled review monthly/quarterly (Layer 2)
     - Triggered review for refactors / bug fixes (Layer 3)
     - 4-type framework: Citation / Field+enum / Behavioral / Architectural
     - Resolution: spec edit OR spawn chip OR ADR
+    - Agent: R5 (drift scanner)
 
-  Phase 8 — ADR Lifecycle (workflow/09)
+  workflow/09 — ADR Lifecycle
     - Format: capture context + decision + alternatives + consequences
     - Lifecycle: Proposed → Accepted → Superseded / Deprecated
     - Relationships: supersedes / extends / conflicts-with / inherits
     - Drift-driven ADR pattern: drift findings → retroactive ADRs
     - Annual ADR review for staleness
+    - Agent: R6 (ADR curator)
 ```
 
-**Phase 7-8 distinction:**
+**Drift vs ADR distinction:**
 
-| Phase | Catches | Examples |
+| Workflow | Catches | Examples |
 |-------|---------|----------|
-| **Phase 7 (Drift)** | Spec ≠ Code | "Spec INV-WAL-02 says TIER_FULL; code accepts TIER_BASIC" |
-| **Phase 8 (ADR)** | Decision not documented | "WHY was TIER_BASIC allowed? No ADR exists; retroactive needed" |
+| **workflow/08 (Drift)** | Spec ≠ Code | "Spec INV-WAL-02 says TIER_FULL; code accepts TIER_BASIC" |
+| **workflow/09 (ADR)** | Decision not documented | "WHY was TIER_BASIC allowed? No ADR exists; retroactive needed" |
 
-The two work together: drift detection (Phase 7) surfaces Type 3-design + Type 4 changes → ADR (Phase 8) captures the WHY → spec realigns.
+The two work together: drift detection (workflow/08) surfaces Type 3-design + Type 4 changes → ADR (workflow/09) captures the WHY → spec realigns.
 
 ## 3b. Specialized agents per phase
 

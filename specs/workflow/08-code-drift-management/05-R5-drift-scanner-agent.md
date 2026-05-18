@@ -365,7 +365,41 @@ R5 cannot:
 - Read PR descriptions outside what's in git
 - Know about regulatory changes (that's R4)
 
-For limitations: file as RES-MOD-R5-NN; escalate to human.
+For limitations: file as RES-MOD-DRIFT-NN; escalate to human.
+
+## When R5 finds suspected regulatory drift (R5 → R4 handoff)
+
+R5 detects spec ≠ code (drift). But sometimes the drift is downstream of regulatory change R4 should have caught:
+
+**Pattern:** spec says "CTR threshold = 20M MNT" but code uses 30M MNT. Two interpretations:
+- **Type 3-bug** (R5 default): code is wrong; spec is right; spawn chip to fix code
+- **Authority-driven drift** (R4 territory): regulator amended law; code reflects new law; spec is stale
+
+R5 cannot distinguish these without checking the underlying authority. If R5 finds drift involving a value that LOOKS authority-driven (threshold, deadline, retention window, jurisdictional definition), R5 should:
+
+1. Flag as `RES-MOD-DRIFT-NN` with category `authority-suspected`
+2. Recommend: "Dispatch R4 (per `workflow/07-r4-regulatory-research/06-re-validation-strategy.md`) to re-validate the source — may be authority-driven drift, not code-bug"
+3. Do NOT auto-categorize as Type 3-bug
+4. Do NOT recommend spawn chip until R4 confirms
+
+After R4 completes:
+- If authority unchanged → R5 categorization stands; Type 3-bug; spawn chip
+- If authority amended → drift is authority-driven; write retroactive ADR per `workflow/09-adr-lifecycle/04-drift-driven-adr-pattern.md`; update spec; no spawn chip needed
+
+This handoff prevents R5 from filing chips that mistakenly "fix" code that's actually correct relative to amended law.
+
+## When R5 finds drift requiring ADR (R5 → R6 handoff)
+
+For Type 3-design + Type 4 drift:
+
+1. R5 produces finding + recommends "ADR needed"
+2. Human reviewer accepts the recommendation (R5 doesn't auto-dispatch)
+3. Human dispatches R6 Mode A (draft retroactive ADR) per `workflow/09-adr-lifecycle/05-R6-adr-curator-agent.md`
+4. R6 drafts ADR using R5's finding as input
+5. Human reviews + accepts ADR
+6. Spec updates applied; drift item marked RESOLVED
+
+Don't auto-dispatch R6 from R5 — human review of the categorization decision (bug vs design) is mandatory.
 
 ## Cross-references
 

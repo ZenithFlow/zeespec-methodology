@@ -51,13 +51,23 @@ Read all dimension files BEFORE generating code.
 
 ## Key architectural decisions
 
-### Foundational ADRs
+### Foundational ADRs (this module's own decisions)
 
-ADRs are summarized here (one-line per row). If you maintain a separate ADR log (e.g., `docs/specs/MODULE_NAME/decisions.md` from a 4-file legacy convention), cite both.
+ADRs are summarized here (one-line per row). For full ADR text, either inline below OR in `adr/` folder per `workflow/09-adr-lifecycle/01-adr-format-template.md` (Option B).
 
 | ADR | Decision | Status | Source |
 |-----|----------|--------|--------|
-| **ADR-MOD_PREFIX-001** | [decision] | [ACCEPTED/DEFERRED/SUPERSEDED] | [file:line citation OR full text inline below] |
+| **ADR-MOD_PREFIX-001** | [decision] | [Proposed/Accepted/Superseded/Deprecated] | [file:line OR adr/ADR-MOD_PREFIX-001.md] |
+
+### Inherited ADRs (from other modules' decisions)
+
+When this module relies on an ADR owned by another module, list it here. Don't duplicate the ADR text — cite the owner module. Per `workflow/09-adr-lifecycle/03-adr-relationships.md` (inherits relationship).
+
+| ADR | Source module | Decision | Status |
+|-----|---------------|----------|--------|
+| ADR-OTHERMOD-NNN | `<owner-module>` | [one-line summary of the inherited decision] | [as marked in owner module] |
+
+(If you have no inherited ADRs, this table can be empty. If you have many, group by upstream module.)
 
 ### Cross-module dependencies (we depend on these)
 

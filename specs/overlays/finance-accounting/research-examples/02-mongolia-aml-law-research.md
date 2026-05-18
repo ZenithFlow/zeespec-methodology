@@ -1,5 +1,5 @@
 ---
-doc: overlays/finance-accounting/research/examples/02-mongolia-aml-law-research
+doc: overlays/finance-accounting/research-examples/02-mongolia-aml-law-research
 type: research-worked-example
 overlay: finance-accounting
 example_topic: Mongolia AML/CFT Law research (KYC + threshold + deadlines)
