@@ -28,8 +28,12 @@ applies_to: any project using ZeeSpec
 | Authoring a NEW ZeeSpec module | Follow `01-authoring-checklist.md` |
 | **Authoring a module with external-authority claims** (regulator, statute, standard) | Run R4 research FIRST → `07-r4-regulatory-research/00-START-HERE.md` |
 | Reviewing an existing ZeeSpec | Follow `02-b1-verification.md` through `04-r1-r2-parallel-review.md` |
-| Annual re-validation of jurisdictional claims | Re-run R4 → `07-r4-regulatory-research/01-regulatory-research-workflow.md` § "Re-validation workflow" |
+| Annual re-validation of jurisdictional claims | Re-run R4 → `07-r4-regulatory-research/06-re-validation-strategy.md` |
 | Found a real production bug | Follow `06-spawn-task-chips.md` |
+| **Continuous drift monitoring** (CI / scheduled / triggered) | Follow `08-code-drift-management/` |
+| **Made a material design decision** | Write ADR → `09-adr-lifecycle/00-START-HERE.md` |
+| **Drift detection found undocumented design change** | Retroactive ADR → `09-adr-lifecycle/04-drift-driven-adr-pattern.md` |
+| **Annual ADR review** | Curator scan → `09-adr-lifecycle/05-R6-adr-curator-agent.md` (Mode B) |
 
 ## The Read Order (per module)
 

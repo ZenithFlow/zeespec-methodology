@@ -104,6 +104,48 @@ PHASE 5: APPLY (1-2h)      → Fold findings back; spawn task chips for producti
 | **R1** | Architecture-level | "spec describes async, production is sync" |
 | **R2** | Cross-cutting + compliance | "no operator identity captured in audit trail" |
 
+## 3a. Continuous post-Tier-1 phases (drift + ADR)
+
+After Tier 1 promotion, two ONGOING phases keep the spec aligned with reality:
+
+```
+[Tier 1 status]
+        ↓
+[CONTINUOUS]
+  Phase 7 — Code Drift Management (workflow/08)
+    - CI drift scan on every PR (Layer 1)
+    - Scheduled review monthly/quarterly (Layer 2)
+    - Triggered review for refactors / bug fixes (Layer 3)
+    - 4-type framework: Citation / Field+enum / Behavioral / Architectural
+    - Resolution: spec edit OR spawn chip OR ADR
+
+  Phase 8 — ADR Lifecycle (workflow/09)
+    - Format: capture context + decision + alternatives + consequences
+    - Lifecycle: Proposed → Accepted → Superseded / Deprecated
+    - Relationships: supersedes / extends / conflicts-with / inherits
+    - Drift-driven ADR pattern: drift findings → retroactive ADRs
+    - Annual ADR review for staleness
+```
+
+**Phase 7-8 distinction:**
+
+| Phase | Catches | Examples |
+|-------|---------|----------|
+| **Phase 7 (Drift)** | Spec ≠ Code | "Spec INV-WAL-02 says TIER_FULL; code accepts TIER_BASIC" |
+| **Phase 8 (ADR)** | Decision not documented | "WHY was TIER_BASIC allowed? No ADR exists; retroactive needed" |
+
+The two work together: drift detection (Phase 7) surfaces Type 3-design + Type 4 changes → ADR (Phase 8) captures the WHY → spec realigns.
+
+## 3b. Specialized agents per phase
+
+| Phase | Agent | Mode |
+|-------|-------|------|
+| R4 | (R4 agent in workflow/07) | research / re-validation / amendment-scan |
+| Drift | R5 agent (workflow/08/05) | scan / scheduled / triggered |
+| ADR | R6 agent (workflow/09/05) | draft retroactive / annual review / conflict check / cross-module |
+
+These agents are dispatch-ready prompts; engineering teams parameterize per module + domain + jurisdiction.
+
 **R4 vs R2 distinction:**
 - **R2** verifies the spec's compliance claims against existing-knowledge baseline. If R4 didn't run, R2 has no fresh baseline to verify against.
 - **R4** verifies the underlying authority itself (laws change, agencies issue new rules, R4 catches it). R4 looks OUTWARD (regulator websites + statute databases); R2 + R3 look INWARD (production code + sibling specs).

@@ -64,7 +64,7 @@ zeespec-methodology/specs/
 │   ├── severity-matrix.md          — P0/P1/P2/P3 + AI behaviour rules
 │   ├── invariant-numbering.md      — ID conventions (INV/HW/ADR/...)
 │   └── cross-link-bidirectionality.md — bidirectional reference rules
-├── workflow/07-r4-regulatory-research/  — 🆕 v1.0.0 domain-agnostic regulator + statute research
+├── workflow/07-r4-regulatory-research/  — domain-agnostic regulator + statute research
 │   ├── 00-START-HERE.md            — entry; when to use; tier hierarchy
 │   ├── 01-regulatory-research-workflow.md — 6-phase method
 │   ├── 02-source-evaluation.md     — 7-question source trust eval
@@ -76,6 +76,20 @@ zeespec-methodology/specs/
 │   ├── 08-multi-jurisdiction-strategy.md — MAX rule + per-customer profile + cross-border transfer
 │   ├── 09-amendment-tracking.md      — proactive monitoring; watch list; consultation papers
 │   └── 10-translation-pitfalls.md    — modal-verb drift; false friends; terminology log
+├── workflow/08-code-drift-management/  — 🆕 v1.0.0 continuous drift detection + categorization + resolution
+│   ├── 00-START-HERE.md            — entry; 3-layer model (continuous / scheduled / triggered); 4-type framework
+│   ├── 01-drift-detection-strategies.md — CI + monthly + per-event detection patterns
+│   ├── 02-drift-categorization.md  — Type 1 (citation) / Type 2 (field+enum) / Type 3 (behavioral) / Type 4 (architectural)
+│   ├── 03-auto-drift-detection.md  — CI script + GitHub Actions/GitLab/Bitbucket + git pre-commit hooks
+│   ├── 04-drift-resolution-playbook.md — per-type recipes (T1/T2/T3-bug/T3-design/T4)
+│   └── 05-R5-drift-scanner-agent.md — agent prompt (4 dispatch modes)
+├── workflow/09-adr-lifecycle/          — 🆕 v1.0.0 ADR format + lifecycle + relationships + drift-driven pattern
+│   ├── 00-START-HERE.md            — entry; ADR vs spec; when to write; storage options
+│   ├── 01-adr-format-template.md   — inline + file format; required + recommended fields
+│   ├── 02-adr-lifecycle.md         — Proposed → Accepted → Superseded / Deprecated transitions
+│   ├── 03-adr-relationships.md     — supersedes / extends / conflicts-with / inherits links
+│   ├── 04-drift-driven-adr-pattern.md — drift detection → retroactive ADR pipeline
+│   └── 05-R6-adr-curator-agent.md  — agent (4 modes: draft / annual review / conflict check / cross-module)
 └── overlays/
     └── finance-accounting/         — 🆕 v0.1.0 domain-specialized overlay
         ├── README.md               — how to apply the overlay
