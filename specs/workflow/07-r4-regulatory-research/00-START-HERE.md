@@ -92,18 +92,35 @@ For every external-authority claim in your spec:
 
 ## Read order
 
-For first-time setup:
+For first-time setup (~3 hours total):
 
-1. **This file** (orientation)
-2. `01-regulatory-research-workflow.md` — the 6-phase method in detail
-3. `02-source-evaluation.md` — assess whether a source is trustworthy + current
-4. `03-citation-conventions.md` — format citations so they're durable
-5. `04-R4-agent-prompt.md` — agent prompt template (domain-agnostic, parametrized)
-6. `05-source-cheatsheet.md` — starting URLs per jurisdiction (finance + healthcare + government + privacy + tax)
-7. For domain-specific worked examples, see overlays. E.g.:
-   - `overlays/finance-accounting/research-examples/` — 4 finance research sessions
-   - (future) `overlays/healthcare/research-examples/`
-   - (future) `overlays/government/research-examples/`
+**Foundation (read first):**
+
+1. **This file** (orientation; ~15 min)
+2. `01-regulatory-research-workflow.md` — the 6-phase method in detail (~30 min)
+3. `02-source-evaluation.md` — assess whether a source is trustworthy + current (~20 min)
+4. `03-citation-conventions.md` — format citations so they're durable (~20 min)
+5. `04-R4-agent-prompt.md` — agent prompt template (domain-agnostic, parametrized; ~15 min)
+6. `05-source-cheatsheet.md` — starting URLs per jurisdiction (~30 min skim; reference later)
+
+**Advanced strategy (read once methodology basics are clear):**
+
+7. `06-re-validation-strategy.md` — keeping citations current; annual re-check workflow (~25 min)
+8. `07-conflict-resolution.md` — when authorities disagree; 8 types of conflict + decision protocol (~25 min)
+9. `08-multi-jurisdiction-strategy.md` — MAX rule + per-customer profile + cross-border transfer (~30 min)
+10. `09-amendment-tracking.md` — proactive monitoring; watch list pattern; consultation papers (~25 min)
+11. `10-translation-pitfalls.md` — modal-verb drift; false friends; terminology log (~20 min)
+
+**Then apply via worked examples (overlay-specific):**
+
+- `overlays/finance-accounting/research-examples/` — 4 finance research sessions:
+  - `01-frc-investment-fund-regulation.md`
+  - `02-mongolia-aml-law-research.md`
+  - `03-retention-research-cross-jurisdiction.md` (multi-jurisdiction worked)
+  - `04-mongolia-lending-research.md` (most recent; R4 producing a module spec)
+- (future) `overlays/healthcare/research-examples/`
+- (future) `overlays/government/research-examples/`
+- (future) `overlays/privacy/research-examples/`
 
 For AI agents asked to do regulatory research:
 
@@ -111,6 +128,8 @@ For AI agents asked to do regulatory research:
 2. Domain-relevant worked example from the appropriate overlay's `research-examples/`
 3. `02-source-evaluation.md` — to know which sources to trust
 4. `03-citation-conventions.md` — to produce well-formatted output
+5. For re-validation tasks specifically: `06-re-validation-strategy.md` § "R4 agent re-validation mode"
+6. For amendment scanning: `09-amendment-tracking.md` § "R4 amendment-tracking mode"
 
 ## Sources you'll consult (universal hierarchy)
 

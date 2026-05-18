@@ -70,7 +70,12 @@ zeespec-methodology/specs/
 │   ├── 02-source-evaluation.md     — 7-question source trust eval
 │   ├── 03-citation-conventions.md  — durable citation format + source registry
 │   ├── 04-R4-agent-prompt.md       — domain-parametrized agent prompt
-│   └── 05-source-cheatsheet.md     — URLs for finance / healthcare / government / privacy / tax / etc.
+│   ├── 05-source-cheatsheet.md     — URLs for finance / healthcare / government / privacy / tax / etc.
+│   ├── 06-re-validation-strategy.md  — annual re-check + trigger-based + change category handling
+│   ├── 07-conflict-resolution.md     — 8 types of authority conflict + decision protocol
+│   ├── 08-multi-jurisdiction-strategy.md — MAX rule + per-customer profile + cross-border transfer
+│   ├── 09-amendment-tracking.md      — proactive monitoring; watch list; consultation papers
+│   └── 10-translation-pitfalls.md    — modal-verb drift; false friends; terminology log
 └── overlays/
     └── finance-accounting/         — 🆕 v0.1.0 domain-specialized overlay
         ├── README.md               — how to apply the overlay
