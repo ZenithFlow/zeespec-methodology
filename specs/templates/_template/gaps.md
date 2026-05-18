@@ -8,6 +8,10 @@ last_updated: YYYY-MM-DD
 
 # MODULE_NAME — OPEN GAPS
 
+> **What goes in here + where each item comes from:** see
+> `checklists/gaps-anatomy.md` (4-section anatomy + 6 sources +
+> lifecycle + "empty/100+ gaps" red flags + per-entry template).
+>
 > **DO NOT GUESS.** Severity-based blocking:
 >
 > | Severity | Ticket | AI behaviour |

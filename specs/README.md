@@ -63,7 +63,8 @@ zeespec-methodology/specs/
 │   ├── status-tags.md              — IMPL/PARTIAL/DESIGN conventions
 │   ├── severity-matrix.md          — P0/P1/P2/P3 + AI behaviour rules
 │   ├── invariant-numbering.md      — ID conventions (INV/HW/ADR/...)
-│   └── cross-link-bidirectionality.md — bidirectional reference rules
+│   ├── cross-link-bidirectionality.md — bidirectional reference rules
+│   └── gaps-anatomy.md             — 🆕 what gaps.md contains + 6 sources + lifecycle
 ├── workflow/07-r4-regulatory-research/  — domain-agnostic regulator + statute research
 │   ├── 00-START-HERE.md            — entry; when to use; tier hierarchy
 │   ├── 01-regulatory-research-workflow.md — 6-phase method
