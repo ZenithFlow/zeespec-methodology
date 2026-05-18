@@ -33,8 +33,9 @@ last_updated: 2026-05-18
 5. **Finance-calibrated severity matrix** (`principles/severity-matrix-finance.md`) — overrides core severity matrix with financial-domain calibration (compliance enforcement risk, money-loss thresholds, AML reporting deadlines). Jurisdiction-neutral; examples cover multiple regulators.
 6. **Pre-filled module templates** (`modules/`):
    - `general-ledger/` — 10 ZeeSpec files pre-filled with Chart of Accounts, journal entry, double-entry invariants, period close, trial balance
-   - `wallet-settlement/` — 10 files for customer balances, deposit/withdrawal, T+N settlement, reconciliation
-   - `kyc-aml/` — 10 files for tiered KYC, AML screening, CTR threshold, sanctions/PEP, STR/SAR filing
+   - `wallet-settlement/` — condensed overview for customer balances, deposit/withdrawal, T+N settlement, reconciliation
+   - `kyc-aml/` — condensed overview for tiered KYC, AML screening, CTR threshold, sanctions/PEP, STR/SAR filing
+   - `lending/` — condensed overview for loan origination, repayment, NPL classification (Mongolia 5-stage), dual provisioning (IFRS 9 ECL + Mongolia regulatory), credit bureau reporting, write-off workflow
 7. **Specialized R2 reviewer prompt** (`prompts/R2-financial-reviewer.md`) — replaces the generic R2 prompt with finance-tuned questions ("Show me the audit trail for journal #X", "Reconcile yesterday's wallet movements against subledger", "List CTR transactions > threshold over last 30 days").
 8. **Finance + accounting glossary** (`glossary/finance-glossary.md`) — ~120 terms covering double-entry, IFRS line types, AML/KYC acronyms, multi-jurisdiction regulator vocabulary.
 
@@ -117,7 +118,8 @@ overlays/finance-accounting/
 ├── modules/
 │   ├── general-ledger/                      — 10-file ZeeSpec template (CoA + journal)
 │   ├── wallet-settlement/                   — module overview (condensed)
-│   └── kyc-aml/                             — module overview (condensed)
+│   ├── kyc-aml/                             — module overview (condensed)
+│   └── lending/                             — module overview (NBFI lending; NPL; dual ECL)
 ├── research/                                — 🆕 v0.2.0 regulator + statute research workflow
 │   ├── 00-START-HERE.md                     — research entry point
 │   ├── regulator-research-workflow.md       — 6-phase research method
@@ -128,7 +130,8 @@ overlays/finance-accounting/
 │   └── examples/
 │       ├── 01-frc-investment-fund-regulation.md
 │       ├── 02-mongolia-aml-law-research.md
-│       └── 03-retention-research-cross-jurisdiction.md
+│       ├── 03-retention-research-cross-jurisdiction.md
+│       └── 04-mongolia-lending-research.md           — NBFI lending (R4 produced lending module)
 ├── prompts/
 │   └── R2-financial-reviewer.md             — specialized R2 agent prompt
 └── glossary/
