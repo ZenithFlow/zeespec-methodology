@@ -306,7 +306,7 @@ Schedules:
 
 ## glossary.md — Module-specific terms
 
-**CTR (Cash Transaction Report)** — Required filing for cash transactions ≥ threshold (Mongolia: 20M MNT). See `../../principles/frc-compliance.md`.
+**CTR (Cash Transaction Report)** — Required filing for cash transactions ≥ threshold (Mongolia: 20M MNT). See `../../principles/regulatory-compliance.md`.
 
 **STR / SAR (Suspicious Transaction Report)** — Filing triggered by typology or manual flag. Filed within 24 hours of suspicion.
 

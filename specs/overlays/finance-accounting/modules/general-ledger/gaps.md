@@ -148,5 +148,5 @@ For any 🚨 P0 or 🟠 P1 OPEN gap referenced by code path under work:
 
 - `../../principles/severity-matrix-finance.md` — severity calibration
 - `../../principles/financial-anti-patterns.md` — patterns whose detection triggers these gap types
-- `../../principles/frc-compliance.md` — regulatory context for P0 calibration
+- `../../principles/regulatory-compliance.md` — regulatory context for P0 calibration
 - Core ZeeSpec `checklists/severity-matrix.md` — generic matrix (overridden by finance variant)

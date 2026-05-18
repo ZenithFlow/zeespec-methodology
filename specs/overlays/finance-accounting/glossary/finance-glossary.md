@@ -377,5 +377,5 @@ last_updated: 2026-05-18
 ## Cross-references
 
 - `principles/accounting-principles.md` — full conceptual framework for accounting terms
-- `principles/frc-compliance.md` — FRC + AML/CFT regulatory terms in context
+- `principles/regulatory-compliance.md` — FRC + AML/CFT regulatory terms in context
 - Per-module `glossary.md` — module-specific extensions

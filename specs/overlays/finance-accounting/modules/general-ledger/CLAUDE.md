@@ -140,4 +140,4 @@ The General Ledger module is the **system of record** for all financial transact
 
 ### Compliance references
 - `docs/specs/zeespec-finance/principles/accounting-principles.md` — double-entry + IFRS framework
-- `docs/specs/zeespec-finance/principles/frc-compliance.md` — FRC + retention requirements
+- `docs/specs/zeespec-finance/principles/regulatory-compliance.md` — FRC + retention requirements

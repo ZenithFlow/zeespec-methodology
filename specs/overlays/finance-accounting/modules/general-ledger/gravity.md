@@ -63,7 +63,7 @@ last_updated: YYYY-MM-DD
 **Status:** ⚠️ HISTORICAL: 🚧 BROKEN in pilot (BackfillGeneralLedgerCommand executed raw DELETE in dev). MUST be ✅ IMPL.
 **Source:** REVOKE DELETE on journal_line, audit_log, account_balance_snapshot from application_user; archive pattern for cold data.
 **Test:** DELETE FROM journal_line fails with permission denied.
-**Dimension links:** why.md R-GL-01; frc-compliance.md HW-FRC-09; financial-anti-patterns.md #14.
+**Dimension links:** why.md R-GL-01; regulatory-compliance.md HW-FRC-09; financial-anti-patterns.md #14.
 
 ### HW-GL-10 — Segregation of Duties enforced at service layer
 **Status:** ✅ IMPL

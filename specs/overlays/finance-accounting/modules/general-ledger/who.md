@@ -103,4 +103,4 @@ Every audit_log entry captures:
 
 - `what.md` § 1.5 — AuditLog entity
 - `gravity.md` — HW-GL-* including HW-GL-10 (SoD) and HW-GL-19 (audit log append-only)
-- `../../principles/frc-compliance.md` § 4 — auth + RBAC model
+- `../../principles/regulatory-compliance.md` § 4 — auth + RBAC model

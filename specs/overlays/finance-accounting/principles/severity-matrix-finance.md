@@ -247,7 +247,7 @@ A gap filed 6 months ago as P1 may now be P0 (incident happened, aging crossed) 
 
 - `accounting-principles.md` — invariants that define what's "correct"
 - `financial-anti-patterns.md` — patterns whose defaults map to this matrix
-- `frc-compliance.md` — regulatory framework that drives P0 calibration
+- `regulatory-compliance.md` — regulatory framework that drives P0 calibration
 - Core `checklists/severity-matrix.md` — generic matrix (this overrides for finance)
 - Core `checklists/anti-patterns.md` — generic anti-patterns (financial-anti-patterns extends)
 

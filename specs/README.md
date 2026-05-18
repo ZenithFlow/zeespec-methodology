@@ -82,7 +82,7 @@ Domain-specialized add-ons that layer additional invariants, anti-patterns, seve
 
 | Overlay | Status | When to use |
 |---------|--------|-------------|
-| **finance-accounting** v0.1.0 | 🧪 experimental | Regulated financial services (mutual funds, brokerages, payments, custodians). Double-entry + IFRS-aware + FRC/EU/US compliance. See `overlays/finance-accounting/README.md`. |
+| **finance-accounting** v0.2.0 | 🧪 experimental | Regulated financial services (mutual funds, brokerages, payments, custodians). Double-entry + IFRS-aware + multi-jurisdiction compliance (EU/US/UK/SG/JP/IN/HK/AU/MN). Includes **R4 regulatory research methodology** with 6-phase workflow + agent prompt + 3 worked examples. See `overlays/finance-accounting/README.md`. |
 
 ## Quick start (5 minutes)
 

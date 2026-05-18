@@ -95,5 +95,5 @@ last_updated: YYYY-MM-DD
 ## 9. Cross-references
 
 - `../../principles/accounting-principles.md` — double-entry framework rationale
-- `../../principles/frc-compliance.md` — regulatory framework
+- `../../principles/regulatory-compliance.md` — regulatory framework
 - `docs/business/business_rules.md` — BR-GL-XX (in your project)

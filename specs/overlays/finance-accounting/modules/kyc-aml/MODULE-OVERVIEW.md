@@ -368,7 +368,7 @@ SoD:
 
 ## glossary.md — Module-specific terms
 
-**AML** — Anti-Money Laundering. Set of regulations + practices to detect + prevent money laundering. See `../../principles/frc-compliance.md` § 2.4.
+**AML** — Anti-Money Laundering. Set of regulations + practices to detect + prevent money laundering. See `../../principles/regulatory-compliance.md` § 2.4.
 
 **CTR** — Cash Transaction Report. Required filing for cash transactions ≥ threshold (Mongolia: 20M MNT; US: $10K).
 

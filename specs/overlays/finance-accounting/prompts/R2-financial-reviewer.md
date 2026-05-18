@@ -29,7 +29,7 @@ This module uses the **finance-accounting overlay** at
 `docs/specs/zeespec-finance/`. Before reviewing, you MUST have working
 knowledge of:
 - `docs/specs/zeespec-finance/principles/accounting-principles.md` — double-entry
-- `docs/specs/zeespec-finance/principles/frc-compliance.md` — regulatory framework
+- `docs/specs/zeespec-finance/principles/regulatory-compliance.md` — regulatory framework
 - `docs/specs/zeespec-finance/principles/financial-invariants-catalog.md` — INV-FIN-*
 - `docs/specs/zeespec-finance/principles/financial-anti-patterns.md` — 15 traps
 - `docs/specs/zeespec-finance/principles/severity-matrix-finance.md` — P0/P1 calibration
@@ -311,6 +311,6 @@ ZeeSpec workflow/06-spawn-task-chips.md]
 
 - `../principles/severity-matrix-finance.md` — severity definitions
 - `../principles/financial-anti-patterns.md` — patterns to detect
-- `../principles/frc-compliance.md` — regulatory context
+- `../principles/regulatory-compliance.md` — regulatory context
 - Core ZeeSpec `workflow/04-r1-r2-parallel-review.md` — generic R1+R2 framework
 - Core ZeeSpec `workflow/06-spawn-task-chips.md` — chip dispatch

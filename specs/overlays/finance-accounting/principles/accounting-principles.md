@@ -357,7 +357,7 @@ close/reopen, account creation/deactivation, balance materialization:
 - reason (free text for high-impact actions)
 - correlation_id (request_id, batch_id)
 
-Retention: per FRC = 7 years minimum (see frc-compliance.md).
+Retention: per FRC = 7 years minimum (see regulatory-compliance.md).
 ```
 
 ## 7. Common pitfalls in code
@@ -456,4 +456,4 @@ When authoring an `accounting/` module (or any module that posts to GL):
 
 ## Next
 
-→ `frc-compliance.md` — FRC + AML + KYC framework
+→ `regulatory-compliance.md` — FRC + AML + KYC framework

@@ -27,26 +27,29 @@ last_updated: 2026-05-18
 ## What you get
 
 1. **Accounting principles file** (`principles/accounting-principles.md`) — codifies double-entry invariants (debit=credit, no negative balances, immutable journal, period close) as `INV-ACC-*` rules ready to copy into your `accounting/what.md`.
-2. **FRC compliance file** (`principles/frc-compliance.md`) — Mongolia FRC requirements as primary (AML law, 7-year retention, 20M MNT CTR threshold, KYC tiers); EU (ESMA / GDPR), US (SEC / FINRA / SOX), and other jurisdictions noted as adaptation tables.
+2. **Regulatory compliance file** (`principles/regulatory-compliance.md`) — 7 universal compliance pillars (segregation, NAV, AML/CFT, reporting, retention, data protection) with multi-jurisdiction examples (EU / US / UK / Singapore / India / Japan / HK / Australia / Mongolia). Mongolia FRC shown as one example among many.
 3. **Financial invariants catalog** (`principles/financial-invariants-catalog.md`) — 25-30 canonical INV / HW entries seen across pilot modules; reuse directly OR fork.
 4. **Financial anti-patterns** (`principles/financial-anti-patterns.md`) — 12-15 domain-specific traps beyond core ZeeSpec's 13 (e.g., currency-rounding drift, FX revaluation timing, fee-accrual off-by-one).
-5. **FRC-calibrated severity matrix** (`principles/severity-matrix-finance.md`) — overrides core severity matrix with financial-domain calibration (compliance enforcement risk, money-loss thresholds, AML reporting deadlines).
+5. **Finance-calibrated severity matrix** (`principles/severity-matrix-finance.md`) — overrides core severity matrix with financial-domain calibration (compliance enforcement risk, money-loss thresholds, AML reporting deadlines). Jurisdiction-neutral; examples cover multiple regulators.
 6. **Pre-filled module templates** (`modules/`):
    - `general-ledger/` — 10 ZeeSpec files pre-filled with Chart of Accounts, journal entry, double-entry invariants, period close, trial balance
    - `wallet-settlement/` — 10 files for customer balances, deposit/withdrawal, T+N settlement, reconciliation
    - `kyc-aml/` — 10 files for tiered KYC, AML screening, CTR threshold, sanctions/PEP, STR/SAR filing
 7. **Specialized R2 reviewer prompt** (`prompts/R2-financial-reviewer.md`) — replaces the generic R2 prompt with finance-tuned questions ("Show me the audit trail for journal #X", "Reconcile yesterday's wallet movements against subledger", "List CTR transactions > threshold over last 30 days").
-8. **Finance + accounting glossary** (`glossary/finance-glossary.md`) — ~80-100 terms covering double-entry accounting, IFRS line types, FRC vocabulary, AML/KYC acronyms.
+8. **Finance + accounting glossary** (`glossary/finance-glossary.md`) — ~120 terms covering double-entry, IFRS line types, AML/KYC acronyms, multi-jurisdiction regulator vocabulary.
+
+9. **Regulatory research methodology** (`research/`) — step-by-step workflow for navigating your jurisdiction's regulator website + statute database; how to evaluate sources; how to cite regulator + law in your spec; R4-Regulatory-Research agent prompt; 3 worked examples (FRC investment-fund regulation; Mongolia AML law; cross-jurisdiction retention research); cheatsheet of regulator websites + statute databases for 9 jurisdictions.
 
 ## Read order
 
 1. **Core ZeeSpec first** — read `/specs/README.md` + `/specs/METHODOLOGY.md` + `/specs/workflow/00-START-HERE.md` (1.5h)
 2. **This overlay's README** (you are here)
 3. `principles/accounting-principles.md` — understand the double-entry semantics this overlay assumes
-4. `principles/frc-compliance.md` — regulatory framework
+4. `principles/regulatory-compliance.md` — regulatory framework (multi-jurisdiction)
 5. `principles/financial-invariants-catalog.md` — reusable invariants
 6. `principles/severity-matrix-finance.md` — calibration
-7. Pick the relevant module template under `modules/` and start authoring
+7. `research/00-START-HERE.md` — how to research YOUR jurisdiction's specifics (regulator + statute + retention thresholds)
+8. Pick the relevant module template under `modules/` and start authoring
 
 ## Relationship to core ZeeSpec
 
@@ -107,18 +110,29 @@ overlays/finance-accounting/
 ├── README.md                                — this file
 ├── principles/
 │   ├── accounting-principles.md             — double-entry + IFRS invariants
-│   ├── frc-compliance.md                    — FRC (primary) + EU/US notes
+│   ├── regulatory-compliance.md             — 7 universal pillars; multi-jurisdiction
 │   ├── financial-invariants-catalog.md      — 25-30 reusable INV/HW
-│   ├── financial-anti-patterns.md           — 12-15 finance-specific traps
-│   └── severity-matrix-finance.md           — FRC-tuned P0/P1
+│   ├── financial-anti-patterns.md           — 15 finance-specific traps
+│   └── severity-matrix-finance.md           — finance-tuned P0/P1
 ├── modules/
 │   ├── general-ledger/                      — 10-file ZeeSpec template (CoA + journal)
-│   ├── wallet-settlement/                   — 10-file ZeeSpec template (deposit/payout/T+N)
-│   └── kyc-aml/                             — 10-file ZeeSpec template (tiered KYC + AML)
+│   ├── wallet-settlement/                   — module overview (condensed)
+│   └── kyc-aml/                             — module overview (condensed)
+├── research/                                — 🆕 v0.2.0 regulator + statute research workflow
+│   ├── 00-START-HERE.md                     — research entry point
+│   ├── regulator-research-workflow.md       — 6-phase research method
+│   ├── source-evaluation.md                 — how to assess regulator sources
+│   ├── citation-conventions.md              — how to cite regulator + law in spec
+│   ├── R4-regulatory-research-agent.md      — specialized R4 agent prompt
+│   ├── other-jurisdictions-cheatsheet.md    — source URLs for 9 jurisdictions
+│   └── examples/
+│       ├── 01-frc-investment-fund-regulation.md
+│       ├── 02-mongolia-aml-law-research.md
+│       └── 03-retention-research-cross-jurisdiction.md
 ├── prompts/
 │   └── R2-financial-reviewer.md             — specialized R2 agent prompt
 └── glossary/
-    └── finance-glossary.md                  — ~80-100 finance + accounting + FRC terms
+    └── finance-glossary.md                  — ~120 finance + accounting terms
 ```
 
 ## License + credits
