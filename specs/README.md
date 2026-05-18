@@ -58,13 +58,31 @@ zeespec-methodology/specs/
 │       ├── module-index.md         — copy to docs/specs/zeespec/README.md
 │       ├── spawn-chips.md          — track all dispatched task chips
 │       └── pilot-retrospective.md  — after 3+ modules, capture lessons
-└── checklists/
-    ├── anti-patterns.md            — 13 anti-patterns to avoid
-    ├── status-tags.md              — IMPL/PARTIAL/DESIGN conventions
-    ├── severity-matrix.md          — P0/P1/P2/P3 + AI behaviour rules
-    ├── invariant-numbering.md      — ID conventions (INV/HW/ADR/...)
-    └── cross-link-bidirectionality.md — bidirectional reference rules
+├── checklists/
+│   ├── anti-patterns.md            — 13 anti-patterns to avoid
+│   ├── status-tags.md              — IMPL/PARTIAL/DESIGN conventions
+│   ├── severity-matrix.md          — P0/P1/P2/P3 + AI behaviour rules
+│   ├── invariant-numbering.md      — ID conventions (INV/HW/ADR/...)
+│   └── cross-link-bidirectionality.md — bidirectional reference rules
+└── overlays/
+    └── finance-accounting/         — 🆕 v0.1.0 domain-specialized overlay
+        ├── README.md               — how to apply the overlay
+        ├── principles/             — accounting + FRC + invariants + anti-patterns + severity
+        ├── modules/                — 3 pre-filled module templates
+        │   ├── general-ledger/     — full 10-file ZeeSpec for GL / journal / CoA
+        │   ├── wallet-settlement/  — module overview (condensed) for payment / wallet
+        │   └── kyc-aml/            — module overview (condensed) for KYC / AML
+        ├── prompts/                — specialized R2 financial reviewer agent prompt
+        └── glossary/               — ~100 finance + accounting + FRC terms
 ```
+
+## Available overlays
+
+Domain-specialized add-ons that layer additional invariants, anti-patterns, severity calibration, and pre-filled module templates onto the neutral core.
+
+| Overlay | Status | When to use |
+|---------|--------|-------------|
+| **finance-accounting** v0.1.0 | 🧪 experimental | Regulated financial services (mutual funds, brokerages, payments, custodians). Double-entry + IFRS-aware + FRC/EU/US compliance. See `overlays/finance-accounting/README.md`. |
 
 ## Quick start (5 minutes)
 
@@ -100,9 +118,10 @@ find . -name '*.bak' -delete
 
 ## When to use ZeeSpec
 
-| Project type | Verdict |
-|--------------|---------|
-| Compliance-heavy (finance / healthcare / government) | ✅ STRONG fit |
+| Project type | Verdict | Recommended overlays |
+|--------------|---------|---------------------|
+| Regulated financial services (funds, brokers, payments) | ✅ STRONG fit | + `finance-accounting` |
+| Compliance-heavy (finance / healthcare / government) | ✅ STRONG fit | + domain overlay (finance available; healthcare/government TBD) |
 | Multi-team / multi-module enterprise app | ✅ STRONG fit |
 | AI-assisted dev at scale (Claude Code / Copilot / Cursor) | ✅ STRONG fit |
 | Brownfield with stale documentation | ✅ STRONG fit (great for dock + verify) |
