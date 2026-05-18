@@ -11,7 +11,7 @@ last_updated: YYYY-MM-DD
 > **Stack-agnostic:** Entity shape, invariants. Stack-specific bindings (ORM annotations, framework classes) live in `where.md` § 5.
 >
 > **Source documents:**
-> - Production code (highest authority) — см. `CLAUDE.md` § Source documents
+> - Production code (highest authority) — see `CLAUDE.md` § Source documents
 > - All entity schemas MUST be verified directly against production source
 
 ## 1. Entities

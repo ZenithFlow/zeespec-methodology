@@ -1,6 +1,6 @@
 # ZeeSpec Methodology — Standalone Package
 
-> **A portable, AI-friendly specification methodology** based on the 6-dimension Zachman framework (1987), adapted for modern AI-assisted development. Validated across 5 production modules in a Mongolian Mutual Fund Management System (PHP 8.2 + Symfony 6.4 + PostgreSQL 15) — surfaced **150+ findings including 35+ real production bugs**.
+> **A portable, AI-friendly specification methodology** based on the 6-dimension Zachman framework (1987), adapted for modern AI-assisted development. Validated across 5 production modules in a Mongolian Mutual Fund Management System (PHP 8.2 + Symfony 6.4 + PostgreSQL 15) — surfaced **177 findings, 4 real production bugs fixed + 6 queued, 22 compliance gaps filed** (see § Validation Track Record below).
 
 ---
 
@@ -34,17 +34,21 @@ zeespec-methodology/specs/
 │   ├── 05-apply-findings.md        — fold findings back
 │   └── 06-spawn-task-chips.md      — production-fix delegation
 ├── templates/
-│   └── _template/                  — empty 10-file ZeeSpec scaffolding
-│       ├── CLAUDE.md               — entry point template
-│       ├── why.md                  — strategic goals + risks
-│       ├── what.md                 — entities + invariants
-│       ├── how.md                  — algorithms + state machines
-│       ├── who.md                  — actors + RBAC
-│       ├── when.md                 — triggers + SLAs
-│       ├── where.md                — storage + tech stack binding
-│       ├── gravity.md              — cross-cutting hardwiring
-│       ├── gaps.md                 — open questions
-│       └── glossary.md             — domain + technical terms
+│   ├── _template/                  — empty 10-file ZeeSpec scaffolding (per-module)
+│   │   ├── CLAUDE.md               — entry point template
+│   │   ├── why.md                  — strategic goals + risks
+│   │   ├── what.md                 — entities + invariants
+│   │   ├── how.md                  — algorithms + state machines
+│   │   ├── who.md                  — actors + RBAC
+│   │   ├── when.md                 — triggers + SLAs
+│   │   ├── where.md                — storage + tech stack binding
+│   │   ├── gravity.md              — cross-cutting hardwiring
+│   │   ├── gaps.md                 — open questions
+│   │   └── glossary.md             — domain + technical terms
+│   └── _meta/                      — project-wide tracking templates
+│       ├── module-index.md         — copy to docs/specs/zeespec/README.md
+│       ├── spawn-chips.md          — track all dispatched task chips
+│       └── pilot-retrospective.md  — after 3+ modules, capture lessons
 └── checklists/
     ├── anti-patterns.md            — 13 anti-patterns to avoid
     ├── status-tags.md              — IMPL/PARTIAL/DESIGN conventions
@@ -70,15 +74,16 @@ EOF
 
 # 3. Initialize your first module from the template
 MODULE=your-first-module
-MOD_PREFIX=YOURMOD   # 3-7 chars ALL CAPS
+MOD_PREFIX=YOURMOD   # 3-7 chars ALL CAPS for ID prefixing (INV-YOURMOD-NN, HW-YOURMOD-NN)
 
 cp -r your-project/docs/specs/zeespec/templates/_template \
       your-project/docs/specs/zeespec/$MODULE
 
-# 4. Replace placeholders
+# 4. Replace placeholders (portable sed — works on macOS BSD + Linux GNU)
 cd your-project/docs/specs/zeespec/$MODULE
-grep -rl 'MODULE_NAME' . | xargs sed -i '' "s/MODULE_NAME/$MODULE/g"
-grep -rl 'MOD_PREFIX' . | xargs sed -i '' "s/MOD_PREFIX/$MOD_PREFIX/g"
+grep -rl 'MODULE_NAME' . | xargs sed -i.bak "s/MODULE_NAME/$MODULE/g"
+grep -rl 'MOD_PREFIX' . | xargs sed -i.bak "s/MOD_PREFIX/$MOD_PREFIX/g"
+find . -name '*.bak' -delete
 
 # 5. Author your first ZeeSpec (4-6 hours per module)
 #    → follow workflow/01-authoring-checklist.md

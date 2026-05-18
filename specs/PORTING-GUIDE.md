@@ -52,12 +52,20 @@ When writing or modifying production code:
 ```bash
 # Pick your highest-risk module first
 MODULE=your-critical-module-name
+MOD_PREFIX=YOURMOD   # 3-7 chars ALL CAPS for ID prefixing (INV-YOURMOD-NN, HW-YOURMOD-NN)
 
 # Scaffold from template
 cp -r docs/specs/zeespec/templates/_template docs/specs/zeespec/$MODULE
+cd docs/specs/zeespec/$MODULE
 
-# Replace MODULE_NAME placeholder
-grep -rl 'MODULE_NAME' docs/specs/zeespec/$MODULE | xargs sed -i '' "s/MODULE_NAME/$MODULE/g"
+# Replace BOTH placeholders.
+# Portable sed pattern (works on macOS BSD sed + Linux GNU sed):
+grep -rl 'MODULE_NAME' . | xargs sed -i.bak "s/MODULE_NAME/$MODULE/g"
+grep -rl 'MOD_PREFIX' . | xargs sed -i.bak "s/MOD_PREFIX/$MOD_PREFIX/g"
+find . -name '*.bak' -delete
+
+# macOS-only alternative if you're sure: sed -i '' "s/.../"
+# Linux-only alternative: sed -i "s/.../"
 ```
 
 ### 4. Author the module (4-6 hours)

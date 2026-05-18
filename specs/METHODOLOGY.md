@@ -56,10 +56,12 @@ The 4 helpers:
 
 ## 3. The Promotion Workflow (Tier 1)
 
-A module goes through 4 phases to reach **Tier 1 (production-validated)** status:
+A module goes through **5 phases** to reach **Tier 1 (production-validated)** status. Each phase catches a different class of error:
 
 ```
 PHASE 1: AUTHOR (4-6h)     → Read existing canonical docs + production code → write 10 ZeeSpec files
+                              (Author phase has 12 sub-steps — one per file + final assembly;
+                               see workflow/01-authoring-checklist.md)
        ↓
 PHASE 2: B1 VERIFY (30min) → Grep production: field counts, enum cases, signatures, line refs
        ↓
@@ -74,7 +76,7 @@ PHASE 5: APPLY (1-2h)      → Fold findings back; spawn task chips for producti
    Tier 1 STATUS
 ```
 
-**Why 4 phases?** Each catches a different class of error:
+**Why 5 phases?** Each catches a different class of error:
 
 | Phase | Catches | Examples |
 |-------|---------|----------|
@@ -99,6 +101,12 @@ Every claim about production state MUST carry one of these tags:
 
 ## 5. Severity Matrix (gaps.md)
 
+> **Icon convention (READ THIS FIRST):**
+> - **🚨** = Severity P0 (Critical) — describes IMPACT
+> - **🔴** = Status OPEN — describes LIFECYCLE (unresolved)
+> - These are ORTHOGONAL. A gap can be `🚨 P0` + `🔴 OPEN` (most urgent) OR `🚨 P0` + `🟢 RESOLVED` (urgent + fixed).
+> - Symbols: 🚨 / 🟠 / 🟡 / 🟢 (severity) vs 🔴 / 🟡 / 🟢 / ⚪️ / 📌 (status)
+
 OPEN gaps carry severity. AI behaviour depends on severity:
 
 | Severity | Has ticket? | AI behaviour |
@@ -112,12 +120,14 @@ OPEN gaps carry severity. AI behaviour depends on severity:
 
 ## 6. Numbering Conventions
 
+Most-used prefixes (see `checklists/invariant-numbering.md` for the **full 19-prefix catalog** including `SLA`, `G`, `BR`, `F`, `Gap`, `RES`, `NHW`):
+
 | Prefix | Meaning | Lives in | Example |
 |--------|---------|----------|---------|
 | `INV-<MOD>-NN` | Invariant (data integrity) | `what.md` | `INV-NOTIF-13` |
 | `HW-<MOD>-NN` | Hardwiring (cross-dimension) | `gravity.md` | `HW-NOTIF-08` |
-| `ADR-<MOD>-NNN` | Architecture Decision Record | `CLAUDE.md` + `decisions.md` | `ADR-NOTIF-009` |
-| `ALG-<MOD>-NAME` | Algorithm | `how.md` | `ALG-NOTIF-SEND-01` |
+| `ADR-<MOD>-NNN` | Architecture Decision Record | `CLAUDE.md` (+ optional separate ADR log) | `ADR-NOTIF-009` |
+| `ALG-<MOD>-NAME` | Algorithm (descriptive name, ALL CAPS) | `how.md` | `ALG-NOTIF-SEND-01` |
 | `P-<MOD>-NN` | Process | `how.md` | `P-NOTIF-PUSH-01` |
 | `FU-<MOD>-NAME` | Follow-Up gap | `gaps.md` | `FU-NOTIF-FCM-STALE-CLEANUP` |
 | `R-<MOD>-NN` | Risk | `why.md` | `R-NOTIF-09` |
@@ -127,7 +137,7 @@ OPEN gaps carry severity. AI behaviour depends on severity:
 | `A-<MOD>-NN` | Actor | `who.md` | `A-NOTIF-02` |
 | `SOD-<MOD>-NN` | Segregation of Duties | `who.md` | `SOD-NOTIF-03` |
 
-Use ALL CAPS module prefix; zero-padded numbers (NN = 2 digit, NNN = 3 digit for ADRs).
+Use ALL CAPS module prefix; zero-padded numbers (NN = 2 digit, NNN = 3 digit for ADRs). Descriptive-suffix prefixes (`ALG`, `FU`, `Gap`) use ALL CAPS with hyphens, no zero-padding.
 
 ## 7. The Two-Layer Architecture (Stack Independence)
 
@@ -145,21 +155,25 @@ This single section names framework + library + class specifics. Porting to a di
 
 ### Example
 
-```markdown
-# Layer 1 (language-agnostic) — where.md § 1
-## S-NOTIF-02: Async message queue
-Domain: notification dispatch transports
-Properties:
-- 4 transports with retry strategies (high/normal/low priority + main)
-- Per-transport max_retries config
-- Dead-letter transport for exhausted retries
+Layer 1 (language-agnostic) — content lives in `where.md` § 1:
 
-# Layer 2 (where.md § 5)
-### 5.3 Async transports
-Component: Symfony Messenger 6.4 with Redis transport
-- notifications: max_retries=3, delay=1000ms (PHP class App\Message\SendNotificationMessage)
-- sms_high_priority: max_retries=5, delay=500ms
-- ...
+```
+S-NOTIF-02: Async message queue
+  Domain: notification dispatch transports
+  Properties:
+    - 4 transports with retry strategies
+    - Per-transport max_retries config
+    - Dead-letter transport for exhausted retries
+```
+
+Layer 2 (stack-specific) — content lives in `where.md` § 5.3:
+
+```
+Async transports
+  Component: Symfony Messenger 6.4 with Redis transport
+    - notifications: max_retries=3, delay=1000ms (PHP class App\Message\SendNotificationMessage)
+    - sms_high_priority: max_retries=5, delay=500ms
+    - ...
 ```
 
 ## 8. The 5 R6 Reflexes (R6-aware authoring)
@@ -201,16 +215,18 @@ Each HW entry:
 
 When module A inherits a constraint from module B, BOTH specs must declare the relationship.
 
-**Module B (the owner)** — `gravity.md`:
-```markdown
-## Downstream inheritance
+**Module B (the owner)** — section in `gravity.md`:
+
+```
+Section: Downstream inheritance
 | Inheriting module | What it inherits |
 | module-A          | HW-B-02 (user-level addressing) |
 ```
 
-**Module A (the consumer)** — `gravity.md`:
-```markdown
-## From module B (HW-B inheritance)
+**Module A (the consumer)** — section in `gravity.md`:
+
+```
+Section: From module B (HW-B inheritance)
 | Inherited HW | Why | How it manifests |
 | HW-B-02 | Module A needs user-level dispatch | Resolved via b.getUser() |
 ```
@@ -275,19 +291,39 @@ Most modules sit at 🟡 Design-intent for an extended period — that's healthy
 
 ## 16. Glossary of ZeeSpec Terms
 
-- **Tier 1 promotion** — the B1 + R3 + R1+R2 + apply workflow
-- **B1 verification** — quantitative grep against production
-- **R3 deep verifier** — same-session line-by-line check
-- **R1 reviewer** — algorithm + race condition + invariant correctness
-- **R2 reviewer** — compliance + audit + cross-module
-- **R1+R2 parallel** — both agents dispatched simultaneously; results merged
-- **Spawn task chip** — production bug delegated to separate session
-- **Gap** — unresolved decision; AI must stop on OPEN
-- **Hardwiring (HW)** — cross-dimension invariant
-- **Bidirectional cross-link** — both consumer + provider modules declare the relationship
-- **AccountStatus pattern** — false-positive enforcement claim
-- **createdBy:0 anti-pattern** — sentinel value instead of real operator capture
-- **R6 reflexes** — 5 verification checks applied during authoring
+**Workflow terms:**
+- **Tier 1 promotion** — the 5-phase Author + B1 + R3 + R1+R2 + apply workflow
+- **B1 verification** — Baseline verification, layer 1; quantitative grep against production code (entity field counts, enum cases, LOC, line refs). Runs in ~30 min before deeper review phases.
+- **R3 deep verifier** — same-session line-by-line check; reads each ZeeSpec file end-to-end + production code; catches AccountStatus-pattern false positives. ~1-2 hours.
+- **R1 reviewer** — independent algorithm + race condition + invariant correctness reviewer; runs in parallel with R2.
+- **R2 reviewer** — independent compliance + audit + cross-module reviewer; runs in parallel with R1.
+- **R1+R2 parallel** — both agents dispatched simultaneously; results merged after they finish.
+- **R6 reflexes** — 5 verification checks applied during authoring (entity, method, invariant, cross-link, logging) to prevent the most common drift classes.
+
+**Artifacts + concepts:**
+- **Spawn task chip** — production bug delegated to separate session (self-contained prompt with file paths + acceptance criteria)
+- **Gap** — unresolved decision; AI must stop on OPEN with severity 🚨 P0 or 🟠 P1 (without ticket)
+- **Hardwiring (HW)** — cross-dimension invariant codified in `gravity.md`
+- **Bidirectional cross-link** — both consumer + provider modules declare the relationship (anti-pattern: unilateral declaration)
+
+**Status values** (lifecycle):
+- **🔴 OPEN** — blocking; no decision yet
+- **🟡 PROPOSED** — solution drafted, awaiting approval
+- **🟢 RESOLVED** — decision recorded; production fix landed
+- **⚪️ DEFERRED** — postponed; not currently blocking; revisit after [date or trigger]
+- **📌 BY-DESIGN** — documented intentional gap (we acknowledge but won't fix; e.g., "polymorphic ref has no FK by design — soft-delete on consumer modules compensates")
+
+**Severity values** (impact):
+- **🚨 P0 Critical** — money loss, compliance violation, runtime crash
+- **🟠 P1 Important** — audit gap, dead code, missing guard
+- **🟡 P2 Medium** — drift, missing test
+- **🟢 P3 Low** — style, naming
+
+(Severity is ORTHOGONAL to status — see § 5 icon convention.)
+
+**Anti-patterns:**
+- **AccountStatus pattern** — false-positive enforcement claim (spec says enforced; production has bypass)
+- **createdBy:0 anti-pattern** — sentinel value instead of real operator capture; breaks FRC audit trail
 
 ---
 

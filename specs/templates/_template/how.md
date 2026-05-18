@@ -11,7 +11,7 @@ last_updated: YYYY-MM-DD
 > **Stack-agnostic:** Process flows + algorithms as pseudocode. Stack-specific class names live in `where.md` § 5.
 >
 > **Source documents:**
-> - Production code (highest authority) — см. `CLAUDE.md` § Source documents
+> - Production code (highest authority) — see `CLAUDE.md` § Source documents
 > - All algorithms MUST be verified directly against production services
 
 ## 1. Process overview
@@ -32,7 +32,9 @@ last_updated: YYYY-MM-DD
 └─────────────────────────────────────┘
 ```
 
-## 2. Algorithm — ALG-MOD_PREFIX-NN
+## 2. Algorithm — ALG-MOD_PREFIX-DESCRIPTIVE-NAME
+
+> Naming: `ALG-<MOD_PREFIX>-<DESCRIPTIVE-NAME>` (e.g., `ALG-NOTIF-SEND-01`, `ALG-WAL-MATCHER-CUSTOMER`). ALL CAPS with hyphens; suffix `-NN` only if multiple algorithms share the same descriptive name.
 
 **Production:** `path/to/Service::method()` line NN-MM.
 
@@ -58,7 +60,7 @@ method(input1: Type, input2: Type) -> ReturnType:
 
 ## 3. Sub-algorithms
 
-### ALG-MOD_PREFIX-NN-A: [helper name]
+### ALG-MOD_PREFIX-PARENT-NAME-HELPER: [helper name]
 
 ```
 [pseudocode]

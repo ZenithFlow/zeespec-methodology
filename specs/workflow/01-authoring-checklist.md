@@ -13,19 +13,25 @@
 
 ```bash
 MODULE=your-module-name
-MOD_PREFIX=YOURMODULE   # 3-7 chars ALL CAPS
+MOD_PREFIX=YOURMOD   # 3-7 chars ALL CAPS for ID prefixing (INV-YOURMOD-NN)
 
 # Scaffold from template
 cp -r docs/specs/zeespec/templates/_template docs/specs/zeespec/$MODULE
 cd docs/specs/zeespec/$MODULE
 
-# Replace placeholders
-grep -rl 'MODULE_NAME' . | xargs sed -i '' "s/MODULE_NAME/$MODULE/g"
-grep -rl 'MOD_PREFIX' . | xargs sed -i '' "s/MOD_PREFIX/$MOD_PREFIX/g"
+# Replace placeholders (portable sed — works on macOS BSD + Linux GNU)
+grep -rl 'MODULE_NAME' . | xargs sed -i.bak "s/MODULE_NAME/$MODULE/g"
+grep -rl 'MOD_PREFIX' . | xargs sed -i.bak "s/MOD_PREFIX/$MOD_PREFIX/g"
 
 # Update frontmatter dates
 TODAY=$(date +%Y-%m-%d)
-grep -rl 'YYYY-MM-DD' . | xargs sed -i '' "s/YYYY-MM-DD/$TODAY/g"
+grep -rl 'YYYY-MM-DD' . | xargs sed -i.bak "s/YYYY-MM-DD/$TODAY/g"
+
+# Clean up backup files
+find . -name '*.bak' -delete
+
+# (macOS-only alternative: sed -i '' "s/.../"  ;  Linux-only: sed -i "s/.../"
+#  The .bak variant works on both.)
 ```
 
 ## Phase 2: Read existing canonical docs (30 min)

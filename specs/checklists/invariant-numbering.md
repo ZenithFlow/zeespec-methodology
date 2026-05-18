@@ -29,7 +29,7 @@
 |--------|---------|----------|---------|
 | `INV-<MOD>-NN` | Invariant (data integrity) | `what.md` | `INV-NOTIF-13` |
 | `HW-<MOD>-NN` | Hardwiring (cross-dimension) | `gravity.md` | `HW-NOTIF-08` |
-| `ADR-<MOD>-NNN` | Architecture Decision Record | `CLAUDE.md` + `decisions.md` | `ADR-NOTIF-009` |
+| `ADR-<MOD>-NNN` | Architecture Decision Record | `CLAUDE.md` ADR table (+ optional `decisions.md` legacy ADR log if your project has 4-file convention) | `ADR-NOTIF-009` |
 | `ALG-<MOD>-NAME` | Algorithm | `how.md` | `ALG-NOTIF-SEND-01` |
 | `P-<MOD>-NN` | Process | `how.md` | `P-NOTIF-PUSH-01` |
 | `V-<MOD>-NN` | Validation table | `how.md` | `V-NOTIF-01` |

@@ -94,5 +94,5 @@ last_updated: YYYY-MM-DD
 ## Cross-references
 
 - 4-file canonical: `docs/specs/MODULE_NAME/CLAUDE.md` (if exists)
-- Sibling cross-links: см. cross-references in each dimension file
+- Sibling cross-links: see cross-references in each dimension file
 - Related dimensions: what (entity drift), how (algorithm gaps), where (storage gaps), gravity (HW gaps)

@@ -53,9 +53,11 @@ Read all dimension files BEFORE generating code.
 
 ### Foundational ADRs
 
+ADRs are summarized here (one-line per row). If you maintain a separate ADR log (e.g., `docs/specs/MODULE_NAME/decisions.md` from a 4-file legacy convention), cite both.
+
 | ADR | Decision | Status | Source |
 |-----|----------|--------|--------|
-| **ADR-MOD_PREFIX-001** | [decision] | [ACCEPTED/DEFERRED/SUPERSEDED] | `decisions.md` ADR-MOD_PREFIX-001 |
+| **ADR-MOD_PREFIX-001** | [decision] | [ACCEPTED/DEFERRED/SUPERSEDED] | [file:line citation OR full text inline below] |
 
 ### Cross-module dependencies (we depend on these)
 
@@ -72,7 +74,7 @@ Read all dimension files BEFORE generating code.
 ## When you write code (language-agnostic)
 
 - **Cite rule IDs in comments** (e.g., `// INV-MOD_PREFIX-04`, `// HW-MOD_PREFIX-08`, `// ADR-MOD_PREFIX-013`)
-- If a 🔴 OPEN gap blocks you → STOP, ask user (см. `gaps.md` severity matrix)
+- If a 🔴 OPEN gap blocks you → STOP, ask user (see `gaps.md` severity matrix)
 - All `gravity.md` constraints (HW-MOD_PREFIX-XX) MUST be enforced when status is ✅ IMPL
 - **Status tag behavior:**
   - ✅ IMPL — verified in production; cite + rely
@@ -103,10 +105,10 @@ Read all dimension files BEFORE generating code.
 - `backend/src/Service/<MODULE>/ServiceName.php`
 - `backend/src/Enum/<MODULE>/EnumName.php`
 
-### Canonical 4-file specs (if exists)
-- `docs/specs/MODULE_NAME/CLAUDE.md`
-- `docs/specs/MODULE_NAME/decisions.md`
-- `docs/specs/MODULE_NAME/implementation.md`
+### Canonical 4-file legacy specs (if your project has them — NOT part of ZeeSpec)
+- `docs/specs/MODULE_NAME/CLAUDE.md` (legacy entry point)
+- `docs/specs/MODULE_NAME/decisions.md` (legacy ADR log — supplemented by ZeeSpec's CLAUDE.md ADR table)
+- `docs/specs/MODULE_NAME/implementation.md` (legacy implementation tracker)
 
 ### Feature documentation (if exists)
 - `docs/features/MODULE_NAME/system.md`
