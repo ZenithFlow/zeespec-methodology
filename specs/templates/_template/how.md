@@ -21,7 +21,7 @@ last_updated: YYYY-MM-DD
 ```
 ┌─────────────────────────────────────┐
 │ MAIN PATH                           │
-│   Caller invokes Service::action()  │
+│   Caller invokes <Service>.<action>()│
 │         │                           │
 │         ▼                           │
 │   Step 1: validate                  │
@@ -36,7 +36,7 @@ last_updated: YYYY-MM-DD
 
 > Naming: `ALG-<MOD_PREFIX>-<DESCRIPTIVE-NAME>` (e.g., `ALG-NOTIF-SEND-01`, `ALG-WAL-MATCHER-CUSTOMER`). ALL CAPS with hyphens; suffix `-NN` only if multiple algorithms share the same descriptive name.
 
-**Production:** `path/to/Service::method()` line NN-MM.
+**Production:** `path/to/<Service>.<method>()` line NN-MM (use your stack's class/method separator: `::`, `.`, `->`, `#`, etc.).
 
 ```
 method(input1: Type, input2: Type) -> ReturnType:

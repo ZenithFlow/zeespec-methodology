@@ -1,3 +1,11 @@
+---
+doc: templates/_meta/spawn-chips
+type: meta-template
+version: 2.3.0
+status: stable
+last_updated: 2026-05-18
+---
+
 # Spawn Task Chips — Project-Wide Tracking
 
 > Dashboard of all spawn task chips dispatched from ZeeSpec reviews. Replaces ad-hoc tracking.
@@ -24,7 +32,7 @@ After each `06-spawn-task-chips.md` workflow, append a row to the appropriate ta
 |------|--------|-------|:--------:|--------|-----------|
 | YYYY-MM-DD | [module] | [chip title] | 🟠 P1 | [reason] | YYYY-MM-DD |
 
-## Statistics (auto-update during pilot retrospective)
+## Statistics (update manually during pilot retrospective)
 
 - Total chips dispatched: N
 - 🟢 RESOLVED: X (X% closure rate)

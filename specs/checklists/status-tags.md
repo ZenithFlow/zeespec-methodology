@@ -1,6 +1,16 @@
+---
+doc: checklists/status-tags
+type: checklist
+version: 2.3.0
+status: stable
+last_updated: 2026-05-18
+---
+
 # Status Tag Convention
 
 > Every claim about production state MUST carry one of these tags. Used in `what.md` invariants, `gravity.md` HW entries, `gaps.md` statuses, and `CLAUDE.md` ADR table.
+>
+> **Note on examples:** The code snippets below come from the pilot project (PHP/Doctrine) and use `#[ORM\Column]`, `OneToOne`, `.php` filenames as the example syntax. The **status-tag convention itself is stack-neutral**. Translate ORM annotations / file extensions / class syntax to your stack's equivalents (see `anti-patterns.md` for the per-stack translation table).
 
 ## The 5 tags
 

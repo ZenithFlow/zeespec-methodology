@@ -1,3 +1,11 @@
+---
+doc: checklists/cross-link-bidirectionality
+type: checklist
+version: 2.3.0
+status: stable
+last_updated: 2026-05-18
+---
+
 # Cross-Link Bidirectionality Rule
 
 > When module A inherits a constraint from module B, BOTH specs must declare the relationship. This is the single most important inter-module rule in ZeeSpec.

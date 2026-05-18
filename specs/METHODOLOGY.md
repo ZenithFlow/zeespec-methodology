@@ -1,6 +1,14 @@
+---
+doc: METHODOLOGY
+type: framework-spec
+version: 2.3.0
+status: stable
+last_updated: 2026-05-18
+---
+
 # ZeeSpec — Full Methodology Specification
 
-> Version 2.0 (post-pilot, language-agnostic). Read once; reference forever.
+> Version 2.3 (post-pilot, language-agnostic, jurisdiction-neutral). Read once; reference forever.
 
 ---
 
@@ -128,8 +136,8 @@ Most-used prefixes (see `checklists/invariant-numbering.md` for the **full 19-pr
 | `HW-<MOD>-NN` | Hardwiring (cross-dimension) | `gravity.md` | `HW-NOTIF-08` |
 | `ADR-<MOD>-NNN` | Architecture Decision Record | `CLAUDE.md` (+ optional separate ADR log) | `ADR-NOTIF-009` |
 | `ALG-<MOD>-NAME` | Algorithm (descriptive name, ALL CAPS) | `how.md` | `ALG-NOTIF-SEND-01` |
-| `P-<MOD>-NN` | Process | `how.md` | `P-NOTIF-PUSH-01` |
-| `FU-<MOD>-NAME` | Follow-Up gap | `gaps.md` | `FU-NOTIF-FCM-STALE-CLEANUP` |
+| `P-<MOD>-[DESC-]NN` | Process | `how.md` | `P-NOTIF-PUSH-01` (with DESC) or `P-NOTIF-01` (NN-only) |
+| `FU-<MOD>-NAME` | Follow-Up gap | `gaps.md` | `FU-<MOD>-STALE-TOKEN-CLEANUP` |
 | `R-<MOD>-NN` | Risk | `why.md` | `R-NOTIF-09` |
 | `T-<MOD>-NN` | Trigger/timing | `when.md` | `T-NOTIF-03` |
 | `S-<MOD>-NN` | Storage role | `where.md` | `S-NOTIF-01` |

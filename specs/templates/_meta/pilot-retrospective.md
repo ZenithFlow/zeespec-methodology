@@ -1,3 +1,11 @@
+---
+doc: templates/_meta/pilot-retrospective
+type: meta-template
+version: 2.3.0
+status: stable
+last_updated: 2026-05-18
+---
+
 # ZeeSpec Pilot Retrospective
 
 > Write this after authoring 3+ modules. Captures lessons learned, methodology improvements, ROI evidence.
@@ -60,7 +68,7 @@
 
 ## Team feedback
 
-> "[Quote from developer / FM / compliance officer]"
+> "[Quote from developer / domain expert / compliance officer]"
 
 ## Next steps
 

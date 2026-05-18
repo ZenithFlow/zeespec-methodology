@@ -1,3 +1,12 @@
+---
+doc: workflow/03-r3-deep-review
+type: workflow-checklist
+phase: R3-deep-verify
+version: 2.3.0
+status: stable
+last_updated: 2026-05-18
+---
+
 # R3 Deep Review — Same-Session Line-by-Line Verifier
 
 > Time: 1-2 hours per module. Run after B1.
@@ -24,7 +33,9 @@ This is **same-session** — the agent does it as part of the authoring workflow
 ```markdown
 You are an R3 deep verifier for the <module> ZeeSpec at
 `docs/specs/zeespec/<module>/`. Verify EVERY production claim against actual
-`backend/src/` code (or your stack's source path).
+production code at `<your-source-root>/<MODULE>/` (substitute your stack's
+source path — e.g., `backend/src/`, `src/<package>/`, `internal/<module>/`,
+`lib/<module>/`).
 
 **Already-verified B1 baselines (use as ground truth):**
 [paste B1 output here — entity counts, enum counts, LOC, key line refs]

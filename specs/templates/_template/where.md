@@ -86,47 +86,60 @@ last_updated: YYYY-MM-DD
 - [N secondary indexes on table_1]
 
 ### 5.3 Async transports
-**Component:** [framework + transport]
+**Component:** [framework + transport — e.g., Kafka, RabbitMQ, SQS, Redis Streams, Celery, Sidekiq, BullMQ, Symfony Messenger]
 **Routing:**
-- `[Message\Class\Name]` → `[transport_name]`
+- `[message / task / event identifier]` → `[transport_name]`
 
 **Transport configs:**
 | Transport | max_retries | initial delay | multiplier | max_delay |
 |-----------|------------:|--------------:|:----------:|----------:|
 | [name] | N | X ms | Y | Z ms |
 
+> The fully-qualified names below are **placeholders** — substitute your stack's package / namespace / module conventions.
+> Examples of equivalents per stack:
+> - Java/Spring: `com.acme.<module>.PrimaryService`
+> - Python: `acme.<module>.services.PrimaryService`
+> - Go: `github.com/acme/<module>/primaryservice` or `internal/<module>/primary.go`
+> - Rust: `acme::<module>::PrimaryService`
+> - TypeScript/Node: `@acme/<module>/PrimaryService`
+> - C#: `Acme.<Module>.PrimaryService`
+> - PHP (pilot): `App\Service\<Module>\PrimaryService`
+
 ### 5.4 Service classes (production)
-- `App\Service\<MODULE>\PrimaryService` — [purpose] (~N public methods)
-- `App\Service\<MODULE>\SecondaryService` — [purpose]
+- `<namespace>/<Module>/PrimaryService` — [purpose] (~N public methods)
+- `<namespace>/<Module>/SecondaryService` — [purpose]
 
 ### 5.5 Message + handler classes
-- `App\Message\<MODULE>\<Action>Message` + `App\MessageHandler\<MODULE>\<Action>Handler`
+- `<namespace>/<Module>/Message/<Action>Message` + `<namespace>/<Module>/MessageHandler/<Action>Handler`
+  (or whatever your stack calls "event + handler" — Spring `ApplicationEvent` + `@EventListener`, Python Celery `@task`, Go channel + worker, Rust `tokio::spawn`, NestJS `@MessagePattern`, etc.)
 
-### 5.6 Enums
-- `App\Enum\<MODULE>\<EnumName>` — N cases
+### 5.6 Enums / typed constants
+- `<namespace>/<Module>/<EnumName>` — N cases
+  (use your language's enum mechanism: Java/C#/TS/Rust `enum`, Python `Enum`, Go const block + typed int, Ruby module constants, PHP 8.1+ `enum`)
 
 ### 5.7 External provider integration
 **[Provider name]:**
 - [Env var] `EXAMPLE_API_KEY`
-- [SDK/library]
+- [SDK/library — language-specific]
 - [Failure modes]
 
 ### 5.8 Auth + RBAC
-- [Auth bundle/library + version]
+- [Auth library/framework + version]
 - [Role hierarchy reference]
 
-### 5.9 Commands
-- `App\Command\<MODULE>\<Action>Command` (`app:command:name`)
+### 5.9 CLI commands
+- `<namespace>/<Module>/<Action>Command` (`<cli-runner> <command-name>`)
+  (e.g., `python manage.py X`, `mvn exec:java -Dexec.mainClass=...`, `go run cmd/X`, `cargo run --bin X`, `npm run X`, `php bin/console X`, `bundle exec rake X`)
 
 ### 5.10 Configuration sources
-- `config/packages/[file].yaml`
-- `.env`: `[ENV_VAR_NAMES]`
+- `[config file path — e.g., config/<file>.yaml, application.yml, settings.py, conf/<file>.toml]`
+- `.env` (or your stack's environment-variable mechanism): `[ENV_VAR_NAMES]`
 
 ## 6. Cross-references
 
 ### Source documents
 - Production code per `CLAUDE.md` § Source documents
-- `backend/migrations/` ([entity] migrations)
+- `[migrations directory — e.g., backend/migrations/, alembic/versions/, db/migrate/, prisma/migrations/]` ([entity] migrations)
 
 ### Related dimensions
 - `what.md` — entity schemas

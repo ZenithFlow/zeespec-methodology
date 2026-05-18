@@ -14,7 +14,7 @@ last_updated: YYYY-MM-DD
 
 | Item | Value |
 |------|-------|
-| Default timezone | `[your local tz, e.g., Asia/Ulaanbaatar]` |
+| Default timezone | `[your local tz — e.g., UTC, America/New_York, Europe/London, Asia/Tokyo, Asia/Ulaanbaatar]` |
 | Storage timezone | `UTC` (always) |
 | Business day source | [system] |
 | Holiday source | [calendar / manual table] |

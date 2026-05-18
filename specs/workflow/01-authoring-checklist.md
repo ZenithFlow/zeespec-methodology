@@ -1,3 +1,12 @@
+---
+doc: workflow/01-authoring-checklist
+type: workflow-checklist
+phase: author
+version: 2.3.0
+status: stable
+last_updated: 2026-05-18
+---
+
 # Authoring a New ZeeSpec Module (Tier 0 → Tier 1)
 
 > Total time: 4-6 hours for module + 3-4 hours for review = ~8 hours per module to reach Tier 1.
@@ -81,7 +90,7 @@ Goal: Capture every algorithm + state machine + validation rule.
 
 ## Phase 6: Author `who.md` (30 min)
 
-- [ ] § 1 Actor inventory (A-MOD-NN: customer / system / FM / admin / external)
+- [ ] § 1 Actor inventory (A-MOD-NN: end-user / system / operator / admin / external — use your domain's role names, e.g., customer / fund manager / nurse / sales-rep)
 - [ ] § 2 RBAC matrix (operation × role × allowed?)
 - [ ] § 3 Segregation of Duties (SOD-MOD-NN — two-eyes principle, etc.)
 - [ ] § 4 Surface-level auth gates (API endpoint × role × notes)

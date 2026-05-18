@@ -1,3 +1,11 @@
+---
+doc: templates/_meta/module-index
+type: meta-template
+version: 2.3.0
+status: stable
+last_updated: 2026-05-18
+---
+
 # ZeeSpec Module Index
 
 > One-line summary of every ZeeSpec module in this project. Copy this file to `docs/specs/zeespec/README.md` and maintain as you author + promote modules.

@@ -1,3 +1,11 @@
+---
+doc: checklists/severity-matrix
+type: checklist
+version: 2.3.0
+status: stable
+last_updated: 2026-05-18
+---
+
 # Severity Matrix — Gap Priorities + AI Behaviour
 
 > Use in `gaps.md` to triage OPEN gaps. Drives whether AI proceeds or STOPs.
@@ -41,7 +49,7 @@ A finding is P0 if ANY of these apply:
 - Regulatory enforcement action risk (your local regulator — e.g., national securities, central bank, tax authority, GDPR/CCPA enforcement)
 - Runtime crash in core flow (e.g., every approval throws 500)
 - Audit trail completely broken (e.g., createdBy: 0 sentinel)
-- Data corruption (e.g., balance sheet shows wrong signs)
+- Data corruption in a system-of-record table (e.g., balance sheet wrong signs in finance; patient-record cross-contamination in healthcare; order-line totals diverging from line items in e-commerce)
 - Single-actor money exfiltration vector
 - Production bug already happened (incident log evidence)
 
@@ -95,21 +103,21 @@ If a gap affects multiple severities:
 | Compliance + UX | Compliance wins → severity matches the regulatory impact |
 | Race condition only at high concurrency | Frequency-adjusted → if <1% incidence, downgrade to P2 |
 
-## Real examples from pilot
+## Real examples (pilot + analogues in other domains)
 
-> Examples below come from the pilot project (a regulated financial services system). Substitute equivalents from your own domain.
+> Pilot examples come from a regulated financial-services system. The right-hand columns show what an equivalent finding would look like in healthcare, e-commerce, and SaaS to help non-finance teams calibrate.
 
-| Finding | Severity | Why |
-|---------|:--------:|-----|
-| Regulatory retention violation (hard DELETE on audit tables) | 🚨 P0 | Compliance + already executed in dev |
-| `createdBy:0` sentinel anti-pattern across 20+ sites | 🚨 P0 | Audit trail BROKEN; regulator inspector test fails |
-| Approval workflow boundary mismatch (every approved record throws) | 🚨 P0 | Runtime crash in core flow |
-| Stale-read at maturity-event time → over-distribution | 🚨 P0 | Real money risk |
-| Tax remittance ignores foreign-currency bucket | 🚨 P0 | Government under-remittance + tax penalties |
-| Per-type toggles DEAD CODE (UI shows but production ignores) | 🟠 P1 | Privacy/consent false-promise + UX confusion |
-| Stale line refs (200+ drift) | 🟡 P2 | Confusing to readers but not broken |
-| Enum count drift (39 → 45) | 🟡 P2 | Docs only |
-| Admin filter missing 35 enum cases | 🟢 P3 | UI polish |
+| Finding (pilot, finance) | Sev | Healthcare analogue | E-commerce / SaaS analogue |
+|--------------------------|:---:|---------------------|----------------------------|
+| Regulatory retention violation (hard DELETE on audit tables) | 🚨 P0 | Hard DELETE on medical-records / consent table | Hard DELETE on subscription / order-history table |
+| `createdBy:0` sentinel across 20+ sites | 🚨 P0 | `chartedBy: 0` on patient-record updates | `actorId: 0` on org-config changes |
+| Approval workflow boundary mismatch (every approved record throws) | 🚨 P0 | "Release patient note" path always throws | "Publish article" path always throws |
+| Stale-read at maturity-event → over-distribution | 🚨 P0 | Stale-read at appointment-booking → double-booking | Stale-read at coupon redemption → over-issue |
+| Tax remittance ignores foreign-currency bucket | 🚨 P0 | Insurance-claim totaller ignores secondary-payer bucket | Invoice totaller ignores foreign-currency line items |
+| Per-type toggles DEAD CODE (UI shows but production ignores) | 🟠 P1 | Patient-consent toggles UI-only, no enforcement | Notification-preference toggles UI-only |
+| Stale line refs (200+ drift) | 🟡 P2 | (same) | (same) |
+| Enum count drift (39 → 45) | 🟡 P2 | (same) | (same) |
+| Admin filter missing 35 enum cases | 🟢 P3 | (same) | (same) |
 
 ## Severity escalation triggers
 

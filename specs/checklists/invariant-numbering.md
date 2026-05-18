@@ -1,3 +1,11 @@
+---
+doc: checklists/invariant-numbering
+type: checklist
+version: 2.3.0
+status: stable
+last_updated: 2026-05-18
+---
+
 # Invariant + ID Numbering Convention
 
 > Pick a 3-7 char ALL CAPS module prefix once. Use it consistently across all 10 files.
@@ -31,7 +39,7 @@
 | `HW-<MOD>-NN` | Hardwiring (cross-dimension) | `gravity.md` | `HW-NOTIF-08` |
 | `ADR-<MOD>-NNN` | Architecture Decision Record | `CLAUDE.md` ADR table (+ optional `decisions.md` legacy ADR log if your project has 4-file convention) | `ADR-NOTIF-009` |
 | `ALG-<MOD>-NAME` | Algorithm | `how.md` | `ALG-NOTIF-SEND-01` |
-| `P-<MOD>-NN` | Process | `how.md` | `P-NOTIF-PUSH-01` |
+| `P-<MOD>-[DESC-]NN` | Process | `how.md` | `P-NOTIF-PUSH-01` (DESC variant) or `P-NOTIF-01` (NN-only variant) |
 | `V-<MOD>-NN` | Validation table | `how.md` | `V-NOTIF-01` |
 | `S-<MOD>-NN` | Storage role | `where.md` | `S-NOTIF-01` |
 | `F-<MOD>-W-NN` | Failure-mode write semantics | `where.md` | `F-NOTIF-W-01` |
@@ -45,7 +53,7 @@
 | `FU-<MOD>-DESC` | Follow-up gap | `gaps.md` | `FU-<MOD>-STALE-TOKEN-CLEANUP` (descriptive suffix, ALL CAPS, hyphenated) |
 | `Gap-<MOD>-NN` | Numbered gap | `gaps.md` | `Gap-NOTIF-14` |
 | `RES-<MOD>-QN` | Research question | `gaps.md` | `RES-NOTIF-Q3` |
-| `NHW-<MOD>-NN` | Non-hardwiring (explicit non-rule) | `gravity.md` | `NHW-NOTIF-2` |
+| `NHW-<MOD>-NN` | Non-hardwiring (explicit non-rule) | `gravity.md` | `NHW-NOTIF-02` |
 
 ## Numbering rules
 

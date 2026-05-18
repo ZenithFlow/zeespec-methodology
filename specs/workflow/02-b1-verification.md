@@ -1,3 +1,12 @@
+---
+doc: workflow/02-b1-verification
+type: workflow-checklist
+phase: B1-quantitative-drift
+version: 2.3.0
+status: stable
+last_updated: 2026-05-18
+---
+
 # B1 Verification — Quantitative Drift Check
 
 > Time: 30 minutes per module. Run after initial authoring AND when re-validating an aged spec.

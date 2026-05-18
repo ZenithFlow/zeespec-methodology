@@ -10,7 +10,7 @@ purpose: experimental — ZeeSpec methodology trial, not yet canonical
 
 # MODULE_NAME — AI Spec Entry Point
 
-This module is specified using **ZeeSpec** (10-file Zachman-derived framework, language-agnostic v2.0).
+This module is specified using **ZeeSpec** (10-file Zachman-derived framework, language-agnostic v2.3).
 Read all dimension files BEFORE generating code.
 
 > ⚠️ **Authoring scope statement:**
@@ -18,7 +18,7 @@ Read all dimension files BEFORE generating code.
 > This ZeeSpec captures the MODULE_NAME module's **specification**. Production code is the highest authority. Where doc and code disagree, **code is canonical**; spec author should flag the drift as a Gap-MOD_PREFIX-XX entry rather than silently choosing.
 >
 > **Canonical sources (in priority order):**
-> 1. Production code (`backend/src/<MODULE>/*`) — highest authority
+> 1. Production code (`<your-source-root>/<MODULE>/*` — e.g., `backend/src/...`, `src/<package>/...`, `internal/<module>/...`, `lib/<module>/...`) — highest authority
 > 2. Existing 4-file canonical (`docs/specs/MODULE_NAME/{CLAUDE,decisions,implementation}.md`) if exists
 > 3. Feature documentation (`docs/features/MODULE_NAME/*.md`) if exists
 > 4. This ZeeSpec

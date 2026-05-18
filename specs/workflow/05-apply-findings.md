@@ -1,3 +1,12 @@
+---
+doc: workflow/05-apply-findings
+type: workflow-checklist
+phase: apply
+version: 2.3.0
+status: stable
+last_updated: 2026-05-18
+---
+
 # Apply Findings — Fold Reviewer Output Back into Spec
 
 > Time: 1-2 hours per module. Run after R1+R2.

@@ -1,6 +1,23 @@
+---
+doc: checklists/anti-patterns
+type: checklist
+version: 2.3.0
+status: stable
+last_updated: 2026-05-18
+---
+
 # ZeeSpec Anti-Patterns — 13 Common Pitfalls
 
-> Catalogued from 5-module pilot. Watch for these during authoring + review.
+> Catalogued from a 5-module pilot. Watch for these during authoring + review.
+>
+> **Note on examples:** The code snippets below come from the pilot project (PHP / Symfony / Doctrine) and use that stack's syntax — `$this->`, `::`, `.php` filenames, `#[ORM\...]` attributes. The **patterns themselves are stack-neutral**. Mental translation for other stacks:
+>
+> | PHP/pilot syntax | Java/Kotlin | Python | TypeScript | Go | Rust | C# | Ruby |
+> |------------------|-------------|--------|------------|----|----|------|------|
+> | `$this->method()` | `this.method()` | `self.method()` | `this.method()` | `s.Method()` | `self.method()` | `this.Method()` | `method` |
+> | `Class::staticMethod()` | `Class.staticMethod()` | `Class.static_method()` | `Class.staticMethod()` | `Class.StaticMethod()` (or pkg func) | `Class::static_method()` | `Class.StaticMethod()` | `Class.static_method` |
+> | `Service.php:265` | `Service.java:265` | `service.py:265` | `service.ts:265` | `service.go:265` | `service.rs:265` | `Service.cs:265` | `service.rb:265` |
+> | `#[ORM\Column]` | `@Column` | `Column()` / `Field()` | `@Column` / Prisma model | `gorm:` tag | `table!` macro | `[Column]` | `db/schema.rb` |
 
 ## 1. AccountStatus pattern (false-positive enforcement)
 

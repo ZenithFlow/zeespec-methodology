@@ -1,3 +1,12 @@
+---
+doc: workflow/00-START-HERE
+type: ai-agent-entry-point
+version: 2.3.0
+status: stable
+last_updated: 2026-05-18
+applies_to: any project using ZeeSpec
+---
+
 # ZeeSpec Workflow — AI Agent Entry Point
 
 > Read this BEFORE generating ANY code that touches a ZeeSpec-codified module.
@@ -92,7 +101,7 @@ Spec says "security_alerts cannot be disabled (INV-NOTIF-18 🚧 DESIGN)". You w
 
 ### Mistake 2: Inventing decisions when a gap blocks you
 
-Spec says "FU-X: SMS toggle missing — STOP, ASK USER". You write a TOOD comment and proceed with a default. Now there's no record of the unresolved question.
+Spec says "FU-X: SMS toggle missing — STOP, ASK USER". You write a TODO comment and proceed with a default. Now there's no record of the unresolved question.
 
 **Fix:** Genuinely STOP. Ask in the chat. Wait for the user's decision before proceeding.
 

@@ -1,3 +1,11 @@
+---
+doc: README
+type: package-overview
+version: 2.3.0
+status: stable
+last_updated: 2026-05-18
+---
+
 # ZeeSpec Methodology — Standalone Package
 
 > **A portable, AI-friendly specification methodology** based on the 6-dimension Zachman framework (1987), adapted for modern AI-assisted development. **Language-agnostic by design** — only one file (`where.md` § 5) is stack-specific. Validated across 5 production modules of a regulated financial-services system; pilot stack was PHP / Symfony / PostgreSQL but the methodology applies equally to Go, Java, Python, Rust, TypeScript, C#, Ruby, and other backend stacks. The pilot surfaced **177 findings, 4 real production bugs fixed + 6 queued, 22 compliance gaps filed** (see § Validation Track Record below).
@@ -46,6 +54,7 @@ zeespec-methodology/specs/
 │   │   ├── gaps.md                 — open questions
 │   │   └── glossary.md             — domain + technical terms
 │   └── _meta/                      — project-wide tracking templates
+│       ├── README.md                — _meta directory overview
 │       ├── module-index.md         — copy to docs/specs/zeespec/README.md
 │       ├── spawn-chips.md          — track all dispatched task chips
 │       └── pilot-retrospective.md  — after 3+ modules, capture lessons
@@ -105,8 +114,10 @@ find . -name '*.bak' -delete
 
 ## Validation Track Record
 
-| Module | Findings | Production Bugs | Compliance Gaps |
-|--------|---------:|----------------:|----------------:|
+> **Pilot domain:** regulated financial services (mutual-fund management). The compliance-gap descriptors below (AML / regulator audit) reflect this domain. In other domains the analogue would be — healthcare: PHI exposure / HIPAA audit; e-commerce: PCI-DSS / GDPR-Article-17; government: FedRAMP control gaps. The methodology applies equally; only the gap labels change.
+
+| Module (pilot) | Findings | Production Bugs | Compliance Gaps (pilot-domain labels) |
+|----------------|---------:|----------------:|---------------------------------------|
 | notification | 45 | 2 fixed | 3 GDPR/AML filed |
 | asset_catalog | 13 | 1 fixed | 1 phantom-method removed |
 | wallet | 25 | 1 fixed | 5 AML filed |

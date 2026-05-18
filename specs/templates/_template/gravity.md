@@ -69,7 +69,7 @@ WHY       ●●   ●●●   ●●     ●●●   ●●●   ●
 
 ## §5. Anti-gravity — what is NOT hardwired
 
-### NHW-1: [Non-rule name]
+### NHW-MOD_PREFIX-01: [Non-rule name]
 
 [Statement of what is intentionally NOT a constraint. Helps prevent over-engineering.]
 

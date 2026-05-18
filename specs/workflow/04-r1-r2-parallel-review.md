@@ -1,3 +1,12 @@
+---
+doc: workflow/04-r1-r2-parallel-review
+type: workflow-checklist
+phase: R1-R2-parallel-review
+version: 2.3.0
+status: stable
+last_updated: 2026-05-18
+---
+
 # R1 + R2 Parallel Independent Reviewers
 
 > Time: 1-2 hours wall-clock per module (2x parallel agents). Run after R3.
@@ -71,13 +80,14 @@ might miss, focusing on regulation, audit trail, cross-module breakage,
 and operator workflows.
 
 **Domain context:** [your jurisdiction + applicable regulations]
-[Examples:
+[Pick one row that matches your context; pilot example shown last as reference detail level:
  - EU finance: ESMA / national securities regulator; GDPR; PSD2; MiFID II
- - US finance: SEC / FINRA; BSA/AML; SOX 7-year retention; CTR $10K threshold
- - Healthcare US: HIPAA + state privacy laws
- - E-commerce: PCI-DSS + GDPR / CCPA
- - Pilot example: Mongolia FRC (Financial Regulatory Commission); 7-year retention
-   per Mongolia AML law; CTR threshold 20M MNT]
+ - US finance: SEC / FINRA; BSA/AML; SOX; CTR $10K threshold
+ - Healthcare (US): HIPAA + state privacy laws; HITECH breach-notification
+ - Healthcare (EU): GDPR Article 9 + national health-data laws
+ - E-commerce / SaaS: PCI-DSS + GDPR / CCPA
+ - Government: FedRAMP / FISMA / ISO 27001
+ - Pilot: Mongolia FRC; 7-year AML retention; CTR 20M MNT]
 
 **Already-known issues — don't re-report:**
 [List R3's findings + R1 likely findings to dedupe]
@@ -106,7 +116,7 @@ and operator workflows.
 
 8. [Notification + escalation] — Failures dispatched? Stuck-state alarmed?
 
-9. [Year-end / period-end] — Closing entries auto-generated? Reports prep'd?
+9. [Periodic reporting cycle — if applicable] — Closing entries / period-end snapshots / batch jobs run on schedule? Required reports auto-generated? *Skip this section if your domain has no periodic regulatory reporting (e.g., pure SaaS, non-regulated e-commerce).*
 
 10. [Top 3 inspector questions] — "Show me the audit trail for X" /
     "Who posted Y?" / "Show closing entries for prior period". Which fail today?

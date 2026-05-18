@@ -1,3 +1,12 @@
+---
+doc: workflow/06-spawn-task-chips
+type: workflow-checklist
+phase: spawn-chips
+version: 2.3.0
+status: stable
+last_updated: 2026-05-18
+---
+
 # Spawn Task Chip Pattern — Delegating Production Bugs
 
 > Time: 10-15 min per chip. Use when reviewer finds a real production bug.
@@ -27,12 +36,12 @@ Each spawn task chip has 3 fields:
 
 ### 1. Title (under 60 chars, imperative)
 
-Good: "Fix R5 redemption AML bypass — bankAccount.isVerified gap"
+Good: "Fix unauthorized-account bypass on resource verification — verify-flag gap" *(pilot: "Fix R5 redemption AML bypass — bankAccount.isVerified gap")*
 Bad: "Bug fix"
 
 ### 2. TLDR (1-2 sentences, plain English)
 
-Good: "OrderService::createRedemptionWithdrawal picks customer's FIRST bank account with NO isVerified check. Customer-initiated redemption can payout to unverified account → AML/regulatory bypass."
+Good: "`<ResourceService>.<createMethod>()` picks the customer's FIRST linked account/resource with NO verified-flag check. Customer-initiated action can complete against an unverified resource → security / compliance bypass." *(pilot illustration: PHP `OrderService::createRedemptionWithdrawal` picks first bank account with no `isVerified` check, enabling an AML bypass.)*
 
 Bad: "Bug in withdrawal flow"
 
@@ -78,7 +87,7 @@ Must include:
 **Files to read first:**
 - `path/to/file.ext` (entire file — focus on lines XX-YY)
 - `path/to/related.ext` (sister method to mirror)
-- `vendor/lib/Exception.ext` (typed exception classes to catch)
+- `[third-party / framework dependency path]` (typed exception or error classes to catch — your equivalent of `vendor/`, `node_modules/`, `site-packages/`, Go module cache, `~/.cargo/registry/`, etc.)
 
 **Regression test (must add):**
 
@@ -110,8 +119,8 @@ Must include:
 ```javascript
 // Inside an agent session, invoke:
 mcp__ccd_session__spawn_task({
-  title: "Fix R5 redemption AML bypass — bankAccount.isVerified gap",
-  tldr: "OrderService picks customer's first bank account with no isVerified check...",
+  title: "Fix unauthorized-account bypass on resource verification",
+  tldr: "ResourceService picks customer's first linked account with no verified-flag check...",
   prompt: "..." // 500-3000 word self-contained prompt
 })
 ```

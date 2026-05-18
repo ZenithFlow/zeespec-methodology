@@ -45,9 +45,9 @@ last_updated: YYYY-MM-DD
 
 ### Research questions (open, not blocking)
 
-| ID | Title | Status | Notes |
-|----|-------|:------:|-------|
-| **RES-MOD_PREFIX-Q1** | [open question] | 🟢 P3 OPEN | [notes] |
+| ID | Title | Severity | Status | Notes |
+|----|-------|:--------:|:------:|-------|
+| **RES-MOD_PREFIX-Q1** | [open question] | 🟢 P3 | 🔴 OPEN | [notes] |
 
 ## Gap details
 

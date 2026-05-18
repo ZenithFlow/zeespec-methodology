@@ -1,3 +1,11 @@
+---
+doc: PORTING-GUIDE
+type: porting-guide
+version: 2.3.0
+status: stable
+last_updated: 2026-05-18
+---
+
 # ZeeSpec Porting Guide — Adapt to Your Stack
 
 > The 10-file ZeeSpec format is **language-agnostic by design**. Porting from one stack to another requires rewriting ONE file (where.md § 5). This guide explains how.

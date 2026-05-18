@@ -74,7 +74,7 @@ last_updated: YYYY-MM-DD
 
 | Service method | Guard | Reason |
 |----------------|-------|--------|
-| `MainService::action()` | Authorization check | [reason] |
+| `<MainService>.<action>()` | Authorization check | [reason] |
 
 ## 5. Auth flow integration
 
