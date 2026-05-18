@@ -9,7 +9,11 @@ last_updated: 2026-05-18
 
 # Accounting Principles — Double-Entry + IFRS-Aware
 
-> Foundational invariants every finance module MUST honor. Copy the relevant `INV-ACC-*` and `HW-ACC-*` entries into your module's `what.md` § 2 and `gravity.md` § 1.
+> **Reference example** of how to codify domain principles in a ZeeSpec overlay. Specific to financial-services accounting; the structure (status-tagged invariants + citation blocks) is reusable for other domains.
+>
+> Foundational invariants every finance module SHOULD honor. Copy the relevant `INV-ACC-*` and `HW-ACC-*` entries into your module's `what.md` § 2 and `gravity.md` § 1.
+>
+> For NON-finance domains: adapt the structure (invariants + citations + cross-refs) but research your domain's own foundational principles (e.g., healthcare: HIPAA PHI minimums; government: NIST baseline; privacy: GDPR Art. 5 principles).
 
 ## 1. Double-entry foundations
 

@@ -26,7 +26,9 @@ applies_to: any project using ZeeSpec
 | Writing new code in a module with a ZeeSpec | Read all 10 files; cite IDs |
 | Modifying existing code | Read the relevant dimension files (e.g., what.md if changing entities, how.md if changing algorithms) |
 | Authoring a NEW ZeeSpec module | Follow `01-authoring-checklist.md` |
+| **Authoring a module with external-authority claims** (regulator, statute, standard) | Run R4 research FIRST → `07-r4-regulatory-research/00-START-HERE.md` |
 | Reviewing an existing ZeeSpec | Follow `02-b1-verification.md` through `04-r1-r2-parallel-review.md` |
+| Annual re-validation of jurisdictional claims | Re-run R4 → `07-r4-regulatory-research/01-regulatory-research-workflow.md` § "Re-validation workflow" |
 | Found a real production bug | Follow `06-spawn-task-chips.md` |
 
 ## The Read Order (per module)

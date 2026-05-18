@@ -8,9 +8,16 @@ status: experimental
 last_updated: 2026-05-18
 ---
 
-# ZeeSpec Overlay — Finance & Accounting
+# ZeeSpec Overlay — Finance & Accounting (Reference Example)
 
-> **Domain-specialized add-on** for regulated financial-services systems (mutual funds, brokerages, payments, custodians) built on the **double-entry accounting** model. Layers IFRS-aware accounting invariants, FRC/SEC/ESMA compliance framework, AML/KYC rules, and pre-filled module templates on top of the neutral ZeeSpec core.
+> **Domain-specialized REFERENCE EXAMPLE** demonstrating how to layer concrete domain content (principles, modules, glossary, R4 research artifacts) on top of neutral ZeeSpec core. Built around regulated financial-services systems (mutual funds, brokerages, payments, custodians, NBFI lending) with double-entry accounting + multi-jurisdiction compliance.
+>
+> **This overlay is a reference, not a prescription.** Treat it as:
+> - **Example of how to structure a domain overlay** — same shape applies to healthcare, government, privacy, etc.
+> - **Reusable starting point for finance projects** — copy + adapt to your codebase
+> - **Worked R4 research examples** — see how regulator + statute research produces module specs (4 examples in `research-examples/`)
+>
+> The **methodology** (core ZeeSpec workflow + R4 regulatory research at `workflow/07-r4-regulatory-research/`) is **the primary deliverable**. This overlay shows the methodology in action for one domain.
 
 ## When to use this overlay
 

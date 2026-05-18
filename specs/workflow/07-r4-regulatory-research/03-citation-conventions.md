@@ -1,15 +1,16 @@
 ---
-doc: overlays/finance-accounting/research/citation-conventions
-type: research-method
-overlay: finance-accounting
-version: 0.1.0
-status: experimental
+doc: workflow/07-r4-regulatory-research/03-citation-conventions
+type: workflow-research-method
+phase: R4-regulatory-research
+version: 1.0.0
+status: stable
 last_updated: 2026-05-18
+applies_to: any regulated domain
 ---
 
-# Citation Conventions for Regulator + Statute References
+# Citation Conventions for External-Authority References
 
-> A citation in your ZeeSpec must be **durable** (next reviewer can verify in 5 years), **specific** (down to article/paragraph), and **dated** (version-pinned). This file defines the format.
+> **Domain-agnostic.** A citation in your ZeeSpec must be **durable** (next reviewer can verify in 5 years), **specific** (down to article/paragraph/section), and **dated** (version-pinned). This file defines the format. Examples in this doc use finance (Mongolia AML Law) because the worked examples are mature; the format itself applies to ANY external authority — healthcare regulations (HIPAA / GDPR Art. 9), government standards (NIST SP 800-XX), privacy law (GDPR Art. 17), tax codes, labor law, etc.
 
 ## The minimum citation block
 

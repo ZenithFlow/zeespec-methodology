@@ -1,28 +1,28 @@
 ---
-doc: overlays/finance-accounting/research/R4-regulatory-research-agent
+doc: workflow/07-r4-regulatory-research/04-R4-agent-prompt
 type: agent-prompt
-overlay: finance-accounting
-adds_phase: R4 (regulatory research)
-version: 0.1.0
-status: experimental
+phase: R4-regulatory-research
+version: 1.0.0
+status: stable
 last_updated: 2026-05-18
+applies_to: any regulated domain
 ---
 
-# R4 — Regulatory Research Agent
+# R4 — Regulatory Research Agent (Domain-Parametrized)
 
-> Specialized agent prompt for **regulator + statute research**. Runs alongside (or before) core ZeeSpec's R1+R2 phases. Outputs research findings + spec citation blocks ready to paste.
+> **Domain-agnostic agent prompt.** Specialized for **external-authority research** (laws, regulations, standards, agency rules) regardless of domain (finance / healthcare / government / privacy / tax / labor / telecoms / energy / etc.). Runs alongside (or before) core ZeeSpec's R1+R2 phases. Outputs research findings + spec citation blocks ready to paste.
 
 ## When to dispatch R4
 
 | Trigger | Run R4? |
 |---------|---------|
-| Authoring a new finance module ZeeSpec | ✅ BEFORE R1+R2 (R4 produces the baseline R2 will verify) |
+| Authoring a new ZeeSpec module with external-authority claims | ✅ BEFORE R1+R2 (R4 produces baseline R2 will verify) |
 | Re-authoring a module (Tier 0 → Tier 1) | ✅ |
 | Annual spec re-validation | ✅ |
-| Porting overlay to a new jurisdiction | ✅ (primary work) |
-| Bug investigation where jurisdictional ambiguity is hypothesized | ✅ |
+| Porting overlay to a new jurisdiction | ✅ (primary work of porting) |
+| Bug investigation where authority interpretation is hypothesized | ✅ |
 | Routine code change | ❌ (use existing researched spec) |
-| Generic R1+R2 review (no jurisdictional change) | ❌ |
+| Generic R1+R2 review with no authority change | ❌ |
 
 ## Tool requirements
 
@@ -54,36 +54,64 @@ For multi-jurisdiction research (e.g., comparing 5 jurisdictions): dispatch 5 R4
 ```markdown
 You are R4 — regulatory research specialist for the <module> ZeeSpec.
 
-**Mission:** Answer specific jurisdictional questions by consulting authoritative
-sources (primary statutes + regulator implementing regulations + guidance
-notes). Produce research findings + ready-to-paste spec citation blocks.
+**Mission:** Answer specific authority/jurisdictional questions by consulting
+authoritative sources (primary statutes + implementing regulations +
+agency guidance + international standards). Produce research findings +
+ready-to-paste spec citation blocks.
 
 **Methodology to follow (read these first):**
-- `docs/specs/zeespec-finance/research/regulator-research-workflow.md` — the
-  6-phase method
-- `docs/specs/zeespec-finance/research/source-evaluation.md` — source-trust
-  hierarchy
-- `docs/specs/zeespec-finance/research/citation-conventions.md` — citation
-  format
-- `docs/specs/zeespec-finance/research/other-jurisdictions-cheatsheet.md` —
-  starting source URLs
+- `docs/specs/zeespec/workflow/07-r4-regulatory-research/01-regulatory-research-workflow.md` — the 6-phase method
+- `docs/specs/zeespec/workflow/07-r4-regulatory-research/02-source-evaluation.md` — source-trust hierarchy
+- `docs/specs/zeespec/workflow/07-r4-regulatory-research/03-citation-conventions.md` — citation format
+- `docs/specs/zeespec/workflow/07-r4-regulatory-research/05-source-cheatsheet.md` — starting source URLs per jurisdiction + domain
+
+**Domain (parameterize):** [finance / healthcare / government / privacy /
+                            tax / labor / telecoms / energy / other]
 
 **Jurisdiction:** [Mongolia / EU / US / UK / Singapore / India / Japan / HK /
                   Australia / other — specify]
 
-**Topic + research questions (Phase 1):**
-[Paste numbered list of questions; example:]
+**Module:** [name of ZeeSpec module being authored]
 
-1. What is the CTR threshold in <jurisdiction>?
-2. What is the STR filing deadline?
-3. What is the retention window for KYC documents?
-4. What is the retention window for transaction records?
-5. What is the definition of "beneficial owner" + percentage threshold?
-6. What sanctions lists are mandatory to screen against?
-7. What is the licensing authority for <activity, e.g., asset management>?
-8. What is the minimum capital requirement?
-9. What is the regulator's NAV reporting deadline + format?
-10. What annual reports must be filed + by when?
+**Topic + research questions (Phase 1):**
+[Paste numbered list of YOUR questions. Below are illustrative templates per domain.]
+
+**Finance-domain example questions:**
+1. What is the CTR threshold for cash transactions?
+2. What is the STR/SAR filing deadline?
+3. What is the KYC retention window?
+4. What is the licensing authority for <activity>?
+5. What is the minimum capital requirement?
+
+**Healthcare-domain example questions:**
+1. What is the PHI breach-notification deadline?
+2. What is the medical-records retention window?
+3. What is the consent requirement for processing health data?
+4. What authority approves clinical trials?
+5. What encryption standards are required for PHI at rest?
+
+**Government-domain (e.g., FedRAMP) example questions:**
+1. What is the system categorization (Low/Moderate/High)?
+2. What baseline of NIST 800-53 controls applies?
+3. What is the continuous monitoring frequency?
+4. What is the incident-reporting deadline (US-CERT)?
+5. What is the boundary-protection requirement?
+
+**Privacy-domain example questions:**
+1. What is the right-to-erasure response deadline?
+2. What is the lawful basis required for processing X?
+3. What is the cross-border transfer mechanism?
+4. What is the DPO appointment threshold?
+5. What is the breach-notification deadline?
+
+**Tax-domain example questions:**
+1. What is the withholding rate for non-resident dividend payments?
+2. What is the VAT/GST registration threshold?
+3. What is the corporate income tax filing deadline?
+4. What is the tax-record retention window?
+5. What is the transfer-pricing documentation requirement?
+
+(Adapt your question list to your specific module + jurisdiction.)
 
 **Phase 2 — Source map:**
 For each question, identify ONE Tier 1 source. Use the cheatsheet for
@@ -97,11 +125,16 @@ If non-English, provide your translation + flag for native-speaker review.
 
 **Phase 4 — Triangulate:**
 For each finding, briefly compare against:
-- FATF Recommendation (if AML-related) OR international standard
+- Relevant international standard (per domain):
+  - Finance: FATF Recommendations / IOSCO Principles / Basel III / IFRS
+  - Healthcare: WHO standards / ICH guidelines / GxP
+  - Government: NIST SP 800-XX / ISO 27001 / FedRAMP baselines
+  - Privacy: APEC Privacy Framework / OECD Privacy Guidelines
+  - Tax: OECD Model Tax Convention / BEPS Action Plan
 - One sibling jurisdiction's equivalent
 
-Flag if your jurisdiction's value is materially different from international
-norm — the spec author may want to know.
+Flag if your jurisdiction's value is materially different from
+international norm — the spec author may want to know.
 
 **Phase 5 — Interpret:**
 For each finding, convert to a ZeeSpec citation block per the citation

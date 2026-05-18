@@ -1,26 +1,38 @@
 ---
-doc: overlays/finance-accounting/research/regulator-research-workflow
-type: research-workflow
-overlay: finance-accounting
-version: 0.1.0
-status: experimental
+doc: workflow/07-r4-regulatory-research/01-regulatory-research-workflow
+type: workflow-research-method
+phase: R4-regulatory-research
+version: 1.0.0
+status: stable
 last_updated: 2026-05-18
+applies_to: any regulated domain (finance / healthcare / government / privacy / tax / labor / telecoms / energy / etc.)
 ---
 
-# The 6-Phase Regulator Research Workflow
+# The 6-Phase Regulatory Research Workflow
 
-> Time: 1-4 hours per topic depending on scope + jurisdiction familiarity. Run when authoring a new finance module spec, when porting to a new jurisdiction, or during annual re-validation.
+> **Domain-agnostic.** Time: 1-4 hours per topic depending on scope + domain/jurisdiction familiarity. Run when authoring a new module spec with external-authority dependencies, when porting to a new jurisdiction, or during annual re-validation.
+>
+> Worked examples per domain in the relevant overlay's `research-examples/` folder (finance examples available; healthcare/government/privacy planned).
 
 ## Overview
 
 ```
 Phase 1: Scope        → What facts do I need? (1 hour list of questions)
-Phase 2: Source map   → Where do these facts live? (regulator URL + statute URL)
-Phase 3: Primary read → Read the actual law + regulation
+Phase 2: Source map   → Where do these facts live? (authority URL + statute URL)
+Phase 3: Primary read → Read the actual law / regulation / standard
 Phase 4: Triangulate  → Cross-check against international standard / sibling source
-Phase 5: Interpret    → Convert legal text into engineering invariants
+Phase 5: Interpret    → Convert authoritative text into engineering invariants
 Phase 6: Capture      → Cite + log + schedule re-check
 ```
+
+> **Note on examples below:** the detailed Phase 3-5 examples use a **finance research scenario** (Mongolia AML/CFT Law Art. 11.1.1, CTR threshold 20M MNT) because it's the most fully-validated worked example to date. The **method itself is domain-agnostic**. To adapt for another domain:
+>
+> - Healthcare: replace "AML Law Art. 11" with "HIPAA § 164.312" or "GDPR Art. 9"; replace "FIU" with "OCR (Office for Civil Rights)" or "national data-protection authority"
+> - Government / cybersecurity: replace with "NIST SP 800-53 Rev. 5" or "FedRAMP control catalog"; replace authority with "FedRAMP PMO" / "GSA"
+> - Privacy: replace with "GDPR Art. 17 + Recital 65"; replace authority with "ICO / CNIL / EDPB"
+> - Tax: replace with "US IRC § 6109" or "Mongolia Tax Code Art. X"; replace authority with "IRS / HMRC / GASA"
+>
+> The 6-phase shape + outputs (question list → source map → primary read → triangulation → interpretation → capture) is the same.
 
 ## Phase 1 — Scope your research questions (30-45 min)
 

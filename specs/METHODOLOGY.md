@@ -64,9 +64,16 @@ The 4 helpers:
 
 ## 3. The Promotion Workflow (Tier 1)
 
-A module goes through **5 phases** to reach **Tier 1 (production-validated)** status. Each phase catches a different class of error:
+A module goes through **5-6 phases** to reach **Tier 1 (production-validated)** status. Each phase catches a different class of error. R4 is **optional** for modules without external-authority dependencies (pure internal-logic modules); **required** for modules dependent on regulators / statutes / standards.
 
 ```
+[OPTIONAL: PHASE 0 — R4 RESEARCH (1-4h per topic)]
+                              → Research regulator + statute + standard for
+                                external-authority claims; produce citation
+                                blocks ready to paste; only for modules with
+                                external dependencies
+                                (see workflow/07-r4-regulatory-research/)
+       ↓
 PHASE 1: AUTHOR (4-6h)     → Read existing canonical docs + production code → write 10 ZeeSpec files
                               (Author phase has 12 sub-steps — one per file + final assembly;
                                see workflow/01-authoring-checklist.md)
@@ -78,20 +85,30 @@ PHASE 3: R3 DEEP (1-2h)    → Same-session deep verifier; verify every file:lin
 PHASE 4: R1+R2 PARALLEL    → Dispatch 2 parallel agents:
          (1-2h wall)         R1 = algorithm correctness + race conditions
                              R2 = compliance + audit + cross-module
+                                  (R2 uses R4 baseline if R4 was run)
        ↓
 PHASE 5: APPLY (1-2h)      → Fold findings back; spawn task chips for production bugs; commit
        ↓
    Tier 1 STATUS
+
+[ANNUAL: re-run R4 to catch law amendments]
 ```
 
-**Why 5 phases?** Each catches a different class of error:
+**Why 5-6 phases?** Each catches a different class of error:
 
 | Phase | Catches | Examples |
 |-------|---------|----------|
+| **R4** (optional) | External-authority drift | "spec says CTR threshold = 10M MNT but statute was amended to 20M MNT in 2017" |
 | **B1** | Quantitative drift | "spec says 39 enum cases, production has 45" |
 | **R3** | Line-level errors | "method at line 525, not 553 as cited" |
 | **R1** | Architecture-level | "spec describes async, production is sync" |
 | **R2** | Cross-cutting + compliance | "no operator identity captured in audit trail" |
+
+**R4 vs R2 distinction:**
+- **R2** verifies the spec's compliance claims against existing-knowledge baseline. If R4 didn't run, R2 has no fresh baseline to verify against.
+- **R4** verifies the underlying authority itself (laws change, agencies issue new rules, R4 catches it). R4 looks OUTWARD (regulator websites + statute databases); R2 + R3 look INWARD (production code + sibling specs).
+
+For modules without external-authority dependencies (e.g., a pure data-pipeline module with no jurisdictional claims), skip R4. For finance, healthcare, government, privacy, tax modules — R4 should be the FIRST phase.
 
 ## 4. Status Tagging Convention
 

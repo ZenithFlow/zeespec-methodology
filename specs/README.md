@@ -64,6 +64,13 @@ zeespec-methodology/specs/
 │   ├── severity-matrix.md          — P0/P1/P2/P3 + AI behaviour rules
 │   ├── invariant-numbering.md      — ID conventions (INV/HW/ADR/...)
 │   └── cross-link-bidirectionality.md — bidirectional reference rules
+├── workflow/07-r4-regulatory-research/  — 🆕 v1.0.0 domain-agnostic regulator + statute research
+│   ├── 00-START-HERE.md            — entry; when to use; tier hierarchy
+│   ├── 01-regulatory-research-workflow.md — 6-phase method
+│   ├── 02-source-evaluation.md     — 7-question source trust eval
+│   ├── 03-citation-conventions.md  — durable citation format + source registry
+│   ├── 04-R4-agent-prompt.md       — domain-parametrized agent prompt
+│   └── 05-source-cheatsheet.md     — URLs for finance / healthcare / government / privacy / tax / etc.
 └── overlays/
     └── finance-accounting/         — 🆕 v0.1.0 domain-specialized overlay
         ├── README.md               — how to apply the overlay
@@ -82,7 +89,9 @@ Domain-specialized add-ons that layer additional invariants, anti-patterns, seve
 
 | Overlay | Status | When to use |
 |---------|--------|-------------|
-| **finance-accounting** v0.3.0 | 🧪 experimental | Regulated financial services (mutual funds, brokerages, payments, custodians, **NBFI lending**). Double-entry + IFRS-aware + multi-jurisdiction compliance (EU/US/UK/SG/JP/IN/HK/AU/MN). Modules: GL, wallet-settlement, KYC/AML, lending (NPL classification + IFRS 9 ECL + Mongolia regulatory provisioning). Includes **R4 regulatory research methodology** with 6-phase workflow + agent prompt + 4 worked examples. See `overlays/finance-accounting/README.md`. |
+| **finance-accounting** v0.4.0 | 🧪 reference example | Regulated financial services (mutual funds, brokerages, payments, custodians, **NBFI lending**). Double-entry + IFRS-aware + multi-jurisdiction compliance (EU/US/UK/SG/JP/IN/HK/AU/MN). Modules: GL, wallet-settlement, KYC/AML, lending. 4 worked R4 research examples showing the methodology in action. See `overlays/finance-accounting/README.md`. |
+
+> **Note on overlays:** overlays are **reference examples** of how to apply the methodology to a specific domain. The **methodology itself** (core workflow + R4 research at `workflow/07-r4-regulatory-research/`) is the primary deliverable; overlays show it working in practice.
 
 ## Quick start (5 minutes)
 

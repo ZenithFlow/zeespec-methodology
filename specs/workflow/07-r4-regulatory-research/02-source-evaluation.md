@@ -1,15 +1,18 @@
 ---
-doc: overlays/finance-accounting/research/source-evaluation
-type: research-method
-overlay: finance-accounting
-version: 0.1.0
-status: experimental
+doc: workflow/07-r4-regulatory-research/02-source-evaluation
+type: workflow-research-method
+phase: R4-regulatory-research
+version: 1.0.0
+status: stable
 last_updated: 2026-05-18
+applies_to: any regulated domain (finance / healthcare / government / privacy / tax / etc.)
 ---
 
 # Source Evaluation — Trust + Currency + Authoritativeness
 
-> Not all regulator-adjacent sources are equal. This file defines a 4-tier hierarchy + checklist questions to assess whether a source belongs in your spec citation.
+> **Domain-agnostic.** Not all authority-adjacent sources are equal. This file defines a 4-tier hierarchy + 7 checklist questions to assess whether a source belongs in your spec citation. Applies to finance regulators, healthcare authorities, government agencies, standard-setters, statute databases — any external authority your spec depends on.
+>
+> **Per-jurisdiction source tables** (which database is Tier 1 for Mongolia / EU / US / UK / etc.) are in `05-source-cheatsheet.md`.
 
 ## The 4-tier hierarchy (recap from 00-START-HERE.md)
 
