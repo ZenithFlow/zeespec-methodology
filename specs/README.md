@@ -98,7 +98,8 @@ zeespec-methodology/specs/
 │   ├── 04-tooling-integration.md   — CI / IDE / Slack / dashboards
 │   ├── 05-cross-domain-adaptation.md — healthcare / government / privacy / etc.
 │   ├── 06-common-pitfalls.md       — 15 adoption failure modes + fixes
-│   └── 07-zeespec-lite-tier-0-fasttrack.md — 3-file Lite path (2-hour trial)
+│   ├── 07-zeespec-lite-tier-0-fasttrack.md — 3-file Lite path (2-hour trial)
+│   └── 08-one-man-army.md          — solo developer playbook (1 хүн full workflow)
 ├── workflow/11-anthropics-plugin-integration/  — 🆕 v1.0.0 integration with anthropics/financial-services plugins
 │   ├── 00-START-HERE.md            — entry; ZeeSpec vs plugins (complementary)
 │   ├── 01-plugin-output-as-adr.md  — Pattern 1: capture plugin outputs as ADRs

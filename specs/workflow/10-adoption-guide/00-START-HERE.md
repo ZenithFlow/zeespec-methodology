@@ -37,6 +37,8 @@ applies_to: teams considering OR adopting ZeeSpec for the first time
 4. `04-tooling-integration.md` (CI / IDE / Slack / dashboards)
 5. `05-cross-domain-adaptation.md` (healthcare / government / privacy / SaaS — NON-finance)
 6. `06-common-pitfalls.md` (what kills adoption; how to avoid)
+7. `07-zeespec-lite-tier-0-fasttrack.md` (3-file Lite path; ~2-hour trial)
+8. `08-one-man-army.md` (solo developer playbook — 1 хүн full methodology)
 
 ## Adoption decision matrix
 
