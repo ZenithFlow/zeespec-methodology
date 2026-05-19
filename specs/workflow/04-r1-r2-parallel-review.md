@@ -2,9 +2,9 @@
 doc: workflow/04-r1-r2-parallel-review
 type: workflow-checklist
 phase: R1-R2-parallel-review
-version: 2.3.0
+version: 2.4.0
 status: stable
-last_updated: 2026-05-18
+last_updated: 2026-05-19
 ---
 
 # R1 + R2 Parallel Independent Reviewers
@@ -200,5 +200,45 @@ Per-module, reviewer prompts can be tuned:
 - **Wall-clock:** Both run in parallel = max of R1 or R2 = ~90 min wall
 
 If either agent takes >2h, something's wrong (likely the spec is huge — split the module).
+
+## R1+R2 yield statistics (pilot data v3.2)
+
+Observed yield from the investment-module pilot (2026-05-18), measured against a spec that had already gone through 4 author-level review passes + R3:
+
+| Reviewer | NEW findings | Findings that prior 5 passes missed |
+|----------|:-----------:|:----------------------------------:|
+| Day 1-3 author review | 8+7+5 = 20 | (baseline; first pass on own writing) |
+| Day 2 meta-review | 1 production bug | 1 (DUPLICATE-COMMAND) |
+| R3 deep review | 15 | 15 |
+| **R1 algorithm** | **19** | **19** |
+| **R2 compliance + cross-module** | **10** | **10** |
+| **R1 + R2 combined** | **25 unique** (4 overlap with R3) | **25** |
+
+**Total review yield across 6 passes: 61+ findings.**
+
+R1+R2 caught **25 issues that R3's line-by-line spot-check missed**, including:
+- 3 production bugs (FundJournalService 20-site `createdBy: 0`; CHART-OF-ACCOUNTS-DRIFT — 8 wrong account codes; CREATEORDER-BAL-RACE — fund overspending under concurrency)
+- Cross-module spec-drift (accounting + nav + settlement spec doesn't reference investment)
+
+### R2 cross-module verification = highest single yield
+
+R2 item #4 (cross-module verification — does sibling module's spec reference YOUR module's ADRs?) accounted for **1 P0 + 2 PARTIAL findings on its own** in the pilot, including the highest-impact catch (CHART-OF-ACCOUNTS-DRIFT). This pattern generalises:
+
+| Cross-module check | Yield |
+|---------------------|-------|
+| Does sibling ZeeSpec mention your ADRs by ID? | High (catches spec authored from stale source) |
+| Does sibling ZeeSpec consume your fields (e.g. realizedGainLoss)? | High (catches one-sided cross-link declarations) |
+| Does sibling ZeeSpec describe trigger handoffs (e.g. Pattern B)? | Medium |
+
+**Recommendation:** Always allocate explicit time for R2 item #4 — it has the highest finding-per-minute ratio of any review activity.
+
+### When R3 reports ✅ clean, run R1+R2 anyway
+
+Pilot observation: R3 reported "0 false positives among existing OPEN gaps" — but R1+R2 found **25 NEW issues** R3's approach was not equipped to catch:
+- R3 verifies what spec claims; R1+R2 verify what spec **doesn't** claim but should
+- R3 reads code top-down; R1 traces full call chains (catches partial-failure windows)
+- R3 doesn't cross-link to sibling modules; R2 does
+
+**Conclusion:** R1+R2 is **NOT optional after R3**. Both passes find disjoint issue classes. Treat R3+R1+R2 as a 3-pass sequence, all required before Tier 1 promotion.
 
 ## Next: 05-apply-findings.md

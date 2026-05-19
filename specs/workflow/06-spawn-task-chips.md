@@ -2,9 +2,9 @@
 doc: workflow/06-spawn-task-chips
 type: workflow-checklist
 phase: spawn-chips
-version: 2.3.0
+version: 2.4.0
 status: stable
-last_updated: 2026-05-18
+last_updated: 2026-05-19
 ---
 
 # Spawn Task Chip Pattern — Delegating Production Bugs
@@ -150,6 +150,69 @@ Add a note to the gap entry:
 ```
 
 This way, if the chip is closed but you re-author the spec later, you can find the closing PR.
+
+## Scope-discovery deferral pattern (NEW v3.2)
+
+> Observed pattern from pilot: when starting work on a spawn chip, the investigation often reveals that the actual scope is 3-4x larger than the original chip estimated. Common cause: the original gap was filed from a surface-level review; deep investigation finds a cross-module architectural root cause.
+
+### Observed cases (pilot 2026-05-18 investment module)
+
+| Chip | Original scope | Investigation finding | New scope |
+|------|----------------|----------------------|-----------|
+| INV-IMPL-010 (rename duplicate command) | 1-2h: rename one of two `app:investment:settle` declarations | Both commands work on different entities; production crontab calls neither; entire custodian-submit flow is inactive in production | Architectural decision needed; PM input required |
+| INV-IMPL-014 (capture operator-id on Execute/Settle) | 4-6h: inject Security into 2 processors + widen 2 service signatures | Service-layer `executeTransaction` → `FundJournalService` → 20 hardcoded `createdBy: 0` sites across 6+ modules | Cross-module refactor (architect-level); 8-16h+ |
+
+3 cases observed in the pilot's first 3 chip-investigations (66% scope-expansion rate). Treat this as a likely outcome, not an exception.
+
+### Correct workflow (DO)
+
+When investigation reveals scope expansion:
+
+1. **STOP chip implementation immediately.** Don't expand the original chip's scope.
+2. **File NEW gap** in `gaps.md` describing the architectural finding with full Problem/Reproduction/Compliance-concern/Fix-options/Spawn-chip-link.
+3. **File NEW spawn chip** for the architectural decision (separate ID, e.g. INV-IMPL-023).
+4. **Mark original chip DEFERRED** (not in-progress; not closed) with `Subsumed by Gap-MOD-XXX / INV-IMPL-NNN` cross-reference.
+5. **Continue with next-priority chip.** Don't get stuck on the architectural one until PM/architect input arrives.
+
+### Anti-pattern (DON'T)
+
+```
+INV-IMPL-014 original scope: 4-6h
+Investigation discovers it's actually 8-16h cross-module refactor
+WRONG: "I'll just fix this bigger thing too while I'm here"
+       → blows time budget
+       → destroys focus
+       → may introduce regressions in services you weren't planning to touch
+       → spec session becomes a refactor session
+```
+
+### Why this preserves discipline
+
+- **Spec-author session ≠ refactor session.** Cognitive modes differ.
+- **PM/architect time is rate-limited.** Filing a chip for them buys their input.
+- **Other lower-effort chips wait.** A blocked-expanded chip blocks the queue.
+- **Audit trail.** "Chip X DEFERRED, subsumed by Y" is searchable; "Chip X grew to 4x scope and finally landed 3 weeks later" is not.
+
+### Recording deferrals in spawn-chips.md
+
+```markdown
+## Deferred (YYYY-MM-DD)
+
+| Date | Chip | Reason | Subsumed by | Status |
+|------|------|--------|-------------|--------|
+| 2026-05-18 | INV-IMPL-014 (Operator-ID on Exec/Settle) | Scope discovered as cross-module FundJournalService refactor | INV-IMPL-023 + Gap-INV-FUND-JOURNAL-OPERATOR-LEAK | DEFERRED — needs architect signoff |
+| 2026-05-18 | INV-IMPL-010 (Rename duplicate command) | RESOLVED for the rename; investigation surfaced custodian-flow-inactive | INV-IMPL-022 + Gap-INV-CUSTODIAN-FLOW-INACTIVE | RESOLVED (rename); ESCALATED (new chip) |
+```
+
+### Stat from pilot
+
+Of the first 3 spawn-chip investigations:
+- **1** closed cleanly with no scope expansion (INV-IMPL-013 chart-of-accounts spec rewrite — spec-only)
+- **2** discovered architectural scope (INV-IMPL-010 + INV-IMPL-014)
+
+Scope-discovery rate: **66% for spawn chips touching production code, ~0% for spec-only chips.** Plan accordingly.
+
+---
 
 ## Compound chips (1 chip = multiple gaps)
 

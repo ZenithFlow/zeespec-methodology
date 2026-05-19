@@ -2,9 +2,9 @@
 doc: workflow/03-r3-deep-review
 type: workflow-checklist
 phase: R3-deep-verify
-version: 2.3.0
+version: 2.4.0
 status: stable
-last_updated: 2026-05-18
+last_updated: 2026-05-19
 ---
 
 # R3 Deep Review — Same-Session Line-by-Line Verifier
@@ -141,5 +141,46 @@ If R3 reports 0 findings, you've either:
 In case (b), re-prompt with: "You found 0 issues — that's suspicious for a module
 with N production files. Verify ALL N invariants by quoting the production code
 line that enforces each."
+
+## R3 subagent reports require B1 spot-verification (NEW v3.2)
+
+> **Lesson from pilot 2026-05-18 investment module:** R3 deep-introspection background agents can have **~14% false-positive rate** on first-pass reports. Blind-trusting subagent claims propagates errors into invariants + risk register + AI behaviour rules.
+
+### Observed pilot stats
+
+Day 1 of investment ZeeSpec dispatched 4 parallel R3-style introspection agents (entities, services, API, migrations). Of ~50 claims spot-checked across the 4 reports during Day 1 review:
+
+- 1 immediate false positive (Gap-INV-SETTLEMENT-INDEX-DRIFT — claimed entity ORM\Index missing; actually declared)
+- 2 more false positives caught Day 2 Phase 1 re-verification (Gap-INV-BOND-GL-LIKE downgrade; Gap-INV-SELL-ZERO-AMOUNT design intent)
+- **3 false positives in ~21 spot-checked claims = ~14% error rate**
+
+### Mandatory verification step after R3 dispatch
+
+Before ingesting R3 findings into spec:
+
+1. **Spot-check 5-10 random R3 claims** by direct read of the cited file:line range.
+2. For each ✅ IMPL upgrade R3 proposes: re-verify the guard ACTUALLY fires at the cited line. Watch for:
+   - Inverted boolean (`if (!ROLE_ADMIN)` when caller is ROLE_ADMIN — guard never fires)
+   - Wrapped in `if (env=dev)` (production path skips guard)
+   - Method exists but called from no live caller (dead code in service)
+3. For each "method does not exist" R3 claims: re-run `grep -rn "$methodName"` — false-negative on `grep` is the easiest R3 mistake.
+4. For each "no FK constraint" R3 claims: read the entity AND the latest migration touching that table (R3 may have grepped the entity only).
+5. For each line citation: confirm `±5 lines` (R3 line-counting is often off-by-1 to off-by-5 due to file mutations between scan + report).
+
+### Common R3 hallucination patterns
+
+| Pattern | Example from pilot |
+|---------|---------------------|
+| **"Annotation missing"** (entity has the annotation; R3 grep regex was wrong) | Gap-INV-SETTLEMENT-INDEX-DRIFT — `#[ORM\Index]` claimed missing; actually L26-29 declared |
+| **"Method does not exist"** (caller passes wrong case; case-sensitive grep failed) | (no pilot case; common in mixed-case codebases) |
+| **"Status downgrade"** (R3 thinks code doesn't enforce; actually enforces via wrapper) | Gap-INV-BOND-GL-LIKE — claimed LIKE-only; actually bond_id FK is primary path, LIKE is fallback |
+| **"Defect"** (R3 thinks it's a bug; actually intentional design) | Gap-INV-SELL-ZERO-AMOUNT — claimed validator bypass; actually documented design intent ("derived from transactions") |
+| **"Off-by-N line refs"** (R3 reports L240; actual is L242) | Multiple instances; usually 1-5 lines off |
+
+### Workflow integration
+
+The "B1 spot-verify after R3" step adds ~30-45 min to a typical 2h R3 session. Skip it = ship false positives into your spec. Don't skip it.
+
+If you have time budget for only one verification activity: **prefer this over more R3 agents in parallel**. 14% false-positive rate means more R3 = more false data without verification.
 
 ## Next: 04-r1-r2-parallel-review.md
