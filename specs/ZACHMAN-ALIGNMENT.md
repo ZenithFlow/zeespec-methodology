@@ -12,9 +12,9 @@ applies_to: ZeeSpec методологи өөрөө (meta-level; модуль-т
 # ZeeSpec ↔ Zachman Alignment — Судалгаанд үндэслэсэн сайжруулалтын Tier-үүд
 
 > **Төлөв:** PARTIALLY-IMPLEMENTED (2026-05-29) — хэрэгжсэн: **Tier 1 (1A normalize + 1B lint + 1C-lean
-> dogfood) + 2B (DAG / Lite-default) + 3B (positioning / N=1)**; §4 drift цэвэрлэгдсэн. **Зориуд
-> хойшлуулсан:** 2A (status-tag reframe), 1C-full (self-spec модуль + CI), 3A (ADR="which") —
-> ornament / over-engineering. §11 implementation log + §7 дараалал үз.
+> dogfood) + 2A (Zachman-row map) + 2B (DAG / Lite-default) + 3B (positioning / N=1)**; §4 drift
+> цэвэрлэгдсэн. **Зориуд хойшлуулсан:** 1C-full (self-spec модуль + CI), 3A (ADR="which") —
+> over-engineering / ornament. §11 implementation log + §7 дараалал үз.
 
 > **Үндэс:** Энэ баримт нь ZeeSpec-ийн суурь болсон Zachman framework дээр хийсэн судалгааны үр дүн.
 > Зөвлөмж бүр өөрийн үндэслэсэн Zachman / W6H finding-ийг үгчлэн (verbatim, англиар) иш татна.
@@ -264,7 +264,9 @@ Lean ч substantial pass (over-engineering дисциплин хадгалсан
 - **3B** — METHODOLOGY §1 positioning ("Zachman taxonomy + дутуу process/verification давхарга"); §14 + specs/README N=1 honesty caveat.
 - **1C-lean** — `scripts/dogfood-drift-scan.sh`: методологийн өөрийн репод механик self-check (gravity restatement / core-trio version / hardcoded path). Эхний ажиллалт **PASS (3/3)**. Семантик normalization R5-д үлдэнэ. Full self-spec модуль зориуд хийгээгүй (over-engineering).
 
-**Одоо хойшлуулсан:** 2A (Zachman-row reframe — ornament), 1C-full (self-spec модуль + CI — over-engineering), 3A (ADR="which" — ornament). v3.1 нь эдгээр + бодит ашиглалтын дараа.
+- **2A** (нэмэв) — METHODOLOGY §1-д Zachman-row mapping (ZeeSpec нь Owner→Designer→Builder 3 мөрийг шахдаг; Executive/Scope + Technician/Components-ийг зориуд орхино) + §4/§7-д "status-tag = Builder↔Operations гүүр" framing. Танилцуулга/онолын credibility-д (deck) үнэ цэнтэй; зан төлөв өөрчлөхгүй.
+
+**Одоо хойшлуулсан:** 1C-full (self-spec модуль + CI — over-engineering), 3A (ADR="which" — ornament). v3.1 нь эдгээр + бодит ашиглалтын дараа.
 
 ---
 

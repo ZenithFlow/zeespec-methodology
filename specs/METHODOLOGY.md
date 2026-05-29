@@ -26,6 +26,18 @@ Zachman proposed **6 dimensions** (WHAT/HOW/WHERE/WHO/WHEN/WHY) × **6 perspecti
 
 **What ZeeSpec adds to raw Zachman.** Zachman's framework is a *taxonomy* — it says what to document but (by Zachman's own description) is "not a methodology" and prescribes no process, which is its most-cited criticism. ZeeSpec supplies exactly that missing layer: a **process** (author → B1 → R3 → R1+R2 → apply), a **verification discipline** (status tags + `file:line` citations + the reviewer pipeline), and **change-handling** (drift management + ADR lifecycle). In short — **ZeeSpec = the Zachman taxonomy + the process/verification layer Zachman never provided.** (See `ZACHMAN-ALIGNMENT.md` Tier 3·3B.)
 
+**Which Zachman rows ZeeSpec actually spans (honest mapping).** "One perspective" is a simplification: ZeeSpec actually *compresses three* of Zachman's six rows into the builder's working set, and deliberately omits the rest. Naming them keeps the methodology honest about what it captures and what it skips:
+
+| ZeeSpec file / mechanism | Zachman row (perspective) | Layer |
+|--------------------------|---------------------------|-------|
+| `why.md` (goals, business rules, risks) | Owner / Business Management | Conceptual |
+| `what.md` `how.md` `who.md` `when.md` `where.md §§1-4` | Designer / Architect | Logical (Layer 1) |
+| `where.md § 5` (Tech Stack Binding) | Builder / Engineer | Physical (Layer 2) |
+| Status tags (✅ IMPL ⇄ 🚧 DESIGN) | *bridge to* Enterprise / Operations | runtime reality |
+| *(deliberately omitted)* | Executive/Scope (row 1) · Technician/Components (row 5) | — |
+
+Two consequences worth stating: (1) the **two-layer architecture** (§ 7) is exactly Zachman's Logical-row vs Physical-row split; (2) the **status tags** (§ 4) are how ZeeSpec bridges the Builder row (what the design says) to the Operations row (what actually runs) — ✅ IMPL means Builder ≡ Operations, 🚧 DESIGN means Builder ≠ Operations.
+
 ## 2. The 10-File Convention
 
 Every ZeeSpec-codified module lives in a directory:
@@ -162,6 +174,8 @@ For modules without external-authority dependencies (e.g., a pure data-pipeline 
 
 Every claim about production state MUST carry one of these tags:
 
+> **What the tags really measure (Zachman framing):** the gap between the **Builder** row (the design the spec describes) and the **Operations** row (what actually runs in production) — see the § 1 row map. ✅ IMPL = Builder ≡ Operations · 🟡 PARTIAL = partially bridged · 🚧 DESIGN / NOT-ENFORCED / BROKEN = Builder ≠ Operations. The `file:line` citation is the evidence the bridge exists.
+
 | Tag | Meaning | When AI uses |
 |-----|---------|--------------|
 | ✅ **IMPL** | Implemented + verified with `file:line` citation | AI may write code citing this invariant |
@@ -217,6 +231,8 @@ Use ALL CAPS module prefix; zero-padded numbers (NN = 2 digit, NNN = 3 digit for
 ## 7. The Two-Layer Architecture (Stack Independence)
 
 The biggest design choice in ZeeSpec v2: **separate the language-agnostic spec from the stack-specific binding**.
+
+> **In Zachman terms:** Layer 1 is the **Designer / Logical** row; Layer 2 (`where.md § 5`) is the **Builder / Physical** row. Porting to a new stack = re-deriving the Physical row from an unchanged Logical row. (See § 1 row map.)
 
 ### Layers
 
