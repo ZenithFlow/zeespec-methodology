@@ -1,0 +1,12 @@
+{
+  "name": "zeespec",
+  "description": "ZeeSpec methodology — install the spec methodology plus its workflow commands and R4/R5/R6 reviewer agents into any Claude Code project.",
+  "owner": { "name": "batzaya" },
+  "plugins": [
+    {
+      "name": "zeespec",
+      "source": "./",
+      "description": "ZeeSpec methodology — bundled docs (specs/) + workflow commands (init / author / review) + R4/R5/R6 reviewer agents. This repo is both the plugin and its own marketplace."
+    }
+  ]
+}

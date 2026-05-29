@@ -29,6 +29,23 @@ open your-project/docs/specs/zeespec/README.md
 # 3. Follow workflow/00-START-HERE.md
 ```
 
+## Install as a Claude Code plugin
+
+This repo is also a **Claude Code plugin** (and its own marketplace) — the AI-native way to bring ZeeSpec into any project without copying files:
+
+```bash
+# add this repo as a marketplace (local path now; a GitHub shorthand once pushed)
+/plugin marketplace add /absolute/path/to/zeespec-methodology   # or: batzaya/zeespec-methodology
+/plugin install zeespec@zeespec
+```
+
+Then, in any project:
+- `/zeespec:init [module]` — add ZeeSpec + scaffold a module (Tier 0 Lite by default)
+- `/zeespec:author` · `/zeespec:review` — authoring / review workflows
+- Reviewer agents: `zeespec-r4-regulatory`, `zeespec-r5-drift`, `zeespec-r6-adr`
+
+The full methodology ships under `specs/`; commands + agents reference it at runtime via `${CLAUDE_PLUGIN_ROOT}/specs`. Updating the plugin updates the methodology everywhere — no per-project frozen copies to drift. Validate with `claude plugin validate .`.
+
 ## Start here
 
 → **[specs/README.md](specs/README.md)** — full package documentation
