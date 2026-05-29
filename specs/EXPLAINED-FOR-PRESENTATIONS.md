@@ -3,7 +3,7 @@ doc: EXPLAINED-FOR-PRESENTATIONS
 type: presentation-aid
 version: 3.0.0
 status: stable
-last_updated: 2026-05-18
+last_updated: 2026-05-29
 audience: anyone explaining ZeeSpec to others (tech lead, EM, compliance, PM, new team members)
 ---
 
@@ -84,7 +84,7 @@ ZeeSpec шийдэл: ADR lifecycle (workflow/09)
 
 ## 3. ZeeSpec гэж яг юу вэ?
 
-### Бүрэлдэхүүн (90 файл, 4 хэсэг)
+### Бүрэлдэхүүн (4 үндсэн хэсэг)
 
 ```
 ZeeSpec package
@@ -542,13 +542,13 @@ Live demo хүсэх бол: Tier 0 Lite модуль 2 цагийн дотор 
 | v2.9 | 2026-05 | Code Drift + ADR Lifecycle |
 | **v3.0** | **2026-05** | **3-reviewer findings + Adoption Guide + Anthropic integration** |
 
-90 файл; ~50,000 мөр; 10 git commit (initial + 9 versions).
+~100+ файл (өсөн нэмэгддэг тул яг тоог энд хатуугаар бичээгүй — drift-аас сэргийлэв).
 
 ---
 
 ## 16. Resources
 
-- **Local repo:** `/Users/batzaya/Workspace/zeespec-methodology`
+- **Local repo:** энэ package-ийн checkout (`.../zeespec-methodology`)
 - **Core README:** `specs/README.md`
 - **Full methodology:** `specs/METHODOLOGY.md`
 - **AI agent entry:** `specs/workflow/00-START-HERE.md`

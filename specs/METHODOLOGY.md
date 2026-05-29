@@ -1,14 +1,14 @@
 ---
 doc: METHODOLOGY
 type: framework-spec
-version: 2.3.0
+version: 3.0.0
 status: stable
-last_updated: 2026-05-18
+last_updated: 2026-05-29
 ---
 
 # ZeeSpec — Full Methodology Specification
 
-> Version 2.3 (post-pilot, language-agnostic, jurisdiction-neutral). Read once; reference forever.
+> Version 3.0 (post-pilot, language-agnostic, jurisdiction-neutral). Read once; reference forever.
 
 ---
 
@@ -263,28 +263,27 @@ When authoring a new ZeeSpec, apply these 5 verification reflexes from the start
 
 ## 9. Gravity (HW) Constraints — The Crown Jewel
 
-`gravity.md` is the most distinctive ZeeSpec file. It captures **cross-cutting hardwiring** — invariants that span multiple dimensions:
+`gravity.md` is the most distinctive ZeeSpec file. It captures **cross-cutting hardwiring** — constraints that span multiple dimensions.
+
+**It is a *composite* (Zachman 3.0), not a second copy of the rules.** Per the normalization rule *"one fact, one cell,"* a gravity entry **points to** the primitive cells that own the rule; it never restates the rule's text, Status tag, or `file:line`. Those live in the primitive (`what.md` INV-, `how.md` ALG-, `who.md` SOD-, …). A gravity entry holds only **composite-only** content — which cells it crosses + the failure mode if they disagree:
 
 ```markdown
-### HW-NOTIF-01: Per-channel Notification row ⇄ Audit invariant ⇄ Multi-channel fan-out
+### HW-NOTIF-01: Per-channel Notification row ⇄ audit ⇄ multi-channel fan-out
 
-**Statement:** Every channel that passes eligibility gates MUST write a Notification row.
-
-**Crosses:** what (INV-NOTIF-13), how (§ 2 step 3), who (A-NOTIF-02)
-
-**Failure mode if violated:** Per-channel audit trail lost.
-
-**Codification:** ADR-NOTIF-009. Verified at NotificationService::send line 116-139.
+- **Crosses:** what.md/INV-NOTIF-13 · how.md/ALG-NOTIF-SEND-01 · who.md/A-NOTIF-02
+- **Why it's gravity (failure mode if the crossed cells disagree):** a channel passes eligibility but no row is written → per-channel audit trail lost.
+- **Codified by:** ADR-NOTIF-009  (the rule's text, Status, and file:line live in INV-NOTIF-13, not here)
 ```
 
 Each HW entry:
 - Has a unique ID (`HW-MODULE-NN`)
-- Has a one-line statement
-- Lists which dimensions it crosses
-- Describes failure mode if violated
-- Cites the production code or ADR that codifies it
+- **Points to** the primitive cells it crosses (the rule's substance + Status + `file:line` live there)
+- Describes the **failure mode** if those cells disagree — the only content unique to gravity
+- Optionally names the ADR that codified the decision
 
-**Why this matters:** AI agents read each dimension file independently. Without `gravity.md`, an agent writing code that satisfies WHAT might violate HOW × WHO. The HW table is the single place where cross-cutting rules live.
+> **Normalization (v3):** Do NOT put a `**Statement:**` that restates the invariant, a `Status:` tag, or a `service.ext:NN` citation in a gravity entry — all three belong to the primitive cell, and a second copy drifts independently. An entry that merely duplicates another HW becomes an explicit **alias pointer**, not a restatement. (See `ZACHMAN-ALIGNMENT.md` Tier 1·1A.)
+
+**Why this matters:** AI agents read each dimension file independently. Without `gravity.md`, an agent writing code that satisfies WHAT might violate HOW × WHO. The HW index is the single place where cross-cutting relationships are pointed to — and because it only points, it cannot drift out of sync with the rules it references.
 
 ## 10. The Bidirectional Cross-Link Rule
 

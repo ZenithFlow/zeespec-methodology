@@ -13,7 +13,7 @@ addresses: Reviewer C feedback on team-size assumptions; gap between Tier 0 Lite
 
 > **1 хүн ZeeSpec-ийг бүгдийг хийх workflow.** Methodology нь 5-20 хүний team-д зориулагдсан гэж үздэг (compliance officer + tech lead + controller + reviewer + champion). Solo dev-д эдгээр role-ыг **AI agent + хатуу discipline + tooling-ээр орлуулна**.
 >
-> Realistic-ийг хадгалъя: solo dev бүх 90 файлыг бичих хэрэгтэйгүй. **AI agent + 1-2 critical модуль + хатуу review discipline** хангалттай.
+> Realistic-ийг хадгалъя: solo dev бүх файлыг бичих хэрэгтэйгүй. **AI agent + 1-2 critical модуль + хатуу review discipline** хангалттай.
 
 ## Solo dev-ийн challenge
 

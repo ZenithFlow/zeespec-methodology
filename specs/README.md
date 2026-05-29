@@ -1,9 +1,9 @@
 ---
 doc: README
 type: package-overview
-version: 2.5.0
+version: 3.0.0
 status: stable
-last_updated: 2026-05-19
+last_updated: 2026-05-29
 ---
 
 # ZeeSpec Methodology — Standalone Package

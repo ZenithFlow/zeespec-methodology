@@ -11,112 +11,95 @@ last_updated: YYYY-MM-DD
 
 > Cross-cutting constraints that span dimensions. Code MUST honor these regardless of what other dimension files say.
 
-## §1. Core hardwiring (HW-GL-*)
+> 🧭 **NORMALIZATION RULE (ZeeSpec v3 · Zachman 3.0 "one fact, one cell"):**
+> Each HW below is a **pointer (composite)**, not a restatement. The rule's *substance, Status tag, and
+> `file:line`* live in the primitive cell named under **Crosses** (`what.md` INV-GL-, `how.md` ALG-GL-,
+> `who.md` SOD-GL-, …). A gravity entry holds only **composite-only** content: the cells it crosses +
+> the **failure mode if those cells disagree**. (Rationale: `specs/ZACHMAN-ALIGNMENT.md` Tier 1·1A.)
+
+## §1. Core hardwiring (HW-GL-*) — pointer entries
+
+> Status/Source/Test are read from the primitive cells (e.g. `what.md/INV-GL-01`), not duplicated here.
 
 ### HW-GL-01 — Debit = Credit per journal (base currency)
-**Status:** ✅ IMPL
-**Source:** TRIGGER `tg_journal_line_balance_check` on journal_line; AccountingService.postJournal pre-check.
-**Test:** Random-journal property test rejects imbalanced inputs.
-**Dimension links:** what.md INV-GL-01 + INV-GL-09; how.md ALG-GL-POST-01.
+- **Crosses:** `what.md/INV-GL-01` · `what.md/INV-GL-09` · `how.md/ALG-GL-POST-01`
+- **Why it's gravity:** if WHAT (balanced lines) and HOW (posting path) disagree, an imbalanced journal can post → trial balance and every downstream report are wrong.
 
 ### HW-GL-02 — Journal immutability (no UPDATE, no DELETE)
-**Status:** ✅ IMPL
-**Source:** GRANT statements REVOKE UPDATE, DELETE on journal + journal_line from application_user; service interface has no update/delete methods.
-**Test:** Direct SQL `UPDATE journal SET status = 'foo' WHERE ...` fails with permission denied.
-**Dimension links:** what.md INV-GL-02; how.md (ALG-GL-REVERSE-01 as the corrective pattern).
+- **Crosses:** `what.md/INV-GL-02` · `how.md/ALG-GL-REVERSE-01` (the corrective pattern)
+- **Why it's gravity:** if a posted journal is mutated instead of reversed, the audit trail is falsified and the reversal pattern is bypassed.
 
 ### HW-GL-03 — Period state machine forward-only (except REOPEN)
-**Status:** ✅ IMPL
-**Source:** PeriodCloseService guards transitions; DB CHECK trigger on fiscal_period.status.
-**Dimension links:** what.md INV-GL-05; how.md ALG-GL-PERIOD-CLOSE-01; who.md SOD-GL-03.
+- **Crosses:** `what.md/INV-GL-05` · `how.md/ALG-GL-PERIOD-CLOSE-01` · `who.md/SOD-GL-03`
+- **Why it's gravity:** if timing (period state) and authority (who may reopen) disagree, a closed period is silently posted to → financials restated without trace.
 
 ### HW-GL-04 — Atomic posting (all-lines-or-none)
-**Status:** ✅ IMPL
-**Source:** AccountingService.postJournal wraps all INSERTs + audit_log + outbox in single DB transaction.
-**Test:** Force INSERT failure on line 3 of 5; verify lines 1-2 not present after rollback.
-**Dimension links:** how.md ALG-GL-POST-01; where.md F-GL-W-01.
+- **Crosses:** `how.md/ALG-GL-POST-01` · `where.md/F-GL-W-01`
+- **Why it's gravity:** if the transaction boundary fails, a journal can persist some lines without its audit-log/outbox rows → unbalanced AND untraceable.
 
 ### HW-GL-05 — Outbox pattern for async events
-**Status:** ✅ IMPL
-**Source:** outbox_event table written in same TX as journal; separate worker drains.
-**Reason:** Guarantees at-least-once delivery without distributed transactions.
-**Dimension links:** where.md S-GL-08; when.md T-GL-01.
+- **Crosses:** `where.md/S-GL-08` · `when.md/T-GL-01`
+- **Why it's gravity:** without same-TX outbox, an event is lost or double-sent → downstream modules diverge from the GL of record (no 2PC to fall back on).
 
 ### HW-GL-06 — Operator identity captured (no sentinels)
-**Status:** ⚠️ HISTORICAL: 🚧 NOT-ENFORCED in pilot (createdBy:0 anti-pattern across 20+ sites). MUST be ✅ IMPL after spawn-chip remediation.
-**Source:** DB CHECK(created_by > 0); FK to users; service injects authenticated session.
-**Test:** INSERT with created_by = 0 fails with CHECK violation.
-**Dimension links:** what.md INV-GL-07; who.md § 6.
+- **Crosses:** `what.md/INV-GL-07` · `who.md` §6
+- **Why it's gravity:** if identity is not threaded from WHO into the WHAT row written, audit answers "user #0" → "who posted X?" is unanswerable → regulator inspection fails.
+- ⚠️ **Pilot status:** HISTORICAL — was 🚧 NOT-ENFORCED (`createdBy:0` across 20+ sites). Authoritative status: see `what.md/INV-GL-07`.
 
-### HW-GL-07 — All money math via Money type
-**Status:** ✅ IMPL (verify via codebase grep)
-**Source:** No `float` / `double` / `Number` in monetary code paths; all amounts go through Money / Decimal / BigDecimal.
-**Test:** Grep audit on production code.
-**Dimension links:** what.md (NUMERIC(18,4) columns); accounting-principles.md HW-ACC-20.
+### HW-GL-07 — All money math via Money/Decimal type
+- **Crosses:** `what.md` (NUMERIC(18,4) columns) · `principles/accounting-principles.md/HW-ACC-20`
+- **Why it's gravity:** a single `float`/`double` in any monetary path lets rounding drift accumulate across the system → reconciliation breaks far from the cause.
 
 ### HW-GL-08 — FX rate captured at posting time
-**Status:** ✅ IMPL
-**Source:** journal_line.fx_rate + fx_rate_date + fx_rate_source columns filled by postJournal.
-**Dimension links:** what.md INV-GL-09; how.md ALG-GL-POST-01.
+- **Crosses:** `what.md/INV-GL-09` · `how.md/ALG-GL-POST-01`
+- **Why it's gravity:** if the FX rate is not snapshotted at posting, base amounts become non-reproducible → restatement risk on every multi-currency journal.
 
-### HW-GL-09 — Retention enforcement: no hard DELETE on retained tables
-**Status:** ⚠️ HISTORICAL: 🚧 BROKEN in pilot (BackfillGeneralLedgerCommand executed raw DELETE in dev). MUST be ✅ IMPL.
-**Source:** REVOKE DELETE on journal_line, audit_log, account_balance_snapshot from application_user; archive pattern for cold data.
-**Test:** DELETE FROM journal_line fails with permission denied.
-**Dimension links:** why.md R-GL-01; regulatory-compliance.md HW-FRC-09; financial-anti-patterns.md #14.
+### HW-GL-09 — Retention: no hard DELETE on retained tables
+- **Crosses:** `why.md/R-GL-01` · `principles/regulatory-compliance.md/HW-FRC-09` · `principles/financial-anti-patterns.md` #14
+- **Why it's gravity:** a destructive command on a retention-required table violates statute system-wide, regardless of how correct the posting logic is.
+- ⚠️ **Pilot status:** HISTORICAL — was 🚧 BROKEN (`BackfillGeneralLedgerCommand` raw DELETE in dev). Authoritative status: see the primitive.
 
 ### HW-GL-10 — Segregation of Duties enforced at service layer
-**Status:** ✅ IMPL
-**Source:** AccountingService.postJournal (above threshold) checks approver_id != initiator_id; reverseJournal checks actor_id != original.posted_by; PeriodCloseService.reopenPeriod checks actor != closer.
-**Test:** Same-actor approval call returns SoDViolation error.
-**Dimension links:** who.md SOD-GL-01/02/03; financial-anti-patterns.md (relevant).
+- **Crosses:** `who.md/SOD-GL-01` · `who.md/SOD-GL-02` · `who.md/SOD-GL-03`
+- **Why it's gravity:** if any one action path lets a single actor initiate + approve + execute, the fraud control is bypassed no matter what the data model allows.
 
 ### HW-GL-11 — Leaf-account posting only
-**Status:** ✅ IMPL
-**Source:** AccountingService.postJournal pre-check + DB CHECK constraint on journal_line.account_id FK.
-**Dimension links:** what.md INV-GL-13/16.
+- **Crosses:** `what.md/INV-GL-13` · `what.md/INV-GL-16`
+- **Why it's gravity:** posting to an intermediate (roll-up) node double-counts balances up the hierarchy.
 
 ### HW-GL-12 — Multi-currency: base sums balance
-**Status:** ✅ IMPL
-**Source:** Trigger on journal_line aggregates base_amount; same INV-GL-01 logic.
-**Dimension links:** what.md INV-GL-09; how.md ALG-GL-POST-01.
+- **Crosses:** `what.md/INV-GL-09` · `how.md/ALG-GL-POST-01`
+- **Why it's gravity:** if base-currency aggregation and the balance rule disagree, a multi-currency journal looks balanced per-line but unbalances the trial balance.
 
 ### HW-GL-13 — Account type immutable after first transaction
-**Status:** ✅ IMPL
-**Source:** TRIGGER `tg_account_type_immutable` on account UPDATE.
-**Test:** UPDATE account SET account_type = 'X' WHERE id IN (accounts with journal_line) fails.
-**Dimension links:** what.md INV-GL-17.
+- **Crosses:** `what.md/INV-GL-17`
+- **Why it's gravity:** changing an account's type after it has postings silently reclassifies historical statements.
 
-### HW-GL-14 — Period state transitions forward-only
-**Status:** ✅ IMPL (same as HW-GL-03)
-**Dimension links:** accounting-principles.md HW-ACC-14.
+### HW-GL-14 — *(alias)* Period transitions forward-only
+- **Alias of `HW-GL-03`** — not a separate constraint. See HW-GL-03. *(ID retained for cross-refs in `principles/accounting-principles.md/HW-ACC-14`.)*
 
 ### HW-GL-15 — Reversing entry uniqueness
-**Status:** ✅ IMPL
-**Source:** DB UNIQUE(reverses_journal_id) on journal.
-**Dimension links:** what.md INV-GL-08/15.
+- **Crosses:** `what.md/INV-GL-08` · `what.md/INV-GL-15`
+- **Why it's gravity:** without a uniqueness guard a journal can be reversed twice → contra entries duplicated, balances doubly corrected.
 
-### HW-GL-16 — Atomic posting (see HW-GL-04)
-(Duplicate of HW-GL-04; kept for cross-reference numbering compatibility with financial-invariants-catalog.md.)
+### HW-GL-16 — *(alias)* Atomic posting
+- **Alias of `HW-GL-04`** — not a separate constraint. See HW-GL-04. *(ID retained for cross-refs in `principles/financial-invariants-catalog.md`.)*
 
-### HW-GL-17 — Account hierarchy integrity
-**Status:** ✅ IMPL
-**Source:** FK account.parent_id → account.id; no cycles enforced via WITH RECURSIVE check or app-layer.
+### HW-GL-17 — Account hierarchy integrity (no cycles)
+- **Crosses:** `what.md` (account.parent_id FK)
+- **Why it's gravity:** a cycle in the account tree makes roll-ups loop or mis-total.
 
 ### HW-GL-18 — Subledger ↔ GL reconciliation daily
-**Status:** ✅ IMPL
-**Source:** ReconciliationService.reconcileSubledger called by EOD job for each (subledger, control_account) pair; breaks → reconciliation_break table + alert.
-**Dimension links:** what.md INV-GL-18; when.md schedule; financial-invariants-catalog.md INV-FIN-24.
+- **Crosses:** `what.md/INV-GL-18` · `when.md` (EOD schedule) · `principles/financial-invariants-catalog.md/INV-FIN-24`
+- **Why it's gravity:** if a subledger diverges from its control account and nothing reconciles them on schedule, the books are misstated undetected.
 
 ### HW-GL-19 — Audit log append-only + complete
-**Status:** ✅ IMPL
-**Source:** REVOKE UPDATE, DELETE on audit_log; every service mutation appends an audit_log row inside the same TX; entity changes captured with before/after JSON.
-**Dimension links:** what.md § 1.5; financial-invariants-catalog.md HW-FIN-03.
+- **Crosses:** `what.md` §1.5 (AuditLog) · `principles/financial-invariants-catalog.md/HW-FIN-03`
+- **Why it's gravity:** if any mutation path skips the same-TX audit append (or audit rows are mutable), the forensic trail is incomplete exactly where it matters.
 
 ### HW-GL-20 — Correlation ID end-to-end
-**Status:** ✅ IMPL (verify via tracing)
-**Source:** Middleware extracts/generates correlation_id; service layer propagates; every audit + outbox + log carries it.
-**Dimension links:** financial-invariants-catalog.md HW-FIN-04.
+- **Crosses:** `principles/financial-invariants-catalog.md/HW-FIN-04`
+- **Why it's gravity:** without a propagated correlation_id, a single request cannot be traced across audit + outbox + logs.
 
 ## §2. Inherited hardwiring (from upstream modules)
 
@@ -176,6 +159,9 @@ Pattern reusable in wallet, settlement, KYC modules.
 
 ## §6. Status summary
 
-**Section overview (YYYY-MM-DD):** ✅ N IMPL · 🟡 M PARTIAL · 🚧 K BROKEN · 🚧 J NOT-ENFORCED out of 20 HW constraints — fill after R3.
+**Section overview (YYYY-MM-DD):** status is **read from the primitive cells** (e.g. `what.md/INV-GL-*`),
+not stored here. Generate a roll-up from the primitives after R3 if a dashboard is needed —
+do not hand-maintain status in this file (it would denormalize and drift).
 
-Note: HW-GL-06 + HW-GL-09 are flagged HISTORICAL in this template because the pilot revealed them BROKEN. Your project may have a clean slate.
+Note: HW-GL-06 + HW-GL-09 carry a ⚠️ pilot-HISTORICAL flag (were BROKEN / NOT-ENFORCED in the pilot).
+Your project may have a clean slate. HW-GL-14 + HW-GL-16 are **alias pointers**, not separate constraints.

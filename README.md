@@ -12,7 +12,7 @@ zeespec-methodology/
     ├── README.md                   ← package overview + quick start
     ├── METHODOLOGY.md              ← full framework spec (1.5h read)
     ├── PORTING-GUIDE.md            ← adapt to your stack
-    ├── workflow/                   ← 7 step-by-step guides (00-START-HERE first)
+    ├── workflow/                   ← workflow guides 00–12 (00-START-HERE first; full list in specs/README.md)
     ├── templates/_template/        ← empty 10-file ZeeSpec scaffold
     └── checklists/                 ← 5 reference checklists
 ```

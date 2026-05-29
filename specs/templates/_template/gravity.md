@@ -9,16 +9,25 @@ last_updated: YYYY-MM-DD
 # MODULE_NAME — GRAVITY (Cross-dimension Hardwiring)
 
 > Constraints that arise from the **intersection** of two or more dimensions. AI hallucinates the most when these are unspecified.
->
-> **Each constraint MUST be enforced** by code citing its ID — only for ✅ IMPL items. 🚧 DESIGN items require implementation FIRST (see related Gap-MOD_PREFIX-XX).
 
-## §0. Status overview
+> 🧭 **NORMALIZATION RULE (ZeeSpec v3 · Zachman 3.0 "one fact, one cell"):**
+> `gravity.md` is a **composite** — it *points to* primitive cells, it does **not restate** them.
+> The rule's *substance, Status tag (✅/🟡/🚧), and `file:line`* live in the primitive cell
+> (`what.md` INV-, `how.md` ALG-/P-, `who.md` SOD-, `when.md` T-, `where.md` S-). A gravity entry
+> holds only **composite-only** content: which cells it crosses + the **failure mode if those cells
+> disagree**. If you catch yourself copying an invariant's text or its Status here — stop, move it to
+> the primitive and link instead. Restated facts drift independently; pointers don't.
+> (Rationale + tiers: `specs/ZACHMAN-ALIGNMENT.md` Tier 1·1A.)
 
-| HW-MOD_PREFIX ID | Title | Status | Reliability | Notes |
-|------------------|-------|:------:|:-----------:|-------|
-| HW-MOD_PREFIX-01 | [title] | ✅ IMPL / 🟡 PARTIAL / 🚧 DESIGN | High / Medium / Low | [evidence file:line] |
+## §0. Hardwiring index (pointers — status NOT stored here)
 
-**Summary:** ✅ X IMPL · 🟡 Y PARTIAL · 🚧 Z DESIGN out of N hardwiring constraints.
+> Status is **owned by the primitive cells** and read from there. It is intentionally NOT a column in
+> this table — duplicating it would denormalize and drift. This index only maps each HW → the cells it
+> crosses. For a status roll-up, read the primitives (or generate it; never hand-maintain it here).
+
+| HW-MOD_PREFIX ID | Title | Crosses (primitive cells own substance + status) |
+|------------------|-------|---------------------------------------------------|
+| HW-MOD_PREFIX-01 | [title] | `what.md/INV-MOD_PREFIX-NN` · `how.md/ALG-MOD_PREFIX-NAME` · `who.md/…` |
 
 ## §1. 6×6 dimension matrix
 
@@ -36,20 +45,25 @@ WHY       ●●   ●●●   ●●     ●●●   ●●●   ●
 **Hot intersections** (●●● critical):
 - [List the 3-5 critical pairs for this module]
 
-## §2. Own hardwiring (HW-MOD_PREFIX)
+## §2. Own hardwiring (HW-MOD_PREFIX) — pointer entries
+
+> **Format:** each entry = **pointers + composite-only failure mode**. No restated rule text, no Status
+> tag, no `file:line` — those live in the primitive cells named under **Crosses**.
 
 ### HW-MOD_PREFIX-01: [Constraint name]
 
-- **Dimensions:** WHAT × HOW × WHO (or whichever applies)
-- **Rule:** [one-line enforceable statement]
-- **Implementation status:** ✅ IMPL · Reliability: High
-- **Reality:** [what production actually does]
-- **Failure mode if violated:** [what breaks]
-- **Codification:** [ADR-MOD_PREFIX-NNN] + verified at `path/file.ext:NN-MM`
+- **Crosses:** `what.md/INV-MOD_PREFIX-NN` · `how.md/ALG-MOD_PREFIX-NAME` · `who.md/A-MOD_PREFIX-NN`
+- **Why it's gravity (failure mode if the crossed cells disagree):** [the system-wide consequence when WHAT is satisfied but HOW/WHO is not — this is the ONLY substance unique to gravity]
+- **Codified by:** [ADR-MOD_PREFIX-NNN] *(pointer only; the ADR + code proof live with the primitive)*
 
 ### HW-MOD_PREFIX-02: [Next constraint]
 
-[Same pattern]
+[Same pointer pattern]
+
+> ❌ **Anti-pattern (denormalization):** an entry that restates the rule ("Debit must equal Credit…"),
+> carries its own `Status: ✅ IMPL`, or cites `service.ext:NN`. All three belong to the primitive.
+> A gravity entry that duplicates another HW (e.g. "same as HW-X") is not a constraint —
+> make it an explicit **alias pointer**, not a restatement.
 
 ## §3. Downstream inheritance — modules that inherit FROM us
 
@@ -71,7 +85,8 @@ WHY       ●●   ●●●   ●●     ●●●   ●●●   ●
 
 ### NHW-MOD_PREFIX-01: [Non-rule name]
 
-[Statement of what is intentionally NOT a constraint. Helps prevent over-engineering.]
+[Statement of what is intentionally NOT a constraint. Directly fights over-engineering — it tells the
+AI/engineer NOT to add a guard that the design deliberately omits.]
 
 ## §6. Cross-cutting patterns
 
@@ -92,12 +107,12 @@ WHY       ●●   ●●●   ●●     ●●●   ●●●   ●
 ### ADR cross-refs
 - [ADR-MOD_PREFIX-NNN] — [name]
 
-### Related dimensions
-- `what.md` — INV-MOD_PREFIX-NN that each HW enforces
-- `how.md` — algorithms + processes affected
-- `who.md` — actor permissions
-- `when.md` — timing constraints
-- `where.md` — storage + tech stack
+### Related dimensions (these OWN the substance gravity points to)
+- `what.md` — INV-MOD_PREFIX-NN (each HW's data-integrity substance + Status)
+- `how.md` — ALG-/P- algorithms + processes
+- `who.md` — actor permissions + SOD-
+- `when.md` — timing constraints (T-)
+- `where.md` — storage + tech stack (S-)
 - `gaps.md` — OPEN gaps blocking HW promotion
 - `glossary.md` — term definitions
 
