@@ -286,7 +286,7 @@ grep -c "^### HW-" "$DIR/gravity.md" || echo "$DIR/gravity.md has no HW entries"
 ## FAQ
 
 **Q: Do I have to use all 10 files for every module?**
-A: No. Greenfield/Tier-0 modules can start with `CLAUDE.md + what.md + how.md` and grow.
+A: No. Greenfield / Tier-0 Lite modules can start with the 3-file Lite set `CLAUDE.md + what.md + gaps.md` (`gaps.md` keeps the AI-STOP safety) and grow.
 
 **Q: Can I split a large module into sub-modules?**
 A: Yes. Each becomes its own 10-file ZeeSpec directory. Use bidirectional cross-link rule.

@@ -349,7 +349,7 @@ Cost: ~2 FTE.
 
 ## 8. Real-world жишээ: Mongolia mutual fund pilot
 
-ZeeSpec нь **жинхэнэ pilot project дээр validate хийгдсэн**:
+ZeeSpec нь **нэг pilot project дээр туршсан (N=1 — бие даан validate хийгээгүй)**:
 
 ```
 Mongolian Mutual Fund Management System
@@ -371,6 +371,8 @@ Mongolian Mutual Fund Management System
 
 ## 9. ROI шинж тэмдэг
 
+> **N=1 caveat:** доорх тоонууд нь нэг pilot-ийн **ажиглалт** — бие даан баталгаажуулсан ROI биш. Чиглэл заасан, нотлогдоогүй.
+
 ### Investment
 
 | Tier | Initial | Ongoing |
@@ -391,7 +393,7 @@ AI agent code quality:                   30-50% fewer revision cycles
 Cross-team knowledge transfer:           Spec нь canonical source; no Slack archeology
 ```
 
-ROI breakeven: **6 сар** (one bug + one gap = methodology cost-ийг буцааж зөвлөнө).
+ROI breakeven: **~6 сар** (pilot ажиглалт; one bug + one gap = methodology cost — бие даан батлагдаагүй).
 
 ---
 
@@ -510,7 +512,7 @@ Agent өөрөө code уншиж, drift findings produce хийж, recommendatio
 >
 > Гол үнэ цэн нь: AI агент зөв код бичнэ + drift автоматаар илрэнэ + WHY нь жилийн дараа ч мэдэгдэхээр баримтжсан байна.
 >
-> Финансад validate хийсэн (pilot project: 177 findings, 4 production bugs); healthcare / government / privacy зэрэгт adoption guide-д тайлбарласан.
+> Санхүүд нэг pilot дээр туршсан (N=1; 177 findings, 4 production bugs — ажиглалт, validate биш); healthcare / government / privacy зэрэгт adoption guide-д тайлбарласан.
 
 ---
 

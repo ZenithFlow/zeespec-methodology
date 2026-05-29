@@ -70,9 +70,9 @@ Before you adopt ZeeSpec, decide whether it's actually appropriate for your proj
 
 ZeeSpec can be adopted at three depths. **Default to Tier A (Lite) and promote deliberately** — starting every module at full Tier 1 is the most common over-engineering trap (see `ZACHMAN-ALIGNMENT.md` Tier 0 + 2B). Pick the depth the module actually earns:
 
-### Tier A — Lite (1-2 modules; quick start)
+### Tier A — Pilot scope (1-2 modules; quick start)
 
-Use the 10-file format for 1-2 high-risk modules. Run B1 + R3 manually. Skip R4/R5/R6 agents. Skip overlays. No CI integration.
+Scope ZeeSpec to 1-2 high-risk modules (each starting at the 3-file Tier 0 Lite, then promoting to the full 10-file format). Run B1 + R3 manually. Skip R4/R5/R6 agents. Skip overlays. No CI integration.
 
 - Cost: 1 engineer × 1 week initial + 2 hours/month per module ongoing
 - Best for: pilot to evaluate ZeeSpec; small team with 1-2 critical modules

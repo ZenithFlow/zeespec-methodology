@@ -55,7 +55,7 @@ last_updated: YYYY-MM-DD
 - **Why it's gravity:** if the FX rate is not snapshotted at posting, base amounts become non-reproducible → restatement risk on every multi-currency journal.
 
 ### HW-GL-09 — Retention: no hard DELETE on retained tables
-- **Crosses:** `why.md/R-GL-01` · `principles/regulatory-compliance.md/HW-FRC-09` · `principles/financial-anti-patterns.md` #14
+- **Crosses:** `why.md/R-GL-01` · `principles/regulatory-compliance.md/HW-REG-09` · `principles/financial-anti-patterns.md` #14
 - **Why it's gravity:** a destructive command on a retention-required table violates statute system-wide, regardless of how correct the posting logic is.
 - ⚠️ **Pilot status:** HISTORICAL — was 🚧 BROKEN (`BackfillGeneralLedgerCommand` raw DELETE in dev). Authoritative status: see the primitive.
 

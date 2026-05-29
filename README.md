@@ -1,6 +1,6 @@
 # ZeeSpec Methodology
 
-> **A portable, AI-friendly specification methodology** based on the 6-dimension Zachman framework (1987), adapted for modern AI-assisted development. Validated across 5 production modules in a Mongolian Mutual Fund Management System — surfaced **177 findings including 4 real production bugs fixed + 6 queued + 22 compliance gaps filed**.
+> **A portable, AI-friendly specification methodology** based on the 6-dimension Zachman framework (1987), adapted for modern AI-assisted development. Piloted on 5 production modules of a Mongolian Mutual Fund Management System (single pilot, N=1) — which surfaced **177 findings including 4 real production bugs fixed + 6 queued + 22 compliance gaps filed**.
 
 ## Where everything lives
 

@@ -422,4 +422,4 @@ Most modules sit at 🟡 Design-intent for an extended period — that's healthy
 ---
 
 **License:** MIT
-**Validated:** Across 5 production modules in compliance-heavy financial domain
+**Piloted (N=1):** Across 5 production modules in a compliance-heavy financial domain (single-pilot observations — see § 14)

@@ -101,6 +101,8 @@ grep -rl 'MOD_PREFIX' . | xargs sed -i.bak "s/MOD_PREFIX/$MOD_PREFIX/g"
 find . -name '*.bak' -delete
 ```
 
+> **Default is Tier 0 Lite (3 files), not all 10.** This greenfield walk-through authors the **full** 10-file spec for ONE critical module to reach Tier 1. For most modules, start with the 3-file Tier 0 Lite (`CLAUDE.md + what.md + gaps.md`, see `07-zeespec-lite-tier-0-fasttrack.md`) and promote only those that earn it. Note: "Tier 0" below = the *Drafting* maturity tier (all 10 drafted, pre-review) — distinct from "Tier 0 **Lite**" (3-file reduced scope).
+
 ### Day 2-3: Fill in dimensions
 
 In this order:
