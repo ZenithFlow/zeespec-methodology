@@ -64,15 +64,12 @@ For each architectural finding, add or update a HW entry:
 ```markdown
 ### HW-MOD-NN: [new constraint]
 
-- **Dimensions:** [WHICH × DIMENSIONS]
-- **Rule:** [one-line statement]
-- **Implementation status:** [✅/🟡/🚧]
-- **Reality:** [what production actually does]
-- **Failure mode:** [if violated]
-- **Codification:** [ADR / file:line / spawn chip]
+- **Crosses:** [primitive cells that own the rule + Status + file:line — `what.md/INV-…`, `how.md/ALG-…`, `who.md/SOD-…`]
+- **Why it's gravity:** [failure mode if those cells disagree — the only content unique to gravity]
+- **Codified by:** [ADR pointer, optional]
 ```
 
-Update the §0 Status overview table to include new HW entries.
+Pointer-only — one fact, one cell (see METHODOLOGY § 9). Do NOT restate the rule, a Status tag, or a `file:line` here; those live in the primitive cell. Add the HW to the § 0 hardwiring index (HW → crossed cells; no status column). The R5/R3 normalization lint flags violations.
 
 ### Step 4: Update what.md (15 min)
 
