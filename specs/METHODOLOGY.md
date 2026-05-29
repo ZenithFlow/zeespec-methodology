@@ -269,7 +269,7 @@ Async transports
 
 (Layer 2 names actual frameworks, libraries, classes. Layer 1 above does not.)
 
-## 8. The 5 R6 Reflexes (R6-aware authoring)
+## 8. The 5 Authoring Reflexes
 
 When authoring a new ZeeSpec, apply these 5 verification reflexes from the start:
 
@@ -350,7 +350,7 @@ This separates **spec authoring** from **production bug fixing** — keeps each 
 
 | Tier | Definition | Promotion requirements |
 |------|------------|------------------------|
-| 🔵 Drafting | Initial 10-file authoring; not yet verified | None |
+| 🔵 Drafting | Initial authoring (Tier 0 Lite or full 10-file); not yet verified | None |
 | 🟡 Design-intent | B1 + R3 done; R1+R2 may have run; gaps tracked | Author + 1 reviewer |
 | 🟢 Active | All P0 gaps resolved; production-validated; periodic R3 re-run | Tier 1 promotion + ≥1 quarter stable |
 | 📦 Archive | Deprecated module; kept for reference | Module sunset decision |
@@ -392,7 +392,7 @@ Most modules sit at 🟡 Design-intent for an extended period — that's healthy
 - **R1 reviewer** — independent algorithm + race condition + invariant correctness reviewer; runs in parallel with R2.
 - **R2 reviewer** — independent compliance + audit + cross-module reviewer; runs in parallel with R1.
 - **R1+R2 parallel** — both agents dispatched simultaneously; results merged after they finish.
-- **R6 reflexes** — 5 verification checks applied during authoring (entity, method, invariant, cross-link, logging) to prevent the most common drift classes.
+- **Authoring reflexes** — 5 verification checks applied during authoring (entity, method, invariant, cross-link, logging) to prevent the most common drift classes. *(Distinct from the **R6 ADR-curator agent** — § 3b; the "R6" name there is unrelated.)*
 
 **Artifacts + concepts:**
 - **Spawn task chip** — production bug delegated to separate session (self-contained prompt with file paths + acceptance criteria)

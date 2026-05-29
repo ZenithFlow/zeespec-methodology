@@ -114,6 +114,8 @@ last_updated: YYYY-MM-DD
 
 ## §3. Downstream-inherited (modules depending on GL)
 
+> *Illustrative:* this shows the downstream-inheritance PATTERN. Not all named consumers are authored as modules in this reference overlay (only `wallet-settlement` / `kyc-aml` / `lending` stubs exist). Per the bidirectional cross-link rule, a real consumer MUST reciprocate the inherited HW in its own `gravity.md` § "From general-ledger".
+
 ### `wallet` inherits
 - HW-GL-18 (subledger reconciliation)
 - HW-GL-04 (atomic posting via postJournal)

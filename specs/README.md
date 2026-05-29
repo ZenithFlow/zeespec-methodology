@@ -118,7 +118,7 @@ zeespec-methodology/specs/
 │   ├── 07-orchestration-matrix.md  — Multi-role handoff + panel + parallel dispatch
 │   └── 08-limitations-and-escalation.md — Honest limits + when to escalate to humans
 └── overlays/
-    └── finance-accounting/         — domain-specialized reference example (v0.4.0)
+    └── finance-accounting/         — domain-specialized reference example (v0.1.0)
         ├── README.md               — how to apply the overlay
         ├── principles/             — accounting + regulatory + invariants + anti-patterns + severity (5 files)
         ├── modules/                — 4 pre-filled module templates
@@ -137,7 +137,7 @@ Domain-specialized add-ons that layer additional invariants, anti-patterns, seve
 
 | Overlay | Status | When to use |
 |---------|--------|-------------|
-| **finance-accounting** v0.4.0 | 🧪 reference example | Regulated financial services (mutual funds, brokerages, payments, custodians, **NBFI lending**). Double-entry + IFRS-aware + multi-jurisdiction compliance (EU/US/UK/SG/JP/IN/HK/AU/MN). Modules: GL, wallet-settlement, KYC/AML, lending. 4 worked R4 research examples showing the methodology in action. See `overlays/finance-accounting/README.md`. |
+| **finance-accounting** v0.1.0 | 🧪 reference example | Regulated financial services (mutual funds, brokerages, payments, custodians, **NBFI lending**). Double-entry + IFRS-aware + multi-jurisdiction compliance (EU/US/UK/SG/JP/IN/HK/AU/MN). Modules: GL, wallet-settlement, KYC/AML, lending. 4 worked R4 research examples showing the methodology in action. See `overlays/finance-accounting/README.md`. |
 
 > **Note on overlays:** overlays are **reference examples** of how to apply the methodology to a specific domain. The **methodology itself** (core workflow + R4 research at `workflow/07-r4-regulatory-research/`) is the primary deliverable; overlays show it working in practice.
 

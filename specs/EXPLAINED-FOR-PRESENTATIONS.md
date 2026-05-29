@@ -109,16 +109,17 @@ ZeeSpec package
 │   ├── 08-code-drift       — DRIFT management (6 sub-files)
 │   ├── 09-adr-lifecycle    — ADR төрөл (6 sub-files)
 │   ├── 10-adoption-guide   — ORGANIZATIONAL adoption (8 sub-files)
-│   └── 11-anthropics-plugin — anthropics/financial-services integration
+│   ├── 11-anthropics-plugin — anthropics/financial-services integration
+│   └── 12-agentic-role-replacement — 6 human roles → agent (coverage + limits)
 │
-├── Checklists (5 файл)
+├── Checklists (6 файл)
 │   ├── anti-patterns       — 13 зөрчил pattern
 │   ├── severity-matrix     — P0/P1/P2/P3 калибрац
 │   ├── status-tags         — ✅/🟡/🚧 conventions
 │   ├── invariant-numbering — ID conventions
 │   └── cross-link-bidirectional — модуль хоорондын link
 │
-└── Overlays (29 файл)
+└── Overlays (finance-accounting жишээ)
     └── finance-accounting  — Санхүүгийн домэйн жишээ
         ├── principles      — Double-entry + IFRS + AML
         ├── modules         — GL, Wallet, KYC, Lending
@@ -543,6 +544,7 @@ Live demo хүсэх бол: Tier 0 Lite модуль 2 цагийн дотор 
 | v2.7-v2.8 | 2026-05 | R4 promoted to core; advanced strategy |
 | v2.9 | 2026-05 | Code Drift + ADR Lifecycle |
 | **v3.0** | **2026-05** | **3-reviewer findings + Adoption Guide + Anthropic integration** |
+| v3.0.x | 2026-05-29 | Zachman alignment — gravity pointer-only normalization + self-rot drift fixes + tiers 1B/2B/3B/1C-lean/2A (see `ZACHMAN-ALIGNMENT.md`) |
 
 ~100+ файл (өсөн нэмэгддэг тул яг тоог энд хатуугаар бичээгүй — drift-аас сэргийлэв).
 
@@ -561,7 +563,7 @@ Live demo хүсэх бол: Tier 0 Lite модуль 2 цагийн дотор 
 
 ---
 
-**Бичсэн огноо:** 2026-05-18 (v3.0)
+**Бичсэн огноо:** 2026-05-18; шинэчилсэн 2026-05-29 (v3.0.x — Zachman alignment)
 **ZeeSpec version:** 3.0.0
 **License:** MIT
 **Maintainer:** batzaya (initial pilot author)
