@@ -35,7 +35,7 @@ This repo is also a **Claude Code plugin** (and its own marketplace) — the AI-
 
 ```bash
 # add this repo as a marketplace (local path now; a GitHub shorthand once pushed)
-/plugin marketplace add /absolute/path/to/zeespec-methodology   # or: batzaya16/zeespec-methodology
+/plugin marketplace add /absolute/path/to/zeespec-methodology   # or: ZenithFlow/zeespec-methodology
 /plugin install zeespec@zeespec
 ```
 

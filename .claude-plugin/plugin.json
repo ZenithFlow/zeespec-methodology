@@ -5,6 +5,6 @@
   "description": "Zachman-derived 10-file spec methodology for AI-assisted development: dimensional specs, status-tagged invariants, pointer-only gravity (cross-cutting) constraints, drift management + ADR lifecycle, and R4/R5/R6 reviewer agents. Bundles the full methodology under specs/; commands/agents reference it via ${CLAUDE_PLUGIN_ROOT}/specs.",
   "author": { "name": "batzaya" },
   "license": "MIT",
-  "homepage": "https://github.com/batzaya16/zeespec-methodology",
+  "homepage": "https://github.com/ZenithFlow/zeespec-methodology",
   "keywords": ["spec", "methodology", "zachman", "documentation", "drift", "adr", "review", "ai-agent"]
 }
