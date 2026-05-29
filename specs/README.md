@@ -203,6 +203,8 @@ find . -name '*.bak' -delete
 
 ## Cost & ROI
 
+> **N=1 caveat:** the numbers below are *observations from one pilot* (single author, single project), not independently-validated ROI — directional, not proven.
+
 - **Authoring time:** 4-8 hours per module (B1 + R3 + R1+R2 + apply)
 - **Per module ROI:**
   - Production bug avoided: typically saves 8-40 hours of debugging + customer-impact recovery

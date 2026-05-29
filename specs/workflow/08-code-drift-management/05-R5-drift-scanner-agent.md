@@ -148,6 +148,32 @@ overview tools (file tree, package structure, dependency graph if available).
 
 Report any architectural mismatch as Type 4 finding (🚨 P0 default).
 
+**Normalization lint (spec-internal — NOT spec↔code drift):**
+
+Beyond spec↔code drift, check the spec's INTERNAL normalization (Zachman Rule 3+5,
+"one fact, one cell" — see `ZACHMAN-ALIGNMENT.md` Tier 1·1A). Flag:
+
+1. **Fact duplication** — the same rule / value / ID substance stated in 2+ files
+   (e.g. an INV's text restated in `gravity.md`, or a threshold repeated in
+   `what.md` AND `how.md`). A fact must live in exactly ONE primitive cell; the
+   rest reference it.
+2. **gravity restatement** — a `gravity.md` entry carrying a `**Statement:**`, a
+   `Status:` tag, or a `file:line` citation. Gravity is a composite: it points to
+   primitives, never restates them (allowed: Crosses + failure-mode only).
+3. **Dimension leakage** — a dimension file holding content owned by another
+   (e.g. an algorithm in `what.md`; an actor permission in `how.md`).
+4. **Duplicate HW** — two HW entries stating the same constraint ("same as HW-X")
+   instead of one being an explicit alias pointer.
+
+Report format:
+| Lint type | Location(s) | Duplicated / leaked fact | Canonical home | Fix |
+|-----------|-------------|--------------------------|----------------|-----|
+
+Severity 🟡 P2 default (spec-internal, not a production risk) — but it is the
+LEADING INDICATOR of future drift (duplicated facts drift independently), so
+resolve promptly. Fix = move substance to the one primitive cell; replace each
+duplicate with a pointer / alias.
+
 **Output format:**
 
 ```markdown
@@ -165,6 +191,7 @@ Report any architectural mismatch as Type 4 finding (🚨 P0 default).
 - Type 2 (field/enum): N findings (M moderate)
 - Type 3 (behavioral): N findings (M high)
 - Type 4 (architectural): N findings (M critical)
+- Normalization lint (spec-internal): N findings
 - 🚨 P0: N | 🟠 P1: M | 🟡 P2: K | 🟢 P3: J
 
 ## Type 1 findings

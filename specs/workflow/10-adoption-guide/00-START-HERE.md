@@ -68,7 +68,7 @@ Before you adopt ZeeSpec, decide whether it's actually appropriate for your proj
 
 ## Adoption depth tiers
 
-ZeeSpec can be adopted at three depths. Pick what's appropriate for your team:
+ZeeSpec can be adopted at three depths. **Default to Tier A (Lite) and promote deliberately** — starting every module at full Tier 1 is the most common over-engineering trap (see `ZACHMAN-ALIGNMENT.md` Tier 0 + 2B). Pick the depth the module actually earns:
 
 ### Tier A — Lite (1-2 modules; quick start)
 
@@ -92,6 +92,8 @@ All phases active. All agents (R4/R5/R6) routinely dispatched. Continuous CI dri
 - Best for: compliance-heavy enterprise; multi-jurisdiction operations
 
 ## Quick-start decision tree
+
+> **Default: start at Tier 0 Lite** (3 files, ~2h) on your 1–2 highest-risk modules. This tree decides how FAR to *promote*, not whether to start heavy.
 
 ```
 Is your domain regulated?

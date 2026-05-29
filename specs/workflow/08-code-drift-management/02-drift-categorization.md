@@ -20,6 +20,8 @@ last_updated: 2026-05-18
 | **Type 3** | Behavioral drift | Code behavior diverges from spec claim | 🟠 P1 → 🚨 P0 | Spec edit + chip OR ADR |
 | **Type 4** | Architectural drift | Module structure / boundaries changed | 🚨 P0 | ADR + module re-author |
 
+> **A 5th axis — spec-internal normalization (NOT spec↔code).** The 4 types above are all *spec vs code*. A separate check is *spec vs itself*: no fact duplicated across files; `gravity.md` is pointer-only; no dimension leakage (Zachman Rule 3+5, "one fact, one cell"). Default 🟡 P2 — but it is the **leading indicator of future drift** (duplicated facts drift apart), so resolve promptly. Linted by R5 (its "Normalization lint" section) + R3. See `ZACHMAN-ALIGNMENT.md` Tier 1·1A.
+
 ## Type 1 — Citation drift
 
 ### Definition

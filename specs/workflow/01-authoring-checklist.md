@@ -9,7 +9,29 @@ last_updated: 2026-05-18
 
 # Authoring a New ZeeSpec Module (Tier 0 → Tier 1)
 
-> Total time: 4-6 hours for module + 3-4 hours for review = ~8 hours per module to reach Tier 1.
+> Full Tier 1: ~8 hours per module (4-6h author + 3-4h review). **But the default entry is Tier 0 Lite (3 files, ~2h)** — see the authoring order + Lite note below.
+
+## Authoring order — the dependency DAG (read first)
+
+The 6 dimensions are NOT independent; author them in dependency order — each needs the previous:
+
+```
+WHY ──► WHAT ──► HOW ──► { WHO , WHEN } ──► WHERE
+goals   entities  process   actors/timing    stack binding
+```
+
+- **WHY first** — you cannot state invariants before you know the goals + risks.
+- **WHAT before HOW** — algorithms operate on entities that must exist first.
+- **HOW before WHO/WHEN** — you gate and time *processes*, so they must be defined first.
+- **WHERE last** — the only stack-specific file; bind to tech after the logical design is stable.
+- **gravity / gaps / glossary / CLAUDE** — cross-cutting helpers authored alongside; CLAUDE last (it summarizes all). `gravity.md` only *points to* the dimension cells, so it can't be finished before they exist.
+
+> **Start at Tier 0 Lite, not full Tier 1.** Default entry = the 3-file Lite path
+> (`CLAUDE.md` + `what.md` + `gaps.md` — WHY+WHAT captured, gaps tracked), per
+> `10-adoption-guide/07-zeespec-lite-tier-0-fasttrack.md`. Promote to the full
+> 10-file Tier 1 **deliberately**, only for modules that earn it (money / compliance /
+> high-churn). Authoring all 10 files up front for every module is the #1
+> over-engineering trap (see `ZACHMAN-ALIGNMENT.md` Tier 0 + 2B).
 
 ## Prerequisites
 
@@ -128,18 +150,16 @@ Goal: Capture every algorithm + state machine + validation rule.
 
 > The crown jewel. Spend time here.
 
-- [ ] § 0 Status overview table (every HW-MOD-NN with Status + Reliability)
-- [ ] § 1-N Per-HW entries with:
-  - **Dimensions** (which 2+ does it cross?)
-  - **Statement** (one-line invariant)
-  - **Implementation status** (✅/🟡/🚧)
-  - **Reality** (what production actually does)
-  - **Failure mode if violated**
-  - **Codification** (which ADR / file:line)
+- [ ] § 0 Hardwiring index — HW-MOD-NN → the primitive cells it crosses (NO Status column; status is read from the primitives)
+- [ ] § 1-N Per-HW **pointer** entries (one fact, one cell — see METHODOLOGY § 9):
+  - **Crosses** — the primitive cells (`what.md/INV-…`, `how.md/ALG-…`, `who.md/SOD-…`) that own the rule's substance + Status + file:line
+  - **Why it's gravity** — the failure mode if those cells disagree (the ONLY content unique to gravity)
+  - **Codified by** — optional ADR pointer
+  - ❌ Do NOT restate the rule, a Status tag, or a file:line here — those live in the primitive (the R5/R3 normalization lint flags this)
 - [ ] § N+1 Downstream inheritance (which sibling specs inherit)
 - [ ] § N+2 Upstream gravity (what we inherit)
-- [ ] § N+3 Anti-gravity (what is NOT hardwired — explicit non-rules)
-- [ ] § N+4 Hardwiring summary table
+- [ ] § N+3 Anti-gravity (what is NOT hardwired — explicit non-rules; fights over-engineering)
+- [ ] (no separate status table — status lives in the primitives; generate a roll-up if a dashboard is needed)
 
 ## Phase 10: Author `gaps.md` (30 min)
 

@@ -50,6 +50,7 @@ source path — e.g., `backend/src/`, `src/<package>/`, `internal/<module>/`,
 6. State machine transitions — verify each transition has a service method
 7. Enum case coverage — verify caller code uses cases the way spec claims
 8. Cross-module integration points (cite file:line in sibling spec)
+9. Normalization (spec-internal) — no fact restated across files; `gravity.md` entries are pointer-only (no Statement / Status / file:line); no dimension leakage. Flag duplicates — they drift independently. (ZACHMAN-ALIGNMENT Tier 1·1A.)
 
 **Report format:** Group findings by severity:
 - 🔴 P0 CRITICAL (real production bug, false invariant, AccountStatus pattern)

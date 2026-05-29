@@ -24,6 +24,8 @@ Zachman proposed **6 dimensions** (WHAT/HOW/WHERE/WHO/WHEN/WHY) × **6 perspecti
 
 **ZeeSpec simplifies this to 6 dimensions × 1 perspective (the builder/AI agent),** plus 4 helper files (entry point, gravity, gaps, glossary) for a total of **10 files per module**.
 
+**What ZeeSpec adds to raw Zachman.** Zachman's framework is a *taxonomy* — it says what to document but (by Zachman's own description) is "not a methodology" and prescribes no process, which is its most-cited criticism. ZeeSpec supplies exactly that missing layer: a **process** (author → B1 → R3 → R1+R2 → apply), a **verification discipline** (status tags + `file:line` citations + the reviewer pipeline), and **change-handling** (drift management + ADR lifecycle). In short — **ZeeSpec = the Zachman taxonomy + the process/verification layer Zachman never provided.** (See `ZACHMAN-ALIGNMENT.md` Tier 3·3B.)
+
 ## 2. The 10-File Convention
 
 Every ZeeSpec-codified module lives in a directory:
@@ -339,7 +341,9 @@ This separates **spec authoring** from **production bug fixing** — keeps each 
 
 Most modules sit at 🟡 Design-intent for an extended period — that's healthy.
 
-## 14. Cost Per Module (measured from 5-module pilot)
+## 14. Cost Per Module (observed in one 5-module pilot — N=1)
+
+> **Honesty caveat (N=1):** these are *pilot observations* from a single author on a single project, not independently-validated ROI. Treat them as directional, not proven. Building an evidence base beyond N=1 is exactly what the metrics loop (`ZACHMAN-ALIGNMENT.md` Tier 1·1C) is for.
 
 | Module | Authoring time | Findings caught | Production bugs fixed |
 |--------|----------------|-----------------|------------------------|
