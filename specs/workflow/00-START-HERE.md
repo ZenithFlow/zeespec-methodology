@@ -39,6 +39,8 @@ applies_to: any project using ZeeSpec
 
 When picking up work on a module:
 
+> **Load just what the task needs — not all 10.** Always read `CLAUDE.md` + `gaps.md`; then load only the dimension file(s) your task touches (below). Eager-loading every file wastes context and degrades recall (context engineering) — the spec is structured so you don't have to.
+
 1. **`CLAUDE.md`** — entry point. Lists active issues, ADR table, read order, source documents.
 2. **`gaps.md`** — STOP if your task is blocked by an OPEN gap.
 3. **`why.md`** — understand the strategic context + risks before writing code.

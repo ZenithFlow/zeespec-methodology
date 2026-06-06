@@ -151,7 +151,7 @@ Add a note to the gap entry:
 
 This way, if the chip is closed but you re-author the spec later, you can find the closing PR.
 
-## Scope-discovery deferral pattern (NEW v3.2)
+## Scope-discovery deferral pattern (NEW v3.1)
 
 > Observed pattern from pilot: when starting work on a spawn chip, the investigation often reveals that the actual scope is 3-4x larger than the original chip estimated. Common cause: the original gap was filed from a surface-level review; deep investigation finds a cross-module architectural root cause.
 

@@ -20,6 +20,8 @@ R1 + R2 catch what R3 misses. R3 verifies what the spec claims; R1 + R2 look for
 
 **Critical:** R1 and R2 run in PARALLEL (single message, multiple agent invocations) — not sequential. They have independent perspectives and shouldn't bias each other.
 
+> **Scope note (see METHODOLOGY § 3c):** R1/R2 are strongest on the **structural residual** — race conditions, dead code, broken algorithms, cross-cutting incoherence — where the signal is inferable from the code itself. They are weakest at *recalling* domain/regulatory **conventions** (exact thresholds, deadlines, enum rules). Where R2 would otherwise rely on remembering such a value, prefer encoding it as a **deterministic check / BDD example** sourced from R4's citation block, enforced by the CI drift scanner (`workflow/08`, Layer 1) — don't ask the reviewer to recall it. R2 then verifies *coherence* (is the rule honored cross-module?), not the bare value.
+
 ## Inputs
 
 - 10-file ZeeSpec (R3 already applied)
@@ -201,7 +203,7 @@ Per-module, reviewer prompts can be tuned:
 
 If either agent takes >2h, something's wrong (likely the spec is huge — split the module).
 
-## R1+R2 yield statistics (pilot data v3.2)
+## R1+R2 yield statistics (pilot data v3.1)
 
 Observed yield from the investment-module pilot (2026-05-18), measured against a spec that had already gone through 4 author-level review passes + R3:
 

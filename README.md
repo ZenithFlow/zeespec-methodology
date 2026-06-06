@@ -14,7 +14,7 @@ zeespec-methodology/
     ├── PORTING-GUIDE.md            ← adapt to your stack
     ├── workflow/                   ← workflow guides 00–12 (00-START-HERE first; full list in specs/README.md)
     ├── templates/_template/        ← empty 10-file ZeeSpec scaffold
-    └── checklists/                 ← 5 reference checklists
+    └── checklists/                 ← reference checklists (see specs/README.md)
 ```
 
 ## Quick start (3 commands)

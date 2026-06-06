@@ -493,12 +493,102 @@ Skip "WARN mode" altogether → engineers learn to ignore the noise. Skip "BLOCK
 6. **CI runs on every push (not just PR)** → wasted compute; PR is enough
 7. **Drift detection without resolution playbook** → finding without fixing
 
+## Build-time gate — a broken trace is a broken build
+
+Everything above is a **warn-only** scanner: it comments on the PR and lets the
+reviewer decide (`continue-on-error: true`). That is the right first step, but a
+spec whose citations no longer resolve is, mechanically, a *broken trace* — and a
+broken trace should be able to *break the build* (cf. ReqToCode 2026,
+`https://arxiv.org/html/2603.13999` — directional preprint). The enforcing half is
+`scripts/ci-drift-gate.sh`: a generic, project-agnostic, **AI-free** gate (grep /
+awk / sed only) that an adopting project runs in CI against its own
+`docs/specs/zeespec/<module>/` and that **exits nonzero** on violation.
+
+> **Two scripts, two jobs — don't confuse them.** `scripts/ci-drift-gate.sh` is
+> the gate ADOPTERS run against THEIR specs+code. `scripts/dogfood-drift-scan.sh`
+> is the methodology's OWN self-check against THIS repo (gravity-restatement,
+> core-trio version skew, hardcoded paths) — a different target and different
+> checks. Adopters do not run the dogfood scan.
+
+### What it enforces deterministically
+
+| Drift type | Gate-enforceable? | How |
+|------------|:-----------------:|-----|
+| **Type 1** citation | ✅ yes | every `file.ext:NN` cited in a spec must resolve to a real file, and line `NN` must exist in it |
+| **Type 2** field/enum count | ✅ yes (opt-in) | counts carrying a `zeespec:count` marker are re-derived from code; mismatch fails |
+| **Type 3** behavioral | ❌ no — semantic | needs the R5 agent (`05-R5-drift-scanner-agent.md`) / Layer 2 review |
+| **Type 4** architectural | ❌ no — semantic | needs the R5 agent / quarterly architecture review |
+
+The gate refuses to fake Type 3/4: it guards only the mechanical surface. Intent
+stays the source of truth, verified by humans + R5 — the gate just stops a
+provably-broken trace from merging.
+
+### Type 2 annotation convention
+
+Type 2 needs a code-side anchor, so it is **opt-in**: annotate the count in the
+spec, next to the number, with a machine-readable marker. The gate re-derives the
+count with `grep -cE pattern file` and fails on mismatch:
+
+```markdown
+The `WalletStatus` enum has 4 cases.
+<!-- zeespec:count expect=4 file=src/Domain/WalletStatus.php pattern='^\s+case [A-Z]' -->
+```
+
+Unmarked numbers are treated as prose (or as a Type 3/4 semantic claim for R5),
+not gated. Mark illustrative / pseudo-citations with `<!-- drift-ignore:all -->`
+to exempt a whole spec file.
+
+### WARN → FAIL rollout (env-toggled)
+
+Gate mode is set by `ZEESPEC_DRIFT_MODE` so teams roll out without a flag day —
+the same progression discipline as *Maturity progression* and *Anti-patterns*
+above (block-on-day-1 gets routed around; warn-only-forever becomes noise):
+
+```
+ZEESPEC_DRIFT_MODE=warn   # default: print findings, exit 0 (never blocks)
+ZEESPEC_DRIFT_MODE=fail   # print findings, exit nonzero on any Type 1/2 drift
+```
+
+Start `warn` on one module, tune false positives with `drift-ignore` / count
+markers, then flip to `fail` once the signal is trusted.
+
+### GitHub Actions — enforcing gate
+
+This runs *alongside* (not instead of) the warn-comment job above; this one has
+no `continue-on-error`, so a broken trace fails the check:
+
+```yaml
+# .github/workflows/zeespec-drift-gate.yml
+name: ZeeSpec Drift Gate
+on:
+  pull_request:
+    paths:
+      - 'docs/specs/zeespec/**'
+      - '**/*'                 # also re-gate when cited code moves
+jobs:
+  drift-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: ZeeSpec drift gate (Type 1/2)
+        env:
+          ZEESPEC_DRIFT_MODE: warn   # flip to fail once trusted
+        run: bash scripts/ci-drift-gate.sh --spec-dir docs/specs/zeespec --code-dir .
+```
+
+**GitLab CI:** add a `script:` step running
+`ZEESPEC_DRIFT_MODE=fail bash scripts/ci-drift-gate.sh` in a `merge_request_event`
+rule. **Bitbucket Pipelines:** the same one-liner as a `pull-requests` step. Both
+fail the pipeline on a nonzero exit — no extra wiring needed.
+
 ## Cross-references
 
 - `01-drift-detection-strategies.md` — 3-layer model
 - `02-drift-categorization.md` — how to triage findings
 - `04-drift-resolution-playbook.md` — what to do with findings
-- `05-R5-drift-scanner-agent.md` — agent prompt as alternative to script
+- `05-R5-drift-scanner-agent.md` — agent prompt for Type 3/4 (semantic; not gate-able)
+- `scripts/ci-drift-gate.sh` — the enforcing adopter gate (Type 1/2; exits nonzero)
+- `scripts/dogfood-drift-scan.sh` — the methodology's OWN repo self-check (not for adopters)
 - `workflow/02-b1-verification.md` — stack-specific count recipes (Type 2)
 
 ## Next

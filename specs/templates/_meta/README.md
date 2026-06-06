@@ -17,6 +17,7 @@ This directory holds **project-wide** ZeeSpec artifacts (not module-specific). C
 | `spawn-chips.md` | Dashboard of all spawn task chips (open + resolved) across all modules |
 | `pilot-retrospective.md` | After authoring 3+ modules, capture lessons learned |
 | `module-index.md` | One-line summary of every ZeeSpec module + status (copy to `docs/specs/zeespec/README.md`) |
+| `metrics-loop.md` | Per-methodology-version, multi-factor tracking sheet — turns one-time pilot numbers into a trend (closes the metrics loop) |
 
 ## Usage
 
@@ -37,3 +38,5 @@ After authoring 3+ modules, write a retrospective in `pilot-retrospective.md`. T
 - Methodology improvements suggested
 
 The `module-index.md` lives at `docs/specs/zeespec/README.md` in your project — one master index of all ZeeSpec modules with status + finding count.
+
+Each methodology version, roll the retrospective's numbers into `metrics-loop.md` — a multi-factor sheet (authoring time, findings by severity, drift-catch vs false-positive rate, tier mix, qualitative load). Comparing rows across versions is how you tell whether a methodology change actually helped, instead of trusting a single headline number.

@@ -9,7 +9,7 @@ last_updated: 2026-05-18
 
 # Financial Anti-Patterns — 15 Finance-Specific Traps
 
-> Extends core ZeeSpec's 13 generic anti-patterns. Catalogued from the pilot project. Many of these are caused by NOT having a strong accounting model up front.
+> Extends the core ZeeSpec anti-patterns (`checklists/anti-patterns.md`). Catalogued from the pilot project. Many of these are caused by NOT having a strong accounting model up front.
 
 ## 1. Float for money
 
@@ -267,7 +267,7 @@ AccountingService::postJournal only allows status=DRAFT
 
 ## Cross-link: combine with core anti-patterns
 
-The 13 anti-patterns in core ZeeSpec `checklists/anti-patterns.md` ALL still apply to finance modules. The 15 here are additive.
+The core ZeeSpec anti-patterns in `checklists/anti-patterns.md` ALL still apply to finance modules. The 15 here are additive.
 
 Finance-relevant core anti-patterns to watch most closely:
 

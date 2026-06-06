@@ -1,14 +1,14 @@
 ---
 doc: METHODOLOGY
 type: framework-spec
-version: 3.0.0
+version: 3.1.0
 status: stable
-last_updated: 2026-05-29
+last_updated: 2026-06-06
 ---
 
 # ZeeSpec — Full Methodology Specification
 
-> Version 3.0 (post-pilot, language-agnostic, jurisdiction-neutral). Read once; reference forever.
+> Version 3.1 (post-pilot, language-agnostic, jurisdiction-neutral). Read once; reference forever.
 
 ---
 
@@ -75,6 +75,46 @@ The 4 helpers:
 - **gravity.md** — cross-dimension hardwiring (e.g., HW-NOTIF-01: "every dispatched channel writes a row" spans WHAT × HOW × WHO)
 - **gaps.md** — explicit unresolved decisions; AI MUST STOP and ASK USER
 - **glossary.md** — terms that mean different things in different contexts
+
+> **You do not start with all 10.** The 10-file convention is the *ceiling*, not the entry point. The documented default is the **Lite weight (~3 files)**; promoting a module to the full 10 is a deliberate decision for the 1-2 most critical modules — see **§ 2a Module Weight Tiers**.
+
+## 2a. Module Weight Tiers (progressive disclosure)
+
+Applying all 10 files to every module is the #1 over-engineering trap (see `ZACHMAN-ALIGNMENT.md` Tier 0 + 2B). A module's **weight** — how many of the 10 files it carries — should match its complexity and risk, not a one-size policy. This mirrors **progressive disclosure**: load only the cells a task needs, because context is finite and over-stuffed context rots (Anthropic, *Effective context engineering*; *Agent Skills* 3-level disclosure). It is the same scale-adaptive instinct as BMAD's tracks, Kiro's deliberately-3-artifact feature spec, and Spec Kit's intent-first phasing.
+
+| Weight | Files (~) | File set | Use as |
+|--------|:---------:|----------|--------|
+| **Lite** *(default entry)* | 3 | `CLAUDE.md` · `what.md` · `gaps.md` | Every new module starts here — captures invariants + status tags + STOP-gaps in ~2h |
+| **Standard** | 6-7 | Lite **+** `why.md` · `how.md` · `gravity.md` *(± `who.md`/`when.md`)* | Modules with real algorithms or cross-cutting rules, but not yet stack-bound or compliance-critical |
+| **Full** | 10 | all 6 dimensions + 4 helpers (§ 2) | The 1-2 most critical modules — money/data-handling, regulated, long-lived. A deliberate **promotion**, never the reflex |
+
+The file set grows along the authoring DAG (`WHY → WHAT → HOW → {WHO, WHEN} → WHERE`, see `workflow/01-authoring-checklist.md`): Standard adds the conceptual core (why/how/gravity) on top of Lite; Full adds actors, timing, and the stack binding (`where.md`). You promote weight **incrementally** — never author files a module hasn't earned.
+
+### Weight ≠ Maturity (two orthogonal axes)
+
+**WEIGHT** (this section) = how *many* files a module carries. **MATURITY** (§ 13) = how *verified* those files are. They are independent: a 3-file Lite module can be fully verified (🟢 Active), and a 10-file Full module can still be unverified (🔵 Drafting).
+
+| | 🔵 Drafting | 🟢 Active (verified) |
+|---|---|---|
+| **Lite (3)** | new module, just scaffolded | small module, verified + stable |
+| **Full (10)** | critical module mid-authoring | the goal for a critical module |
+
+> **Three things named "Tier" — keep them distinct.** (1) **"Tier 1 promotion"** = the § 3 verification *workflow* (Author → B1 → R3 → R1+R2 → apply) — a MATURITY event, not a file count. (2) **§ 13 Module Maturity Levels** (Drafting/Design-intent/Active/Archive) = how verified. (3) The labels **"Tier 0 Lite"** / **"Tier 1 Standard"** in `10-adoption-guide/07-zeespec-lite-tier-0-fasttrack.md` are the older names for the WEIGHT axis — **"Tier 0 Lite" remains a valid alias for Lite weight**; this section is the canonical home for the weight vocabulary.
+
+### Choosing a weight (decision matrix)
+
+Start Lite. Promote toward Full only when an answer is **YES** — each YES adds weight; reaching Full needs sustained capacity to maintain it.
+
+| Question | If YES |
+|----------|--------|
+| **Regulated / compliance-relevant?** (KYC/AML, PHI, tax, audit trail) | → Standard min; Full if audit-critical (needs `who.md` SoD + `where.md` binding) |
+| **Handles money or sensitive data?** (balances, payments, PII) | → Standard min; Full for the source-of-truth module |
+| **Long-lived?** (runs > 2 years; outlives its author) | → Standard — capture WHY (`why.md`) before context is lost |
+| **High-churn or hand-off?** (≥2 engineers, frequent refactors) | → Standard+ — `how.md` + `gravity.md` prevent cross-cutting regressions |
+| **None of the above** | → stay **Lite** (or skip ZeeSpec entirely — § 15) |
+
+Maintenance capacity is the governor: a solo author should cap Full-weight modules at 1-2 and keep the rest Lite (`10-adoption-guide/08-one-man-army.md`). The Tier-0-Lite fast-track (`07-zeespec-lite-tier-0-fasttrack.md`) is the operational how-to for authoring at Lite weight and the promotion path upward.
+
 
 ## 3. The Promotion Workflow (Tier 1)
 
@@ -170,6 +210,25 @@ These agents are dispatch-ready prompts; engineering teams parameterize per modu
 
 For modules without external-authority dependencies (e.g., a pure data-pipeline module with no jurisdictional claims), skip R4. For finance, healthcare, government, privacy, tax modules — R4 should be the FIRST phase.
 
+## 3c. Where AI review is strong, and where to use deterministic checks
+
+> **Scope, not repair.** This sharpens *where each reviewer earns its keep*; it does not change the pipeline. The design is already partly non-circular: B1 greps **production code** and every claim carries a `file:line` citation (§ 4) — that production code IS an external ground truth, so ZeeSpec reviewers are **not** pure AI-checking-AI. The note below scopes the residual.
+
+**The principle.** An AI reviewer is strongest on the **structural/architectural residual** — correctness, race conditions, cross-cutting coherence, dead code — because the signal is *inferable from the code itself*. It is weakest on domain/regulatory **conventions** — specific thresholds, filing deadlines, enum rules, jurisdiction definitions — because those are *not inferable from code*: they must come from an external spec, and asking a model to *recall* them invites hallucinated values (the exact failure `workflow/07-r4-regulatory-research/` exists to prevent). Anthropic's context-engineering guidance makes the same split: retrieve external facts just-in-time; don't lean on model recall for them.
+
+**The move.** Where a behavioral or regulatory rule has a *checkable value* (a threshold, a deadline, an enum allow-list, a SoD pair), encode it as a **deterministic check / executable assertion / BDD-style example** — `Given a 21M MNT cash transaction, When booked, Then a CTR auto-flags` — rather than relying on a reviewer to remember it. The **R4 output is the natural source**: its citation blocks (`workflow/07/03-citation-conventions.md`) already pin threshold + deadline + source + date; turning each pinned value into one assertion lets a test or the **CI drift-gate** (`scripts/ci-drift-gate.sh`, alongside the `workflow/08` Layer-1 scanner) enforce it *deterministically and forever* — no model recall in the loop. This is also what makes annual R4 re-validation cheap: when a statute amends a value, you change one assertion, and the gate flips. (Worked pattern: `workflow/07-r4-regulatory-research/03-citation-conventions.md` § From citation to executable assertion.)
+
+**Defect-specifiability lens.** Different defect classes are catchable only by different instruments, so each maps to the phase equipped for it:
+
+| Defect class | Only catchable via | ZeeSpec phase |
+|--------------|--------------------|---------------|
+| Convention defect (wrong threshold / deadline / enum rule) | External spec — value isn't in the code | **R4 → deterministic check → B1/CI gate** |
+| Structural defect (race, dead code, broken algorithm, cross-cutting incoherence) | Reading the code's own logic | **R1 + R2** |
+| Quantitative drift (field/enum/LOC/line counts) | Mechanical count vs production | **B1** |
+
+The lens — that some defects are *specifiable* only against an external spec while others are inferable from code — is borrowed from a defect-specifiability taxonomy preprint (arXiv:2603.25773). Cite it honestly: it is **non-peer-reviewed, single-author, and Claude-implemented** — directional framing, not evidence. The mapping above is the actionable takeaway; the citation is not a claim of proof.
+
+
 ## 4. Status Tagging Convention
 
 Every claim about production state MUST carry one of these tags:
@@ -227,6 +286,15 @@ Most-used prefixes (see `checklists/invariant-numbering.md` for the **full 19-pr
 > The `NOTIF` examples come from the pilot project's notification module. Substitute your own module prefix when authoring (e.g., `INV-INVENTORY-04`, `HW-CHECKOUT-07`, `ADR-ORDERS-012`).
 
 Use ALL CAPS module prefix; zero-padded numbers (NN = 2 digit, NNN = 3 digit for ADRs). Descriptive-suffix prefixes (`ALG`, `FU`, `Gap`) use ALL CAPS with hyphens, no zero-padding.
+
+### Versioning convention (package vs per-file)
+
+ZeeSpec carries versions at two scopes — keep them distinct so per-file skew is not mistaken for drift:
+
+- **Package version** — the methodology release as a whole. It is the shared frontmatter `version:` of the **core docs** (`METHODOLOGY.md` · `README.md` · `EXPLAINED-FOR-PRESENTATIONS.md` · `PORTING-GUIDE.md`), which `scripts/dogfood-drift-scan.sh` enforces are equal.
+- **Per-file `version:`** — each workflow / checklist / template / overlay file's *own* revision. It is **independent** and is NOT expected to match the package version; a guide unchanged since `1.0.0` correctly stays at `1.0.0`.
+
+Bump a file's `version:` only when that file changes; never mass-bump per-file versions to match a package release. The dogfood scan enforces agreement only across the core docs — per-file skew below them is intentional, not drift.
 
 ## 7. The Two-Layer Architecture (Stack Independence)
 
@@ -357,9 +425,11 @@ This separates **spec authoring** from **production bug fixing** — keeps each 
 
 Most modules sit at 🟡 Design-intent for an extended period — that's healthy.
 
+> **Maturity is orthogonal to weight.** This table answers *how verified* a module is; § 2a answers *how many files* it carries. A Lite (3-file) module can be 🟢 Active and a Full (10-file) module can be 🔵 Drafting — the two axes move independently.
+
 ## 14. Cost Per Module (observed in one 5-module pilot — N=1)
 
-> **Honesty caveat (N=1):** these are *pilot observations* from a single author on a single project, not independently-validated ROI. Treat them as directional, not proven. Building an evidence base beyond N=1 is exactly what the metrics loop (`ZACHMAN-ALIGNMENT.md` Tier 1·1C) is for.
+> **Honesty caveat (N=1):** these are *pilot observations* from a single author on a single project, not independently-validated ROI. Treat them as directional, not proven. Building an evidence base beyond N=1 is exactly what the metrics loop (`ZACHMAN-ALIGNMENT.md` Tier 1·1C) is for — capture these factors per version in `templates/_meta/metrics-loop.md` and compare rows so each methodology change is judged on whether it actually helped.
 
 | Module | Authoring time | Findings caught | Production bugs fixed |
 |--------|----------------|-----------------|------------------------|
@@ -382,6 +452,8 @@ Most modules sit at 🟡 Design-intent for an extended period — that's healthy
 - ✗ Trivial CRUD modules (10 files is overkill)
 - ✗ Throwaway scripts
 - ✓ Use sparingly: 1-2 most critical modules first, expand as ROI proves out
+
+> **If you do use it, start light.** The default entry is the **Lite weight (~3 files)**, not the full 10 — promote a module to Standard or Full only when the § 2a decision matrix says so. "Lightweight specs" above means exactly this: Lite weight, not a different methodology.
 
 ## 16. Glossary of ZeeSpec Terms
 

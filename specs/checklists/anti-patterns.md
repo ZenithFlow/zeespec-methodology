@@ -232,7 +232,7 @@ Evidence in dev.log:31608 — actually executed 2026-04-20
 
 ---
 
-## 14. Spec authored from stale source (NEW v3.2)
+## 14. Spec authored from stale source (NEW v3.1)
 
 **Symptom:** Spec cites generic / framework-standard / textbook values for things that production has localized. The spec is internally consistent + plausible but **does not match production constants**.
 

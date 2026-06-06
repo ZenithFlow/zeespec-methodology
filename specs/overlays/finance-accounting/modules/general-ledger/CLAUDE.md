@@ -11,7 +11,7 @@ purpose: pre-filled ZeeSpec template for General Ledger / Chart of Accounts modu
 
 # General Ledger — AI Spec Entry Point
 
-This module is specified using **ZeeSpec** core (10-file Zachman-derived framework, language-agnostic v2.3) **plus the finance-accounting overlay** (v0.1.0).
+This module is specified using **ZeeSpec** core (10-file Zachman-derived framework, language-agnostic) **plus the finance-accounting overlay** (v0.1.0).
 
 The General Ledger module is the **system of record** for all financial transactions. It implements double-entry accounting with the Chart of Accounts as backbone.
 

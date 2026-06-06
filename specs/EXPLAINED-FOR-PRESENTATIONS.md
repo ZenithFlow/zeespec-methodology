@@ -1,9 +1,9 @@
 ---
 doc: EXPLAINED-FOR-PRESENTATIONS
 type: presentation-aid
-version: 3.0.0
+version: 3.1.0
 status: stable
-last_updated: 2026-05-29
+last_updated: 2026-06-06
 audience: anyone explaining ZeeSpec to others (tech lead, EM, compliance, PM, new team members)
 ---
 
@@ -88,16 +88,16 @@ ZeeSpec шийдэл: ADR lifecycle (workflow/09)
 
 ```
 ZeeSpec package
-├── Top-level docs (3 файл)
+├── Top-level docs
 │   ├── README.md           — Танилцуулга
 │   ├── METHODOLOGY.md      — Бүрэн methodology
 │   └── PORTING-GUIDE.md    — Stack adaptation
 │
-├── Templates (14 файл)
+├── Templates
 │   ├── _template/          — 10-file module template
 │   └── _meta/              — project-wide tracking templates
 │
-├── Workflow (29+ файл)
+├── Workflow
 │   ├── 00-START-HERE       — AI agent entry point
 │   ├── 01-authoring        — Module бичих
 │   ├── 02-b1-verification  — Drift хэмжих
@@ -112,8 +112,8 @@ ZeeSpec package
 │   ├── 11-anthropics-plugin — anthropics/financial-services integration
 │   └── 12-agentic-role-replacement — 6 human roles → agent (coverage + limits)
 │
-├── Checklists (6 файл)
-│   ├── anti-patterns       — 13 зөрчил pattern
+├── Checklists
+│   ├── anti-patterns       — зөрчлийн pattern-ууд
 │   ├── severity-matrix     — P0/P1/P2/P3 калибрац
 │   ├── status-tags         — ✅/🟡/🚧 conventions
 │   ├── invariant-numbering — ID conventions
@@ -124,7 +124,7 @@ ZeeSpec package
         ├── principles      — Double-entry + IFRS + AML
         ├── modules         — GL, Wallet, KYC, Lending
         ├── prompts         — R2 financial reviewer
-        ├── glossary        — 120+ finance terms
+        ├── glossary        — finance + accounting vocabulary
         └── research-examples — 4 worked R4 sessions
 ```
 
@@ -545,6 +545,7 @@ Live demo хүсэх бол: Tier 0 Lite модуль 2 цагийн дотор 
 | v2.9 | 2026-05 | Code Drift + ADR Lifecycle |
 | **v3.0** | **2026-05** | **3-reviewer findings + Adoption Guide + Anthropic integration** |
 | v3.0.x | 2026-05-29 | Zachman alignment — gravity pointer-only normalization + self-rot drift fixes + tiers 1B/2B/3B/1C-lean/2A (see `ZACHMAN-ALIGNMENT.md`) |
+| **v3.1** | **2026-06-06** | **Module Weight Tiers (Lite/Standard/Full, §2a) + adopter CI drift-gate (`scripts/ci-drift-gate.sh`) + reviewer-scope (§3c) + multi-factor metrics loop + self-drift sweep — deep-research benchmark vs Spec Kit / Kiro / BMAD** |
 
 ~100+ файл (өсөн нэмэгддэг тул яг тоог энд хатуугаар бичээгүй — drift-аас сэргийлэв).
 
@@ -563,7 +564,7 @@ Live demo хүсэх бол: Tier 0 Lite модуль 2 цагийн дотор 
 
 ---
 
-**Бичсэн огноо:** 2026-05-18; шинэчилсэн 2026-05-29 (v3.0.x — Zachman alignment)
-**ZeeSpec version:** 3.0.0
+**Бичсэн огноо:** 2026-05-18; шинэчилсэн 2026-06-06 (v3.1 — alignment pass)
+**ZeeSpec version:** 3.1.0
 **License:** MIT
 **Maintainer:** batzaya (initial pilot author)

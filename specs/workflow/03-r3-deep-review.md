@@ -143,7 +143,7 @@ In case (b), re-prompt with: "You found 0 issues — that's suspicious for a mod
 with N production files. Verify ALL N invariants by quoting the production code
 line that enforces each."
 
-## R3 subagent reports require B1 spot-verification (NEW v3.2)
+## R3 subagent reports require B1 spot-verification (NEW v3.1)
 
 > **Lesson from pilot 2026-05-18 investment module:** R3 deep-introspection background agents can have **~14% false-positive rate** on first-pass reports. Blind-trusting subagent claims propagates errors into invariants + risk register + AI behaviour rules.
 

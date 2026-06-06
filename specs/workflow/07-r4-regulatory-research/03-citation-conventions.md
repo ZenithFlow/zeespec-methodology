@@ -291,6 +291,43 @@ This audit trail lets the next reviewer see the validation history.
 
 ✅ "Per EU AMLD6 (Directive 2024/1640) Art. 32 (CDD measures), adopted 2024-05-31, transposition deadline 2027-07-10, URL eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024L1640, retrieved 2026-05-18."
 
+## From citation to executable assertion (deterministic enforcement)
+
+A citation pins a regulatory **value**; an *assertion* makes that value **enforceable**. Per `METHODOLOGY.md` § 3c, regulatory values (thresholds, deadlines, enum rules) are exactly the defect class an AI reviewer cannot reliably recall — so turn each pinned value into a deterministic check the test suite runs every build, sourced from the citation block above. A broken assertion is a broken build (cf. ReqToCode 2026, `https://arxiv.org/html/2603.13999` — directional preprint).
+
+### Worked example — CTR threshold -> BDD assertion
+
+From the citation block (`SRC-AML-MN-2017` Art. 11.1.1, consolidated 2017-10-26): cash transactions >= 20,000,000 MNT must be reported.
+
+```gherkin
+# Sourced from SRC-AML-MN-2017 Art. 11.1.1 (consolidated 2017-10-26)
+Scenario: Cash transaction at the CTR threshold auto-flags
+  Given a cash transaction of 20,000,000 MNT
+  When it is booked
+  Then a CTR is auto-flagged
+
+Scenario: Cash transaction just below the threshold does not flag
+  Given a cash transaction of 19,999,999 MNT
+  When it is booked
+  Then no CTR is raised
+```
+
+(Gherkin/pseudocode is language-agnostic; implement with your stack's test framework. Keep the boundary cases — at, just-below, just-above — because thresholds are off-by-one magnets.)
+
+### Division of labor — what enforces what
+
+| Instrument | Enforces | Example |
+|------------|----------|---------|
+| **Test suite** (unit/BDD, in CI) | regulatory **values** — thresholds, deadlines, enum allow-lists, SoD pairs | the CTR scenarios above |
+| **`scripts/ci-drift-gate.sh`** | Type 1 **citations** resolve + Type 2 **annotated counts** re-derive | `file:line` cites + `zeespec:count` markers |
+| **R1 / R2** (AI review) | the architectural **residual** (§ 3c) — race conditions, dead code, cross-cutting coherence | "is the rule honored cross-module?" |
+
+A regulatory threshold is a **value** assertion (-> a test), NOT a count of code elements (-> not the gate's Type 2). Don't ask the AI reviewer to remember `20,000,000`; encode it once and let the test fail if production drifts.
+
+### Why this makes annual re-validation cheap
+
+Each assertion names its source ID in a comment (`SRC-AML-MN-2017 Art. 11.1.1`). When R4 re-validation (`06-re-validation-strategy.md`) finds an amendment, you change **one** value in **one** assertion, update its citation block + the "Re-validated" marker above, and the test flips red until production follows. One amended statute -> one assertion edit -> one build signal — no model recall in the loop.
+
 ## Next
 
 → `R4-regulatory-research-agent.md` — agent prompt for automated research

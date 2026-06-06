@@ -30,14 +30,14 @@ else
   echo "  PASS — gravity files are pointer-only"
 fi
 
-# [2] core-trio frontmatter versions must agree
-echo "[2] core-trio version consistency"
+# [2] core-doc frontmatter versions must agree (the single-sourced package version)
+echo "[2] core-doc version consistency"
 ver() { awk -F': ' '/^version:/{print $2; exit}' "$1" 2>/dev/null; }
-vm=$(ver "$SPECS/METHODOLOGY.md"); vr=$(ver "$SPECS/README.md"); ve=$(ver "$SPECS/EXPLAINED-FOR-PRESENTATIONS.md")
-if [ -n "$vm" ] && [ "$vm" = "$vr" ] && [ "$vm" = "$ve" ]; then
-  echo "  PASS — METHODOLOGY / README / EXPLAINED all at $vm"
+vm=$(ver "$SPECS/METHODOLOGY.md"); vr=$(ver "$SPECS/README.md"); ve=$(ver "$SPECS/EXPLAINED-FOR-PRESENTATIONS.md"); vp=$(ver "$SPECS/PORTING-GUIDE.md")
+if [ -n "$vm" ] && [ "$vm" = "$vr" ] && [ "$vm" = "$ve" ] && [ "$vm" = "$vp" ]; then
+  echo "  PASS — METHODOLOGY / README / EXPLAINED / PORTING-GUIDE all at $vm"
 else
-  echo "  FAIL — version skew: METHODOLOGY=$vm README=$vr EXPLAINED=$ve"
+  echo "  FAIL — version skew: METHODOLOGY=$vm README=$vr EXPLAINED=$ve PORTING-GUIDE=$vp"
   fail=1
 fi
 

@@ -256,7 +256,7 @@ Annual: ~$700-2,400. **Lower than half a junior engineer's hourly rate for compl
 
 ## What solo dev SHOULD skip
 
-Methodology has 90 files. Solo dev can't use all. Skip these:
+The methodology is large. Solo dev can't use all of it. Skip these:
 
 | Skip | Reason |
 |------|--------|

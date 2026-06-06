@@ -14,6 +14,8 @@ addresses_reviewer_finding: Reviewer C P0 #1 (no graduated path)
 > **For teams that want to TRY ZeeSpec without 8-hour commitment.** Reduces 10-file format to 3 files; defers reviews + agents to later. Gets you a useful Tier 0 module in 1-2 hours.
 >
 > Inspired by Reviewer C feedback that the 8-hour Tier 1 threshold blocks small teams from validating the methodology cheaply.
+>
+> **Vocabulary note:** the "Tier 0 Lite / Tier 1 Standard / Tier B/C Full" labels here are the **weight** axis; the canonical weight vocabulary (Lite/Standard/Full) lives in `METHODOLOGY.md` § 2a. "Tier 0 Lite" = Lite weight.
 
 ## The Tier 0 hypothesis
 

@@ -1,9 +1,9 @@
 ---
 doc: PORTING-GUIDE
 type: porting-guide
-version: 2.3.0
+version: 3.1.0
 status: stable
-last_updated: 2026-05-18
+last_updated: 2026-06-06
 ---
 
 # ZeeSpec Porting Guide — Adapt to Your Stack

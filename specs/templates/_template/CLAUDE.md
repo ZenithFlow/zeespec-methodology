@@ -10,7 +10,7 @@ purpose: experimental — ZeeSpec methodology trial, not yet canonical
 
 # MODULE_NAME — AI Spec Entry Point
 
-This module is specified using **ZeeSpec** (10-file Zachman-derived framework, language-agnostic v2.3).
+This module is specified using **ZeeSpec** (10-file Zachman-derived framework, language-agnostic).
 Read all dimension files BEFORE generating code.
 
 > ⚠️ **Authoring scope statement:**

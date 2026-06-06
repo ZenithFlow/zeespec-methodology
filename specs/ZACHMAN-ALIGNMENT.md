@@ -11,10 +11,12 @@ applies_to: ZeeSpec методологи өөрөө (meta-level; модуль-т
 
 # ZeeSpec ↔ Zachman Alignment — Судалгаанд үндэслэсэн сайжруулалтын Tier-үүд
 
-> **Төлөв:** PARTIALLY-IMPLEMENTED (2026-05-29) — хэрэгжсэн: **Tier 1 (1A normalize + 1B lint + 1C-lean
-> dogfood) + 2A (Zachman-row map) + 2B (DAG / Lite-default) + 3B (positioning / N=1)**; §4 drift
-> цэвэрлэгдсэн. **Зориуд хойшлуулсан:** 1C-full (self-spec модуль + CI), 3A (ADR="which") —
-> over-engineering / ornament. §11 implementation log + §7 дараалал үз.
+> **Төлөв:** PARTIALLY-IMPLEMENTED (2026-06-06) — хэрэгжсэн: **Tier 1 (1A normalize + 1B lint + 1C-lean
+> dogfood) + 2A (Zachman-row map) + 2B (Lite/Standard/Full weight-tier → core §2a) + 3B (positioning / N=1)**;
+> §4 drift цэвэрлэгдсэн. **v3.1 alignment pass (2026-06-06):** 1C metrics-loop (input #4) + adopter CI drift-gate
+> (1C-lean өргөтгөл) + reviewer-scope §3c (deep-research benchmark-аар) нэмэгдэв; core trio → **v3.1.0**,
+> "NEW v3.2"→v3.1 зөрчил зассан (хэрэглэгчийн шийдвэрээр). **Зориуд хойшлуулсан:** 1C-full (self-spec
+> модуль), 3A (ADR="which") — over-engineering / ornament. §11 implementation log + §7 дараалал үз.
 
 > **Үндэс:** Энэ баримт нь ZeeSpec-ийн суурь болсон Zachman framework дээр хийсэн судалгааны үр дүн.
 > Зөвлөмж бүр өөрийн үндэслэсэн Zachman / W6H finding-ийг үгчлэн (verbatim, англиар) иш татна.
@@ -267,6 +269,31 @@ Lean ч substantial pass (over-engineering дисциплин хадгалсан
 - **2A** (нэмэв) — METHODOLOGY §1-д Zachman-row mapping (ZeeSpec нь Owner→Designer→Builder 3 мөрийг шахдаг; Executive/Scope + Technician/Components-ийг зориуд орхино) + §4/§7-д "status-tag = Builder↔Operations гүүр" framing. Танилцуулга/онолын credibility-д (deck) үнэ цэнтэй; зан төлөв өөрчлөхгүй.
 
 **Одоо хойшлуулсан:** 1C-full (self-spec модуль + CI — over-engineering), 3A (ADR="which" — ornament). v3.1 нь эдгээр + бодит ашиглалтын дараа.
+
+### 2026-06-05 — v3.1 alignment pass (deep-research benchmark + 5 сайжруулалт)
+
+Гадны салбарын benchmark (Spec Kit / Kiro / BMAD / Tessl + Anthropic context-engineering + spec-drift судалгаа; deep-research 2026-06-05) нь ZeeSpec-ийн **цөм чиглэл зөв** ("spec = эх үнэн", role-specialized агент, durable-context↔per-module салгалт, `where.md §5` stack-binding тусгаарлалт) гэдгийг баталж, мөн **2B + 1C нь хамгийн өндөр өгөөжтэй дараагийн алхам** гэсэн §3-ын дотоод оношлогоог гаднаас давхар баталгаажуулав. Энэ pass нь тэдгээрийг хэрэгжүүлэв:
+
+- **2B бүрэн** — `METHODOLOGY.md §2a "Module Weight Tiers"`: Lite/Standard/Full жингийн загвар + шийдвэрийн матриц (`08-one-man-army`-аас цөм рүү ерөнхийчилж зөөв), **Lite-default-ыг §2/§15-аас илрэхүйц** болгов. **WEIGHT ≠ MATURITY** хоёр тэнхлэгийг тусгаарлаж, "Tier" 3 утгын overload-ыг цэгцлэв (rename хийгээгүй; "Tier 0 Lite" = Lite alias). Grounding: BMAD scale-adaptive, Kiro 3-artifact, Anthropic progressive disclosure.
+- **1C-lean өргөтгөл (adopter CI gate)** — `scripts/ci-drift-gate.sh`: adopting төслүүдэд зориулсан, AI-гүй, deterministic build-time gate (Type 1 citation resolution + Type 2 annotated-count; WARN/FAIL env-toggle; зөрчилтэй бол nonzero exit = "broken trace = broken build", ReqToCode). `08/03-auto-drift-detection.md`-д баримтжуулав. **Энэ нь өөрийн репо дээрх 1C-full self-spec модуль БИШ** (тэр хэвээр хойшлогдсон) — adopter-facing sliver; `dogfood-drift-scan.sh` (methodology өөрийн self-check)-ээс ялгаатай.
+- **1C metrics loop (input #4)** — `templates/_meta/metrics-loop.md`: version бүрээр **олон хүчин зүйл** (authoring time, findings/severity, drift-catch vs false-positive rate, tier mix, cognitive load) — нэг тоо БИШ (ICSE-SEIP 2026). N=1 baseline-ыг directional гэж шошголов. §3-ын self-improving #4 цоорхойг хаав.
+- **Reviewer re-scope** — `METHODOLOGY.md §3c` + `workflow/04` тэмдэглэл: AI review = **structural residual**; зохицуулалтын утгыг (босго/хугацаа/enum) deterministic check/BDD руу (R4 → assertion → CI gate), reviewer-ийн санах ойд найдахгүй. B1 grep + `file:line` нь аль хэдийн external ground truth гэдгийг **зээлдэв** (design эвдрээгүй, scope л хурцалсан). Defect-specifiability lens (arXiv:2603.25773) — **non-peer-reviewed, single-author, Claude-implemented, directional** гэж шударгаар иш татав.
+- **§4 self-drift sweep (1C acceptance test)** — stale self-count-уудыг de-hardcode: `08-one-man-army` "90 files", `specs/README` + `EXPLAINED` + finance-overlay "13 anti-patterns" (бодит 14), top `README` "5 checklists" (бодит 6), EXPLAINED tree counts, glossary count. `dogfood-drift-scan.sh` **PASS (3/3)** хэвээр.
+
+**Хэрэгжүүлэлт:** design (5 параллель агент, grounded edits) → программаар apply (20/20 цэвэр) → adversarial dogfood review (4 lens). **Шударга тэмдэглэл:** энэ pass-ыг Claude (Opus 4.8) боловсруулсан; бодит ашиглалтын friction хараахан хэмжигдээгүй — metrics-loop-ийн эхний бодит мөр нь дараагийн модулиас.
+
+**v3.1 finalize (2026-06-06, хэрэглэгчийн шийдвэрээр):** (1) core trio → **v3.1.0** (+ last_updated, changelog мөр, prose "Version 3.1"); 4 файл дахь **"NEW v3.2"** inline tag → **v3.1** (core-той зөрчил арилав); (2) finance-overlay glossary count twins (~120 / ~80) de-hardcode — glossary файлын өөрийн ~100 нь single-source; (3) `07-zeespec-lite`-д weight-vocabulary pointer (§2a), `00-START-HERE`-д just-in-time loading тэмдэглэл, `specs/README` TL;DR-д Lite-default headline нэмэв. dogfood-drift-scan PASS хэвээр.
+
+**Үлдсэн (сонголтот, дараагийн pass):** `07-zeespec-lite`-ийн багана гарчгийг бүрэн Lite/Standard/Full rename (одоо alias pointer хангалттай); broader version-sprawl (PORTING-GUIDE + workflow/checklist frontmatter) single-source normalization; 1C-full self-spec модуль (зориуд хойшилсон, over-engineering).
+
+### 2026-06-06 — deferred batch 2 (R4→assertion + version single-source)
+
+Зөвлөмжийн дагуу 2 өндөр өгөөжтэй deferred-ийг хийв:
+
+- **3.1 — R4 → executable assertion** — `workflow/07/03-citation-conventions.md`-д "From citation to executable assertion" хэсэг (CTR threshold → BDD Given/When/Then worked example + division-of-labor хүснэгт: test suite = values, `ci-drift-gate` = citations/counts, R1/R2 = architectural residual). `METHODOLOGY §3c`-д worked-pattern pointer нэмэв — §3c-ийн зааврыг бодит хэрэгсэл болгов.
+- **1.2 — version single-source** — `METHODOLOGY §6`-д "Versioning convention" (package version = core-docs single-source vs per-file version = бие даасан; skew нь drift биш). `PORTING-GUIDE` → core-doc, **v3.1.0**; `dogfood-drift-scan.sh` → **quartet** (METHODOLOGY/README/EXPLAINED/PORTING-GUIDE) version check; CLAUDE template + GL дахь stale "language-agnostic v2.3" hardcode de-hardcode. dogfood PASS.
+
+**Одоо үлдсэн (зориуд):** 07-ийн багана бүрэн rename (alias хангалттай); per-file version-ийн гүн normalization (convention-оор зарчимжуулсан — mass-bump хийхгүй); 1C-full self-spec модуль (over-engineering).
 
 ---
 

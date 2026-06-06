@@ -36,7 +36,7 @@ last_updated: 2026-05-18
 1. **Accounting principles file** (`principles/accounting-principles.md`) — codifies double-entry invariants (debit=credit, no negative balances, immutable journal, period close) as `INV-ACC-*` rules ready to copy into your `accounting/what.md`.
 2. **Regulatory compliance file** (`principles/regulatory-compliance.md`) — 7 universal compliance pillars (segregation, NAV, AML/CFT, reporting, retention, data protection) with multi-jurisdiction examples (EU / US / UK / Singapore / India / Japan / HK / Australia / Mongolia). Mongolia FRC shown as one example among many.
 3. **Financial invariants catalog** (`principles/financial-invariants-catalog.md`) — 25-30 canonical INV / HW entries seen across pilot modules; reuse directly OR fork.
-4. **Financial anti-patterns** (`principles/financial-anti-patterns.md`) — 12-15 domain-specific traps beyond core ZeeSpec's 13 (e.g., currency-rounding drift, FX revaluation timing, fee-accrual off-by-one).
+4. **Financial anti-patterns** (`principles/financial-anti-patterns.md`) — 15 domain-specific traps extending the core ZeeSpec anti-patterns (e.g., currency-rounding drift, FX revaluation timing, fee-accrual off-by-one).
 5. **Finance-calibrated severity matrix** (`principles/severity-matrix-finance.md`) — overrides core severity matrix with financial-domain calibration (compliance enforcement risk, money-loss thresholds, AML reporting deadlines). Jurisdiction-neutral; examples cover multiple regulators.
 6. **Pre-filled module templates** (`modules/`):
    - `general-ledger/` — 10 ZeeSpec files pre-filled with Chart of Accounts, journal entry, double-entry invariants, period close, trial balance
@@ -44,7 +44,7 @@ last_updated: 2026-05-18
    - `kyc-aml/` — condensed overview for tiered KYC, AML screening, CTR threshold, sanctions/PEP, STR/SAR filing
    - `lending/` — condensed overview for loan origination, repayment, NPL classification (Mongolia 5-stage), dual provisioning (IFRS 9 ECL + Mongolia regulatory), credit bureau reporting, write-off workflow
 7. **Specialized R2 reviewer prompt** (`prompts/R2-financial-reviewer.md`) — replaces the generic R2 prompt with finance-tuned questions ("Show me the audit trail for journal #X", "Reconcile yesterday's wallet movements against subledger", "List CTR transactions > threshold over last 30 days").
-8. **Finance + accounting glossary** (`glossary/finance-glossary.md`) — ~120 terms covering double-entry, IFRS line types, AML/KYC acronyms, multi-jurisdiction regulator vocabulary.
+8. **Finance + accounting glossary** (`glossary/finance-glossary.md`) — finance + accounting + regulator vocabulary covering double-entry, IFRS line types, AML/KYC acronyms, multi-jurisdiction terms.
 
 9. **Worked R4 research examples** (`research-examples/`) — 4 worked R4 sessions demonstrating the regulator + statute research methodology applied to Mongolia FRC, Mongolia AML law, cross-jurisdiction retention, and Mongolia NBFI lending. The R4 METHODOLOGY itself (workflow, source evaluation, citation conventions, agent prompt, cheatsheet) lives in core ZeeSpec at `workflow/07-r4-regulatory-research/` (promoted to core in v2.7).
 
@@ -69,9 +69,9 @@ This overlay **does not replace** core ZeeSpec — it **specializes** it:
 | `templates/_template/what.md` | Pre-filled with accounting invariants (debit=credit, period close, etc.) |
 | `templates/_template/where.md` § 5 | Still stack-specific — overlay does NOT prescribe a stack |
 | `checklists/severity-matrix.md` | Overridden by `severity-matrix-finance.md` (FRC-tuned) |
-| `checklists/anti-patterns.md` | Extended by `financial-anti-patterns.md` (12-15 more) |
+| `checklists/anti-patterns.md` | Extended by `financial-anti-patterns.md` (15 more) |
 | `workflow/04-r1-r2-parallel-review.md` R2 prompt | Replaced by `R2-financial-reviewer.md` |
-| `templates/_template/glossary.md` | Pre-seeded with `finance-glossary.md` ~80 terms |
+| `templates/_template/glossary.md` | Pre-seeded with `finance-glossary.md` (finance vocabulary) |
 
 The stack-agnosticism of core ZeeSpec is **preserved**: this overlay works equally with PHP/Symfony, Java/Spring, Python/Django, Go, Rust, TS/NestJS.
 
@@ -135,7 +135,7 @@ overlays/finance-accounting/
 ├── prompts/
 │   └── R2-financial-reviewer.md             — specialized R2 agent prompt
 └── glossary/
-    └── finance-glossary.md                  — ~120 finance + accounting terms
+    └── finance-glossary.md                  — finance + accounting + regulator vocabulary
 ```
 
 > **Note:** R4 regulatory research METHODOLOGY (the 6-phase workflow, source evaluation, citation conventions, agent prompt, source cheatsheet) lives in **core ZeeSpec** at `workflow/07-r4-regulatory-research/` (promoted to core in v2.7 because it's domain-agnostic). The 4 finance-specific worked examples in `research-examples/` above demonstrate that methodology applied to Mongolia FRC + AML domain.

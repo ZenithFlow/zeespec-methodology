@@ -9,6 +9,8 @@ last_updated: 2026-05-18
 # ZeeSpec Pilot Retrospective
 
 > Write this after authoring 3+ modules. Captures lessons learned, methodology improvements, ROI evidence.
+>
+> This retrospective is point-in-time (per pilot). Roll its numbers up into the per-version trend in `metrics-loop.md` to close the self-improving loop across versions.
 
 ## Pilot scope
 

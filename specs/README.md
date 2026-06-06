@@ -1,9 +1,9 @@
 ---
 doc: README
 type: package-overview
-version: 3.0.0
+version: 3.1.0
 status: stable
-last_updated: 2026-05-29
+last_updated: 2026-06-06
 ---
 
 # ZeeSpec Methodology — Standalone Package
@@ -14,7 +14,7 @@ last_updated: 2026-05-29
 
 ## TL;DR
 
-ZeeSpec is a **10-file specification format** that decomposes any software module into orthogonal dimensions (WHY/WHAT/HOW/WHO/WHEN/WHERE) plus 4 helpers (entry point, gravity, gaps, glossary). The format is **language-agnostic** — only one file (`where.md` § 5) is stack-specific. Reviewers (R3 deep + R1+R2 parallel) catch what single-pass authoring misses.
+ZeeSpec is a **10-file specification format** that decomposes any software module into orthogonal dimensions (WHY/WHAT/HOW/WHO/WHEN/WHERE) plus 4 helpers (entry point, gravity, gaps, glossary). The format is **language-agnostic** — only one file (`where.md` § 5) is stack-specific. Reviewers (R3 deep + R1+R2 parallel) catch what single-pass authoring misses. The default entry is the **Lite weight (~3 files)**, not all 10 — promote to the full set deliberately (see `METHODOLOGY.md` § 2a).
 
 ## What problem does it solve?
 
@@ -59,7 +59,7 @@ zeespec-methodology/specs/
 │       ├── spawn-chips.md          — track all dispatched task chips
 │       └── pilot-retrospective.md  — after 3+ modules, capture lessons
 ├── checklists/
-│   ├── anti-patterns.md            — 13 anti-patterns to avoid
+│   ├── anti-patterns.md            — common anti-patterns to avoid
 │   ├── status-tags.md              — IMPL/PARTIAL/DESIGN conventions
 │   ├── severity-matrix.md          — P0/P1/P2/P3 + AI behaviour rules
 │   ├── invariant-numbering.md      — ID conventions (INV/HW/ADR/...)
@@ -128,7 +128,7 @@ zeespec-methodology/specs/
         │   └── lending/            — module overview (condensed) for NBFI lending
         ├── research-examples/      — 4 worked R4 research examples (finance-specific)
         ├── prompts/                — specialized R2 financial reviewer agent prompt
-        └── glossary/               — ~120 finance + accounting + regulator vocabulary
+        └── glossary/               — finance + accounting + regulator vocabulary
 ```
 
 ## Available overlays
