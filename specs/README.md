@@ -138,6 +138,7 @@ Domain-specialized add-ons that layer additional invariants, anti-patterns, seve
 | Overlay | Status | When to use |
 |---------|--------|-------------|
 | **finance-accounting** v0.1.0 | 🧪 reference example | Regulated financial services (mutual funds, brokerages, payments, custodians, **NBFI lending**). Double-entry + IFRS-aware + multi-jurisdiction compliance (EU/US/UK/SG/JP/IN/HK/AU/MN). Modules: GL, wallet-settlement, KYC/AML, lending. 4 worked R4 research examples showing the methodology in action. See `overlays/finance-accounting/README.md`. |
+| **frontend-design-system** v0.1.0 | 🧪 reference example | Modern, complete, tested frontends for **React/Next.js + Tailwind v4 + shadcn/ui**. Fixes the backend-shaped-spec failures: naked HTML / default serif, half-built CRUD flows, no UI tests. Adds design tokens (DTCG → Tailwind `@theme`), a component-contract spec type, UI-flow-completeness rules, Storybook + Playwright + axe executable tests, and the **RF** frontend reviewer. See `overlays/frontend-design-system/README.md`. |
 
 > **Note on overlays:** overlays are **reference examples** of how to apply the methodology to a specific domain. The **methodology itself** (core workflow + R4 research at `workflow/07-r4-regulatory-research/`) is the primary deliverable; overlays show it working in practice.
 
