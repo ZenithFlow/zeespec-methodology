@@ -42,6 +42,7 @@ This repo is also a **Claude Code plugin** (and its own marketplace) — the AI-
 Then, in any project:
 - `/zeespec:init [module]` — add ZeeSpec + scaffold a module (Tier 0 Lite by default)
 - `/zeespec:author` · `/zeespec:review` · `/zeespec:promote` — authoring / review / full Tier-1 promotion pipeline
+- `/zeespec:drift` · `/zeespec:adr` · `/zeespec:gaps` · `/zeespec:metrics` · `/zeespec:check` — drift scan · ADR · gaps triage · metrics · pre-commit gate
 - Reviewer agents: `zeespec-r4-regulatory`, `zeespec-r5-drift`, `zeespec-r6-adr`
 - Skills (auto-fire): `zeespec-frontend`, `zeespec-aware-coding`, `zeespec-drift-guard`, `zeespec-authoring`, `zeespec-r4-citation` — load the right ZeeSpec guidance automatically while you work
 
