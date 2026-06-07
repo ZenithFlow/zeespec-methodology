@@ -1,14 +1,14 @@
 ---
 doc: METHODOLOGY
 type: framework-spec
-version: 3.1.0
+version: 3.2.0
 status: stable
 last_updated: 2026-06-06
 ---
 
 # ZeeSpec — Full Methodology Specification
 
-> Version 3.1 (post-pilot, language-agnostic, jurisdiction-neutral). Read once; reference forever.
+> Version 3.2 (post-pilot, language-agnostic, jurisdiction-neutral). Read once; reference forever.
 
 ---
 
