@@ -12,6 +12,6 @@ Pick the mode from `$ARGUMENTS`:
 
 3. **CURATE** — dispatch the `zeespec-r6-adr` agent for conflict-check against existing ADRs, annual staleness review (mark stale ADRs SUPERSEDED/DEPRECATED with links), or cross-module impact.
 
-**Lifecycle:** Proposed → Accepted → Superseded / Deprecated. Apply a **24h cool-off** before Accepting any material decision — never instant-self-accept. R6 produces a draft for review; a human (or the cool-off re-read) does the Accept.
+**Lifecycle:** Proposed → Accepted → Superseded / Deprecated. Apply a **cool-off** before Accepting a material decision — never instant-self-accept (a 24h cool-off is the recommended pattern for solo / agentic teams; see `${CLAUDE_PLUGIN_ROOT}/specs/workflow/10-adoption-guide/08-one-man-army.md`). R6 produces a draft for review; a human (or the cool-off re-read) does the Accept.
 
 `$ARGUMENTS` = decision summary / module / drift finding.

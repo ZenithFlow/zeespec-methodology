@@ -30,8 +30,8 @@ When in doubt, escalate to the higher type. A rename that also changes behavior 
 Per the playbook (`${CLAUDE_PLUGIN_ROOT}/specs/workflow/08-code-drift-management/04-drift-resolution-playbook.md`):
 
 - **Spec edit** — drift is real and the spec is stale (Type 1/2; fix citations/counts, re-check status tags + `file:line`).
-- **Spawn a task chip** — the spec is right and the **code is the bug** (regression). Never update the spec to match buggy code; spec stays source-of-truth for intent. → `06-spawn-task-chips.md`.
-- **ADR** — the change was **intentional design**. Write it (dispatch `zeespec-r6-adr`), then update the spec + bump status tags; drift is legitimized. → `09-adr-lifecycle/`.
+- **Spawn a task chip** — the spec is right and the **code is the bug** (regression). Never update the spec to match buggy code; spec stays source-of-truth for intent. → `${CLAUDE_PLUGIN_ROOT}/specs/workflow/06-spawn-task-chips.md`.
+- **ADR** — the change was **intentional design**. Write it (dispatch `zeespec-r6-adr`), then update the spec + bump status tags; drift is legitimized. → `${CLAUDE_PLUGIN_ROOT}/specs/workflow/09-adr-lifecycle/00-START-HERE.md`.
 
 Never both, never auto-apply. For authority-suspected values (thresholds / deadlines / retention), defer to `zeespec-r4-regulatory` instead of filing a chip.
 

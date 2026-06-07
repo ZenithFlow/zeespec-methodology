@@ -12,7 +12,7 @@ Anatomy + calibration: `${CLAUDE_PLUGIN_ROOT}/specs/checklists/gaps-anatomy.md` 
 
 3. **Rank** the remaining rows: P0 → P1 → P2 → P3, OPEN before PROPOSED before the rest.
 
-4. **Spawn-chip status** — read `${CLAUDE_PLUGIN_ROOT}` is the methodology; read the *project's* `docs/specs/zeespec/_meta/spawn-chips.md` and summarize OPEN vs LANDED/RESOLVED vs DEFERRED counts so each P0/P1 gap's chip can be cross-checked as open or landed.
+4. **Spawn-chip status** — read the *project's* `docs/specs/zeespec/_meta/spawn-chips.md` (template at `${CLAUDE_PLUGIN_ROOT}/specs/templates/_meta/spawn-chips.md`) and summarize OPEN vs LANDED/RESOLVED vs DEFERRED counts so each P0/P1 gap's chip can be cross-checked as open or landed.
 
 5. **Separate** 📌 BY-DESIGN (acknowledged, won't-fix) into their own section — never count them as real OPEN work.
 
