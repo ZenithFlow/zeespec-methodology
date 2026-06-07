@@ -44,7 +44,7 @@ Then, in any project:
 - `/zeespec:author` · `/zeespec:review` · `/zeespec:promote` — authoring / review / full Tier-1 promotion pipeline
 - `/zeespec:drift` · `/zeespec:adr` · `/zeespec:gaps` · `/zeespec:metrics` · `/zeespec:check` — drift scan · ADR · gaps triage · metrics · pre-commit gate
 - Reviewer agents: `zeespec-r4-regulatory`, `zeespec-r5-drift`, `zeespec-r6-adr`
-- Skills (auto-fire): `zeespec-frontend`, `zeespec-aware-coding`, `zeespec-drift-guard`, `zeespec-authoring`, `zeespec-r4-citation` — load the right ZeeSpec guidance automatically while you work
+- Skills (context-triggered): `zeespec-frontend`, `zeespec-aware-coding`, `zeespec-drift-guard`, `zeespec-authoring`, `zeespec-r4-citation` — Claude loads the right ZeeSpec guidance when your task matches the skill (on relevance, not a guaranteed hook)
 
 The full methodology ships under `specs/`; commands + agents reference it at runtime via `${CLAUDE_PLUGIN_ROOT}/specs`. Updating the plugin updates the methodology everywhere — no per-project frozen copies to drift. Validate with `claude plugin validate .`.
 

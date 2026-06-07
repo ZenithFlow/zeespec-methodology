@@ -2,7 +2,7 @@
 description: Triage dashboard over every module's gaps.md — rank by severity/status and surface OPEN P0/P1 blockers that STOP the AI.
 ---
 
-Read-only triage of `gaps.md` across ZeeSpec modules in `$ARGUMENTS` (default: every module under `docs/specs/zeespec/`). **Do not resolve, fix, or edit anything** — this is a dashboard. (The `zeespec-drift-guard` skill auto-fires on edits; this command is the explicit on-demand sweep.)
+Read-only triage of `gaps.md` across ZeeSpec modules in `$ARGUMENTS` (default: every module under `docs/specs/zeespec/`). **Do not resolve, fix, or edit anything** — this is a dashboard. (The `zeespec-drift-guard` skill triggers on edits; this command is the explicit on-demand sweep.)
 
 Anatomy + calibration: `${CLAUDE_PLUGIN_ROOT}/specs/checklists/gaps-anatomy.md` + `${CLAUDE_PLUGIN_ROOT}/specs/checklists/severity-matrix.md`.
 

@@ -2,7 +2,7 @@
 description: Fast local pre-commit verification for a ZeeSpec module — the deterministic Type 1/2 drift gate + a B1 quantitative spot-check. Cheap mechanical gate, not the full review.
 ---
 
-Run the **fast deterministic gate** on `$ARGUMENTS` before committing. This is the cheap mechanical check (grep/awk/sed; NO AI) — deep semantic verification is `/zeespec:promote`, not this. It is the explicit on-demand run of what the `zeespec-drift-guard` skill auto-fires on edits.
+Run the **fast deterministic gate** on `$ARGUMENTS` before committing. This is the cheap mechanical check (grep/awk/sed; NO AI) — deep semantic verification is `/zeespec:promote`, not this. It is the explicit on-demand run of what the `zeespec-drift-guard` skill triggers on after edits.
 
 1. **CI drift gate** — run `${CLAUDE_PLUGIN_ROOT}/scripts/ci-drift-gate.sh --spec-dir <module spec dir> --code-dir .`. This deterministically re-derives Type 1 (every `file:line` citation resolves to a real file + line) and Type 2 (counts carrying a `zeespec:count` marker re-grep from code). A broken trace is a broken build — report any DRIFT line verbatim with its `file:line`.
 

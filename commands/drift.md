@@ -2,7 +2,7 @@
 description: Run the explicit on-demand ZeeSpec spec↔code drift scan on a module — deterministic Type 1/2 gate + R5 semantic Type 3/4 sweep, classified and routed to the right resolution.
 ---
 
-Run a deliberate drift scan on `$ARGUMENTS`. (The `zeespec-drift-guard` skill auto-fires after edits; this command is the scheduled / triggered full run.) Framework: `${CLAUDE_PLUGIN_ROOT}/specs/workflow/08-code-drift-management/00-START-HERE.md`.
+Run a deliberate drift scan on `$ARGUMENTS`. (The `zeespec-drift-guard` skill triggers after edits; this command is the scheduled / triggered full run.) Framework: `${CLAUDE_PLUGIN_ROOT}/specs/workflow/08-code-drift-management/00-START-HERE.md`.
 
 1. **Deterministic gate (Type 1 + 2).** Run `${CLAUDE_PLUGIN_ROOT}/scripts/ci-drift-gate.sh` (grep/awk; NO AI) — every `file:line` citation must resolve, every `zeespec:count` marker must re-derive. **A broken trace is a broken build.**
 2. **Semantic sweep (Type 3 + 4).** Dispatch the `zeespec-r5-drift` agent for behavioral + architectural drift the gate can't see (validation removed, sync→async, module split) — plus the spec-internal normalization lint.
