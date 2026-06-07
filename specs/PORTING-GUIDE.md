@@ -1,7 +1,7 @@
 ---
 doc: PORTING-GUIDE
 type: porting-guide
-version: 3.2.0
+version: 3.3.0
 status: stable
 last_updated: 2026-06-06
 ---

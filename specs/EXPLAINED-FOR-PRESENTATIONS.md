@@ -1,7 +1,7 @@
 ---
 doc: EXPLAINED-FOR-PRESENTATIONS
 type: presentation-aid
-version: 3.2.0
+version: 3.3.0
 status: stable
 last_updated: 2026-06-06
 audience: anyone explaining ZeeSpec to others (tech lead, EM, compliance, PM, new team members)
@@ -547,6 +547,7 @@ Live demo хүсэх бол: Tier 0 Lite модуль 2 цагийн дотор 
 | v3.0.x | 2026-05-29 | Zachman alignment — gravity pointer-only normalization + self-rot drift fixes + tiers 1B/2B/3B/1C-lean/2A (see `ZACHMAN-ALIGNMENT.md`) |
 | **v3.1** | **2026-06-06** | **Module Weight Tiers (Lite/Standard/Full, §2a) + adopter CI drift-gate (`scripts/ci-drift-gate.sh`) + reviewer-scope (§3c) + multi-factor metrics loop + self-drift sweep — deep-research benchmark vs Spec Kit / Kiro / BMAD** |
 | **v3.2** | **2026-06-06** | **frontend-design-system overlay (React/Next + Tailwind v4 + shadcn/ui): design tokens · component-contract spec type · ui-flow-completeness · Storybook + Playwright + axe executable tests · RF reviewer — grounded in 3 AI×design-system research passes (`overlays/frontend-design-system/research-notes.md`)** |
+| **v3.3** | **2026-06-06** | **Plugin auto-steering surface: 5 skills (`zeespec-frontend` · `aware-coding` · `drift-guard` · `authoring` · `r4-citation`) that auto-load the right ZeeSpec guidance while you work, + the `/zeespec:promote` command (full Tier-1 pipeline). Skills make the methodology steer the AI by default — no "remember to read the spec".** |
 
 ~100+ файл (өсөн нэмэгддэг тул яг тоог энд хатуугаар бичээгүй — drift-аас сэргийлэв).
 
@@ -565,7 +566,7 @@ Live demo хүсэх бол: Tier 0 Lite модуль 2 цагийн дотор 
 
 ---
 
-**Бичсэн огноо:** 2026-05-18; шинэчилсэн 2026-06-06 (v3.2 — frontend overlay)
-**ZeeSpec version:** 3.2.0
+**Бичсэн огноо:** 2026-05-18; шинэчилсэн 2026-06-06 (v3.3 — plugin skills + /promote command)
+**ZeeSpec version:** 3.3.0
 **License:** MIT
 **Maintainer:** batzaya (initial pilot author)
