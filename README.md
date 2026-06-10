@@ -9,12 +9,13 @@ All methodology content is under `specs/` to keep it portable when dropped into 
 ```
 zeespec-methodology/
 └── specs/                          ← copy this whole directory into your project
-    ├── README.md                   ← package overview + quick start
-    ├── METHODOLOGY.md              ← full framework spec (1.5h read)
-    ├── PORTING-GUIDE.md            ← adapt to your stack
-    ├── workflow/                   ← workflow guides 00–12 (00-START-HERE first; full list in specs/README.md)
-    ├── templates/_template/        ← empty 10-file ZeeSpec scaffold
-    └── checklists/                 ← reference checklists (see specs/README.md)
+    ├── README.md                   ← the router: read this first
+    ├── core/                       ← the mandatory tier (≤ 5,000 lines, CI-budgeted):
+    │                                 METHODOLOGY · PORTING-GUIDE · workflow 00–06 ·
+    │                                 checklists · templates/_template (10-file scaffold)
+    ├── extended/                   ← opt-in chapters 07–12 (R4 research · drift · ADR ·
+    │                                 adoption · plugin integration · agentic roles)
+    └── examples/                   ← overlays (finance, frontend) + presentation notes
 ```
 
 ## Quick start (3 commands)
@@ -26,7 +27,7 @@ cp -r path/to/zeespec-methodology/specs your-project/docs/specs/zeespec
 # 2. Read the package README
 open your-project/docs/specs/zeespec/README.md
 
-# 3. Follow workflow/00-START-HERE.md
+# 3. Follow core/workflow/00-START-HERE.md (only core/ is mandatory reading)
 ```
 
 ## Install as a Claude Code plugin
@@ -51,9 +52,9 @@ The full methodology ships under `specs/`; commands + agents reference it at run
 ## Start here
 
 → **[specs/README.md](specs/README.md)** — full package documentation
-→ **[specs/METHODOLOGY.md](specs/METHODOLOGY.md)** — framework specification
-→ **[specs/PORTING-GUIDE.md](specs/PORTING-GUIDE.md)** — adapt to your stack
-→ **[specs/workflow/00-START-HERE.md](specs/workflow/00-START-HERE.md)** — AI agent entry point
+→ **[specs/core/METHODOLOGY.md](specs/core/METHODOLOGY.md)** — framework specification
+→ **[specs/core/PORTING-GUIDE.md](specs/core/PORTING-GUIDE.md)** — adapt to your stack
+→ **[specs/core/workflow/00-START-HERE.md](specs/core/workflow/00-START-HERE.md)** — AI agent entry point
 
 ## License
 

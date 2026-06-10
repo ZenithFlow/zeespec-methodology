@@ -6,7 +6,7 @@ Run the **fast deterministic gate** on `$ARGUMENTS` before committing. This is t
 
 1. **CI drift gate** — run `${CLAUDE_PLUGIN_ROOT}/scripts/ci-drift-gate.sh --spec-dir <module spec dir> --code-dir .`. This deterministically re-derives Type 1 (every `file:line` citation resolves to a real file + line) and Type 2 (counts carrying a `zeespec:count` marker re-grep from code). A broken trace is a broken build — report any DRIFT line verbatim with its `file:line`.
 
-2. **B1 quantitative spot-check** (`${CLAUDE_PLUGIN_ROOT}/specs/workflow/02-b1-verification.md`) — grep production for the touched scope only: entity field counts, enum case counts, public-method count / signatures vs the spec's claim. Quantitative drift only; use the stack-specific patterns in that doc.
+2. **B1 quantitative spot-check** (`${CLAUDE_PLUGIN_ROOT}/specs/core/workflow/02-b1-verification.md`) — grep production for the touched scope only: entity field counts, enum case counts, public-method count / signatures vs the spec's claim. Quantitative drift only; use the stack-specific patterns in that doc.
 
 3. **Methodology repo?** If `$ARGUMENTS` is this repo (not an adopter project), also run `${CLAUDE_PLUGIN_ROOT}/scripts/dogfood-drift-scan.sh` — gravity restatement, core-doc version skew, hardcoded paths.
 

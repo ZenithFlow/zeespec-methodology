@@ -4,7 +4,7 @@ description: Triage dashboard over every module's gaps.md — rank by severity/s
 
 Read-only triage of `gaps.md` across ZeeSpec modules in `$ARGUMENTS` (default: every module under `docs/specs/zeespec/`). **Do not resolve, fix, or edit anything** — this is a dashboard. (The `zeespec-drift-guard` skill triggers on edits; this command is the explicit on-demand sweep.)
 
-Anatomy + calibration: `${CLAUDE_PLUGIN_ROOT}/specs/checklists/gaps-anatomy.md` + `${CLAUDE_PLUGIN_ROOT}/specs/checklists/severity-matrix.md`.
+Anatomy + calibration: `${CLAUDE_PLUGIN_ROOT}/specs/core/checklists/gaps-anatomy.md` + `${CLAUDE_PLUGIN_ROOT}/specs/core/checklists/severity-matrix.md`.
 
 1. **Scan** each module's `gaps.md`. Parse the Summary table + Drift / Operational-follow-up / Research-question sections into rows: **module · gap ID · severity (🚨 P0 / 🟠 P1 / 🟡 P2 / 🟢 P3) · status (🔴 OPEN / 🟡 PROPOSED / 🟢 RESOLVED / ⚪️ DEFERRED / 📌 BY-DESIGN) · ticket/chip · file:line**.
 
@@ -12,7 +12,7 @@ Anatomy + calibration: `${CLAUDE_PLUGIN_ROOT}/specs/checklists/gaps-anatomy.md` 
 
 3. **Rank** the remaining rows: P0 → P1 → P2 → P3, OPEN before PROPOSED before the rest.
 
-4. **Spawn-chip status** — read the *project's* `docs/specs/zeespec/_meta/spawn-chips.md` (template at `${CLAUDE_PLUGIN_ROOT}/specs/templates/_meta/spawn-chips.md`) and summarize OPEN vs LANDED/RESOLVED vs DEFERRED counts so each P0/P1 gap's chip can be cross-checked as open or landed.
+4. **Spawn-chip status** — read the *project's* `docs/specs/zeespec/_meta/spawn-chips.md` (template at `${CLAUDE_PLUGIN_ROOT}/specs/core/templates/_meta/spawn-chips.md`) and summarize OPEN vs LANDED/RESOLVED vs DEFERRED counts so each P0/P1 gap's chip can be cross-checked as open or landed.
 
 5. **Separate** 📌 BY-DESIGN (acknowledged, won't-fix) into their own section — never count them as real OPEN work.
 

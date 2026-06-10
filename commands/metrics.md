@@ -2,7 +2,7 @@
 description: Capture the per-version multi-factor ZeeSpec metrics row and compare it to the prior version to confirm the shipped change helped without a hidden regression.
 ---
 
-Capture metrics for `$ARGUMENTS` (version label / scope) and **append one row** to `_meta/metrics-loop.md`. Follow the sheet at `${CLAUDE_PLUGIN_ROOT}/specs/templates/_meta/metrics-loop.md`; pull raw numbers from `_meta/pilot-retrospective.md` (`${CLAUDE_PLUGIN_ROOT}/specs/templates/_meta/pilot-retrospective.md`), `spawn-chips.md`, and the R5 drift-scan logs.
+Capture metrics for `$ARGUMENTS` (version label / scope) and **append one row** to `_meta/metrics-loop.md`. Follow the sheet at `${CLAUDE_PLUGIN_ROOT}/specs/core/templates/_meta/metrics-loop.md`; pull raw numbers from `_meta/pilot-retrospective.md` (`${CLAUDE_PLUGIN_ROOT}/specs/core/templates/_meta/pilot-retrospective.md`), `spawn-chips.md`, and the R5 drift-scan logs.
 
 **Collect every factor — read them together, never one in isolation:**
 - Avg authoring time / module; findings / module split by **P0 / P1 / P2**.

@@ -7,7 +7,7 @@ allowed-tools: Read, Grep, Glob
 
 # ZeeSpec Authoring — Lite by default, cited, normalized
 
-Before scaffolding or writing ANY spec file, apply the rules below. They prevent the three classic failures of an AI authoring specs: **over-engineering** (10 files for a trivial module), **uncited claims** (✅ IMPL with no proof), and **drift** (the same rule copied into gravity.md, then diverging). Full detail lives in `${CLAUDE_PLUGIN_ROOT}/specs/workflow/01-authoring-checklist.md` and `${CLAUDE_PLUGIN_ROOT}/specs/METHODOLOGY.md` §§ 2a / 6 / 8 / 9 — load the section you need (progressive disclosure; do not inline it).
+Before scaffolding or writing ANY spec file, apply the rules below. They prevent the three classic failures of an AI authoring specs: **over-engineering** (10 files for a trivial module), **uncited claims** (✅ IMPL with no proof), and **drift** (the same rule copied into gravity.md, then diverging). Full detail lives in `${CLAUDE_PLUGIN_ROOT}/specs/core/workflow/01-authoring-checklist.md` and `${CLAUDE_PLUGIN_ROOT}/specs/core/METHODOLOGY.md` §§ 2a / 6 / 8 / 9 — load the section you need (progressive disclosure; do not inline it).
 
 ## The rules
 
@@ -28,4 +28,4 @@ Before scaffolding or writing ANY spec file, apply the rules below. They prevent
 
 ## Author / verify
 
-To scaffold or extend explicitly, run the **`/zeespec:author`** command. For external-authority claims (regulator / statute / threshold / retention), dispatch the `zeespec-r4-regulatory` agent FIRST. When the module is authored, hand off to `/zeespec:review` (R3 deep-verify → R1+R2) per `${CLAUDE_PLUGIN_ROOT}/specs/workflow/03-r3-deep-review.md`.
+To scaffold or extend explicitly, run the **`/zeespec:author`** command. For external-authority claims (regulator / statute / threshold / retention), dispatch the `zeespec-r4-regulatory` agent FIRST. When the module is authored, hand off to `/zeespec:review` (R3 deep-verify → R1+R2) per `${CLAUDE_PLUGIN_ROOT}/specs/core/workflow/03-r3-deep-review.md`.

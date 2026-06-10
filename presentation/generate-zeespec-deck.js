@@ -2024,8 +2024,8 @@ function addFooter(slide, slideNum) {
       sub: "3 файл",
       items: [
         "specs/README.md — Танилцуулга",
-        "specs/METHODOLOGY.md — Full methodology (1.5h)",
-        "specs/EXPLAINED-FOR-PRESENTATIONS.md — Энэ танилцуулга",
+        "specs/core/METHODOLOGY.md — Full methodology",
+        "specs/examples/EXPLAINED-FOR-PRESENTATIONS.md — Энэ танилцуулга",
       ],
       color: C.deepBlue,
       h: 1.4,

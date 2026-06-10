@@ -7,7 +7,7 @@ allowed-tools: Read, Grep, Glob
 
 # ZeeSpec Frontend — build it modern, complete, and tested
 
-Before writing ANY UI, apply the three rules below. They prevent the three classic failures of a backend-shaped spec driving an AI: **naked HTML in Times New Roman**, **half-built CRUD**, and **no tests**. Full detail lives under `${CLAUDE_PLUGIN_ROOT}/specs/overlays/frontend-design-system/` — load the referenced file when you need depth (progressive disclosure; do not inline it all).
+Before writing ANY UI, apply the three rules below. They prevent the three classic failures of a backend-shaped spec driving an AI: **naked HTML in Times New Roman**, **half-built CRUD**, and **no tests**. Full detail lives under `${CLAUDE_PLUGIN_ROOT}/specs/examples/overlays/frontend-design-system/` — load the referenced file when you need depth (progressive disclosure; do not inline it all).
 
 ## The three rules
 
